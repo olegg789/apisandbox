@@ -1,0 +1,54 @@
+<Gradient className='ProfileUser'>
+                        <Avatar size={96} src={photo} />
+
+                        <Title
+                            className='NameUser'
+                            level="2"
+                            weight="medium"
+                        >
+                            {first_name} {last_name}
+                        </Title>
+
+                        <Text className='SubheaderUser'>
+                            Крутой человек!
+                        </Text>
+
+                        <Button
+                            size="m" mode="secondary"
+                            href={`https://vk.com/durov`}
+                            target='_blank'
+                        >
+                            durov
+                        </Button>
+                    </Gradient>
+                    <Group mode="plain">
+                        <Header>Учебные заведения и классы</Header>
+                        <SimpleCell before={<Icon28SchoolOutline />} description="Екатеринбург">Школа №180</SimpleCell>
+                        <CellButton before={<Icon28AddOutline />}>Добавить учебное заведение</CellButton>
+                    </Group>
+
+
+
+<Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('home', 'placeholder')}>Открыть Placeholder</Button>
+                    </Div>
+                    <Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => this.openPopout()}>Открыть алерт</Button>
+                    </Div>
+                    <Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => this.openSpinner()}>Открыть спиннер</Button>
+                    </Div>
+                    <Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => this.openSnackbar()}>Открыть снекбар</Button>
+                    </Div>
+                    <Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => this.props.openModal("MODAL_PAGE_BOTS_LIST")}>Открыть
+                            модальную страницу</Button>
+                    </Div>
+                    {withoutEpic && <Div>
+                        <Button mode="secondary" size="l" stretched={true} onClick={() => setPage('modal', 'filters')}>Открыть модальное окно</Button>
+                    </Div>}
+                    {this.state.showImg && <Div className='div-center'>
+                        <img src={Chel} alt="чел"/>
+                    </Div>}
+                </Group>
