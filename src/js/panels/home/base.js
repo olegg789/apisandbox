@@ -4,11 +4,9 @@ import {connect} from 'react-redux';
 import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
 
 import {
-    Div, 
     Panel, 
     Alert, 
-    Group, 
-    Button, 
+    Group,
     PanelHeader,
     ScreenSpinner,
     Snackbar,
@@ -17,7 +15,7 @@ import {
     NativeSelect
 } from '@vkontakte/vkui'
 import { Icon16Done } from '@vkontakte/icons'
-import Chel from '../../../svg/chel.svg'
+import bridge from '@vkontakte/vk-bridge';
 
 
 class HomePanelBase extends React.Component {
@@ -74,7 +72,7 @@ class HomePanelBase extends React.Component {
     }
 
     render() {
-        const {id, setPage, withoutEpic} = this.props;
+        const {id} = this.props;
 
         return (
             <Panel id={id}>
@@ -125,12 +123,16 @@ class HomePanelBase extends React.Component {
                             </NativeSelect>
                         </FormItem>
                     </Group>
+                    <Group>
+
+                    </Group>
                 </Group>
                 </Panel>
         );
     }
 
 }
+
 
 const mapDispatchToProps = {
     setPage,

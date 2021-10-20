@@ -24,11 +24,8 @@ import {
   Group
 } from "@vkontakte/vkui";
 
-import { 
-  Icon28HomeOutline, 
-  Icon28Profile,
+import {
   Icon28HistoryForwardOutline,
-  Icon28LightbulbOutline,
   Icon28ArrowUpCircleOutline
 } from '@vkontakte/icons';
 

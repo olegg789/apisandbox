@@ -6,20 +6,11 @@ import {setPage, openPopout, closePopout} from "../../store/router/actions";
 import {
     Panel,
     PanelHeader,
-    Gradient,
-    Avatar,
-    Title,
-    Text,
-    Button,
     ScreenSpinner,
     Group,
-    Header,
-    SimpleCell,
-    CellButton
 } from "@vkontakte/vkui";
 import {
-    Icon28SchoolOutline,
-    Icon28AddOutline
+
 } from '@vkontakte/icons';
 import bridge from '@vkontakte/vk-bridge';
 
@@ -69,11 +60,10 @@ class HomePanelProfile extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {photo, first_name, last_name, user_id} = this.state;
 
         return (
             <Panel id={id}>
-                <PanelHeader noShadow={true}>История</PanelHeader>
+                <PanelHeader>История</PanelHeader>
                 <Group>
                     Тут будет история но Олег ленивая жопа не сделал еще
                 </Group>
