@@ -5,16 +5,17 @@ import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/r
 import {method} from '../../../infoMethod';
 
 import {
-    Panel, 
+    Div,
+    Panel,
     Group,
     PanelHeader,
-    ScreenSpinner,
     Snackbar,
     Avatar,
     FormItem,
-    NativeSelect
+    NativeSelect,
+    Button,
 } from '@vkontakte/vkui'
-import { Icon16Done } from '@vkontakte/icons'
+import {Icon16Done,} from '@vkontakte/icons'
 import bridge from '@vkontakte/vk-bridge';
 
 
@@ -40,7 +41,7 @@ class HomePanelBase extends React.Component {
             <Panel id={id}>
                 <PanelHeader>Выполнить</PanelHeader>
                 <Group>
-                    <FormItem top="Выберите метод">
+                    <FormItem top="Выберите раздел">
                         <NativeSelect placeholder="Не выбран">
                             {method.map((el, index) => {
                                 return <option value={index}>{el}</option>

@@ -39,3 +39,7 @@ export var method = [
 	'Wall',
 	'Widgets'
 ]
+
+export var account = [
+
+]
