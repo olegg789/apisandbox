@@ -2,10 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-    Cell, 
-    List, 
-    Avatar, 
-    InfoRow, 
     ModalPage, 
     ModalPageHeader, 
     PanelHeaderButton, 
@@ -35,29 +31,7 @@ class HomeBotsListModal extends React.Component {
                 onClose={onClose}
                 settlingHeight={80}
             >
-                <Cell
-                    description="Описание"
-                    before={<Avatar size={40} src="https://vk.com/images/community_100.png?ava=1"/>}
-                >
-                    Название
-                </Cell>
-                <List>
-                    <Cell>
-                        <InfoRow header="Подписчиков">
-                            8800
-                        </InfoRow>
-                    </Cell>
-                    <Cell>
-                        <InfoRow header="Записей">
-                            555
-                        </InfoRow>
-                    </Cell>
-                    <Cell>
-                        <InfoRow header="Рейтинг">
-                            3535
-                        </InfoRow>
-                    </Cell>
-                </List>
+
             </ModalPage>
         );
     }

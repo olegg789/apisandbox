@@ -5,7 +5,6 @@ import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/r
 import {method} from '../../../infoMethod';
 
 import {
-    Div,
     Panel,
     Group,
     PanelHeader,
@@ -13,10 +12,10 @@ import {
     Avatar,
     FormItem,
     NativeSelect,
-    Button,
+    PanelHeaderButton
 } from '@vkontakte/vkui'
-import {Icon16Done,} from '@vkontakte/icons'
-import bridge from '@vkontakte/vk-bridge';
+import {Icon16Done, Icon28Settings} from '@vkontakte/icons';
+
 
 
 class HomePanelBase extends React.Component {
@@ -35,11 +34,12 @@ class HomePanelBase extends React.Component {
     }
 
     render() {
-        const {id} = this.props;
+        const {id, setPage} = this.props;
 
         return (
             <Panel id={id}>
-                <PanelHeader>Выполнить</PanelHeader>
+                <PanelHeader
+                    left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28Settings/></PanelHeaderButton>}>Выполнить</PanelHeader>
                 <Group>
                     <FormItem top="Выберите раздел">
                         <NativeSelect placeholder="Не выбран">
