@@ -41,5 +41,22 @@ export var method = [
 ]
 
 export var account = [
-
+	'account.ban',
+	'account.changePassword',
+	'account.getActiveOffers',
+	'account.getAppPermissions',
+	'account.getBanned' ,
+	'account.getCounters',
+	'account.getInfo',
+	'account.getProfileInfo',
+	'account.getPushSettings',
+	'account.registerDevice',
+	'account.saveProfileInfo',
+	'account.setInfo',
+	'account.setOffline',
+	'account.setOnline',
+	'account.setPushSettings',
+	'account.setSilenceMode',
+	'account.unban',
+	'account.unregisterDevice'
 ]

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
-import {method} from '../../../infoMethod';
+import {method, account} from '../../../infoMethod';
 
 import {
     Panel,
@@ -21,7 +21,7 @@ class HomePanelBase extends React.Component {
         super(props);
 
         this.state = { 
-            section: null 
+            section: null
         };
 
         /*
@@ -75,8 +75,8 @@ class HomePanelBase extends React.Component {
                                 placeholder="Не выбран"
                                 //onClick={this.onChange}
                             >
-                                {method.map((el, index) => {
-                                    return <option value={index}>{el}</option>
+                                {account.map((el1, index1) => {
+                                    return <option value={index1}>{el1}</option>
                                 })}
                             </NativeSelect>
                         </FormItem>
