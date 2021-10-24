@@ -6,7 +6,8 @@ import {
     ModalPageHeader, 
     PanelHeaderButton, 
     withPlatform, 
-    IOS
+    IOS,
+    Div
 } from "@vkontakte/vkui";
 import { Icon24Dismiss, Icon24Cancel } from '@vkontakte/icons'
 
@@ -25,13 +26,13 @@ class HomeBotsListModal extends React.Component {
                         right={platform === IOS &&
                         <PanelHeaderButton onClick={onClose}><Icon24Dismiss/></PanelHeaderButton>}
                     >
-                        Информация о сообществе
+                        Test
                     </ModalPageHeader>
                 }
                 onClose={onClose}
                 settlingHeight={80}
             >
-
+                <Div>TEst</Div>
             </ModalPage>
         );
     }
