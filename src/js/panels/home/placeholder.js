@@ -52,13 +52,13 @@ class HomePanelPlaceholder extends React.Component {
 
                 </Group>
                 <Group header={<Header mode="secondary">разработчики</Header>}>
-                    <SimpleCell
+                    <SimpleCell href="https://vk.com/olejii"
                         description="Говнокодер"
                         before={<Avatar src={"https://sun7-14.userapi.com/s/v1/ig2/csPM9GKlyYZX3WngNXADJJT8C0eNfgPK5epHhWMVgRXv-NY52DKBSPL815IZVOQAUhPjjgczOdGBoyqdMadvN3N9.jpg?size=200x200&quality=96&crop=231,222,371,371&ava=1"}/>}
                     >
                         Олег Чикелёв
                     </SimpleCell>
-                    <SimpleCell
+                    <SimpleCell href="https://vk.com/kuz_s"
                         description="НеГовнокодер"
                         before={<Avatar src={"https://sun7-7.userapi.com/s/v1/ig2/fiUFyDy1oyIR6PH_6SzNNKz76np2pFBqzZRUWZjbiuV6eBwiZSgm7lc9ZrN2s6g57Op56hRXTX2SHlTovp69GeVn.jpg?size=200x200&quality=95&crop=0,170,919,919&ava=1"}/> }
                     >
