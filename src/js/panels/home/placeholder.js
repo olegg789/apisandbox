@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {goBack} from "../../store/router/actions";
+import {goBack, openModal} from "../../store/router/actions";
 
 import {
     SimpleCell,
@@ -12,8 +12,8 @@ import {
     CellButton,
     Avatar,
     Header,
-    SliderSwitch,
-    Div
+    Div,
+    Button
 } from "@vkontakte/vkui";
 import {Icon28FavoriteOutline, Icon28MessagesOutline} from '@vkontakte/icons';
 import bridge from '@vkontakte/vk-bridge';
@@ -37,18 +37,10 @@ class HomePanelPlaceholder extends React.Component {
                 </Group>
                 <Group header={<Header mode="secondary">Тема</Header>}>
                     <Div>
-                        <SliderSwitch
-                        options={[
-                            {
-                                name: 'Темная',
-                                value: 'dark',
-                            },
-                            {
-                                name: 'Светлая',
-                                value: 'white',
-                            },
-                        ]}
-                    /></Div>
+                        <Button  size="l" stretched={true} mode="secondary" onClick={() =>  this.props.openModal("MODAL_PAGE_BOTS_LIST")}>
+                            Выбор темы
+                        </Button>
+                    </Div>
 
                 </Group>
                 <Group header={<Header mode="secondary">разработчики</Header>}>
@@ -71,6 +63,6 @@ class HomePanelPlaceholder extends React.Component {
 
 }
 
-const mapDispatchToProps = { goBack };
+const mapDispatchToProps = { goBack, openModal };
 
 export default connect(null, mapDispatchToProps)(HomePanelPlaceholder);

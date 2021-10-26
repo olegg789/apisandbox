@@ -12,7 +12,7 @@ import {
     Avatar,
     FormItem,
     NativeSelect,
-    PanelHeaderButton
+    PanelHeaderButton,
 } from '@vkontakte/vkui'
 import {Icon16Done, Icon28Settings} from '@vkontakte/icons';
 

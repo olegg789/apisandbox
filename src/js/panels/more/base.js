@@ -8,21 +8,19 @@ import {
     PanelHeader,
     Group,
     Placeholder,
-    PanelHeaderButton
 } from "@vkontakte/vkui";
 import {
-    Icon28Settings,
     Icon56CancelCircleOutline
 } from '@vkontakte/icons';
 
 class HomePanelProfile extends React.Component {
 
     render() {
-        const {id, setPage} = this.props;
+        const {id} = this.props;
 
         return (
             <Panel id={id}>
-                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28Settings/></PanelHeaderButton>}>История</PanelHeader>
+                <PanelHeader>История</PanelHeader>
                 <Group>
                     <Placeholder
                         icon={<Icon56CancelCircleOutline/>}

@@ -158,6 +158,7 @@ class App extends React.Component {
                       onSwipeBack={() => goBack()}
                     >
                       <MorePanelBase id="callmodal"/>
+                      <HomePanelPlaceholder id="placeholder"/>
                     </View>
                   </Root>
                 </Epic>
