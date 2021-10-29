@@ -11,7 +11,6 @@ import {
     withPlatform, 
     IOS,
     CellButton,
-    ConfigProvider
 } from "@vkontakte/vkui";
 import {Icon24Dismiss, Icon24Cancel, Icon28MoonOutline, Icon28SunOutline, Icon28SettingsOutline} from '@vkontakte/icons'
 
@@ -39,11 +38,9 @@ class HomeBotsListModal extends React.Component {
                 <List>
                     <CellButton before={<Icon28SettingsOutline/>} onClick={() => console.log('system')}>Системная</CellButton>
 
-                    <CellButton before={<Icon28MoonOutline/>} /*onClick={() => return (
-                        <ConfigProvider scheme={Scheme.BRIGHT_LIGHT}></ConfigProvider>
-                        )}*/>Тёмная</CellButton>
+                    <CellButton before={<Icon28MoonOutline/>} onClick={() => console.log('dark')}>Тёмная</CellButton>
 
-                        <CellButton before={<Icon28SunOutline/>} onClick={() => console.log('light')}>Светлая</CellButton>
+                        <CellButton before={<Icon28SunOutline/>} onClick={() => this.props.changeScheme('bright_light')}>Светлая</CellButton>
                 </List>
             </ModalPage>
         );

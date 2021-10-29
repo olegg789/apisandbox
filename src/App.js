@@ -89,6 +89,10 @@ class App extends React.Component {
     }
   }
 
+  changeScheme(scheme) {
+    this.setState({scheme: scheme})
+  }
+
   render() {
     const {goBack, setStory, closeModal, popouts, activeView, activeStory, activeModals, panelsHistory} = this.props;
     const { isDesktop, hasHeader, Platform } = this.state
@@ -102,6 +106,7 @@ class App extends React.Component {
         <HomeBotsListModal
           id="MODAL_PAGE_BOTS_LIST"
           onClose={() => closeModal()}
+          changeScheme={(scheme) => this.changeScheme(scheme)}
         />
         <HomeBotInfoModal
           id="MODAL_PAGE_BOT_INFO"
@@ -110,8 +115,13 @@ class App extends React.Component {
       </ModalRoot>
     );
 
+
+
+
+
+
     return (     
-      <ConfigProvider platform={Platform} isWebView={true}>
+      <ConfigProvider platform={Platform} isWebView={true} scheme={this.state.scheme}>
         <AdaptivityProvider>
           <AppRoot>
             <SplitLayout
