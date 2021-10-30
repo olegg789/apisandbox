@@ -21,7 +21,7 @@ class HomePanelBase extends React.Component {
         super(props);
 
         this.state = { 
-            section: null
+            section: account
         };
 
         /*
@@ -69,7 +69,7 @@ class HomePanelBase extends React.Component {
                         </NativeSelect>
                     </FormItem>
 
-                    {section !== null && //если section не равен нач. значению, то отображаем второй NativeSelect, для выбора метода
+                    {section == account && //если section не равен нач. значению, то отображаем второй NativeSelect, для выбора метода
                         <FormItem top="Выберите метод">
                             <NativeSelect 
                                 placeholder="Не выбран"
