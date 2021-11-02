@@ -60,3 +60,7 @@ export var account = [
 	'account.unban',
 	'account.unregisterDevice'
 ]
+
+export var ads = [
+	'ok',
+]
