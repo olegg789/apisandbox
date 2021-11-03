@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
-import {method, account} from '../../../infoMethod';
+import {method} from '../../../infoMethod';
 
 import {
     Panel,
