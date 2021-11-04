@@ -76,9 +76,7 @@ class HomePanelBase extends React.Component {
                                     placeholder="Не выбран"
                                     onClick={this.onChange}
                                 >
-                                    {account.map((el1, index1) => {
-                                        return <option value={index1}>{el1}</option>
-                                    })}
+                                    
                                 </NativeSelect>
                             }
                         </FormItem>
