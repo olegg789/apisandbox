@@ -557,3 +557,16 @@ export let infoMethod = [
 	{ "name": "appWidgets.saveAppImage", "description": "Позволяет сохранить изображение в коллекцию приложения для виджетов приложений сообществ после загрузки на сервер."},
 	{ "name": "appWidgets.saveGroupImage", "description": "Позволяет сохранить изображение в коллекцию сообщества для виджетов приложений сообществ. после загрузки на сервер."},
 	{ "name": "appWidgets.update", "description": "Позволяет обновить виджет приложения сообщества."},*/
+
+	/* ТОЖЕ ПОТОМ ВЕРНУ абоба
+	{section == 0 &&
+                                    <NativeSelect
+                                    placeholder="Не выбран"
+                                    onClick={this.onChange}
+                                >
+                                    {account.map((el1, index1) => {
+                                        return <option value={index1}>{el1}</option>
+                                    })}
+                                </NativeSelect>
+                            }
+	 */
