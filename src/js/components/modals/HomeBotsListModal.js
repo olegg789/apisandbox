@@ -13,7 +13,7 @@ import {
     CellButton,
 } from "@vkontakte/vkui";
 import {Icon24Dismiss, Icon24Cancel, Icon28MoonOutline, Icon28SunOutline, Icon28SettingsOutline} from '@vkontakte/icons'
-//import bridge from "@vkontakte/vk-bridge";
+import bridge from "@vkontakte/vk-bridge";
 
 class HomeBotsListModal extends React.Component {
 
@@ -39,9 +39,9 @@ class HomeBotsListModal extends React.Component {
                 <List>
                     <CellButton activeEffectDelay={3} before={<Icon28SettingsOutline/>} onClick={() => this.props.changeScheme('system')}>Системная</CellButton>
 
-                    <CellButton activeEffectDelay={3} before={<Icon28MoonOutline/>} onClick={() => this.props.changeScheme('space_gray')}>Тёмная</CellButton>
+                    <CellButton activeEffectDelay={3} before={<Icon28MoonOutline/>} onClick={() => {this.props.changeScheme('space_gray'); bridge.unsubscribe()}}>Тёмная</CellButton>
 
-                    <CellButton activeEffectDelay={3} before={<Icon28SunOutline/>} onClick={() => this.props.changeScheme('bright_light')}>Светлая</CellButton>
+                    <CellButton activeEffectDelay={3} before={<Icon28SunOutline/>} onClick={() => {this.props.changeScheme('bright_light'); bridge.unsubscribe()}}>Светлая</CellButton>
                 </List>
             </ModalPage>
         );
