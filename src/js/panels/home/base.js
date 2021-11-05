@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
-import {method} from '../../../infoMethod';
+import {method, infoMethod} from '../../../infoMethod';
+import {sleep} from '../../../functions';
 
 import {
     Panel,
@@ -13,23 +14,26 @@ import {
     FormItem,
     NativeSelect,
     PanelHeaderButton,
+    MiniInfoCell
 } from '@vkontakte/vkui'
-import {Icon16Done, Icon28Settings} from '@vkontakte/icons';
+import {
+    Icon16Done, 
+    Icon28Settings,
+    Icon20HelpOutline
+} from '@vkontakte/icons';
 
 class HomePanelBase extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = { 
-            section: null
+            section: null,
+            infoMethods: null,
+            infMethod: null
         };
 
-        /*
-            создаем объект state
-            в нём создаем section
-        */
-
-        this.onChange = this.onChange.bind(this);
+        this.onChangeSections = this.onChangeSections.bind(this);
+        this.onChangeMethods = this.onChangeMethods.bind(this);
     }
 
     openSnackbar() {
@@ -45,14 +49,27 @@ class HomePanelBase extends React.Component {
         );
     }
 
-    onChange(e) {
+    async onChangeSections(e) {
         const { value } = e.currentTarget;
-        this.setState({ section: value }) // меняем значение section на value, которое находится в option
+        this.setState({ section: value })
+
+        await sleep(300) //setState не обновляется моментально => костыль
+
+        let arrInfoMethods = []
+        for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
+            arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+        }
+        this.setState({ infoMethods: arrInfoMethods })
+    }
+
+    onChangeMethods(e) {
+        const { value } = e.currentTarget;
+        this.setState({ infMethod: value })
     }
 
     render() {
         const {id, setPage} = this.props;
-        const {section} = this.state; //из this.state берём значение section, чтобы дальше просто писать "section", а не "this.state.section"
+        const {section, infoMethods, infMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -61,25 +78,32 @@ class HomePanelBase extends React.Component {
                     <FormItem top="Выберите раздел">
                         <NativeSelect 
                             placeholder="Не выбран"
-                            onChange={this.onChange} //запускается, когда меняется значение элемента
+                            onChange={this.onChangeSections}
                         >
                             {method.map((el, index) => {
-                                return <option value={index}>{el}</option>
+                                return <option value={index}>{el.name}</option>
                             })}
                         </NativeSelect>
                     </FormItem>
 
-                    {section !== null && //если section не равен нач. значению, то отображаем второй NativeSelect, для выбора метода
+                    {section !== null &&
                         <FormItem top="Выберите метод">
-                            {section == 0 &&
-                                <NativeSelect
-                                    placeholder="Не выбран"
-                                    onClick={this.onChange}
-                                >
-                                    
-                                </NativeSelect>
-                            }
+                            <NativeSelect
+                                placeholder="Не выбран"
+                                onChange={this.onChangeMethods}
+                            >
+                                {infoMethods}
+                            </NativeSelect>
                         </FormItem>
+                    }
+
+                    {infMethod !== null &&
+                        <MiniInfoCell
+                            before={<Icon20HelpOutline/>}
+                            textWrap='full'
+                        >
+                            {infoMethod[infMethod].description}
+                        </MiniInfoCell>
                     }
                 </Group>
             </Panel>
