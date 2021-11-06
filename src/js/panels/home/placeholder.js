@@ -46,12 +46,12 @@ class HomePanelPlaceholder extends React.Component {
                 </Group>
                 <Group header={<Header mode="secondary">Получение токенов через Implicit Flow</Header>}>
                     <CellButton before={<Icon28UserOutline/>} href={
-                        "https://vk.com/dev/implicit_flow_user/"}>
+                        "https://vk.com/dev/implicit_flow_user"}>
                         Как получить токен пользователя
                     </CellButton>
 
                     <CellButton before={<Icon28Users3Outline/>} href={
-                        "https://vk.com/dev/implicit_flow_group/"}>
+                        "https://vk.com/dev/implicit_flow_group"}>
                         Как получить токен сообщества
                     </CellButton>
                 </Group>
