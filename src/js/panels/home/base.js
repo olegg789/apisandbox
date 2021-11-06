@@ -17,9 +17,9 @@ import {
     MiniInfoCell
 } from '@vkontakte/vkui'
 import {
-    Icon16Done, 
-    Icon28Settings,
-    Icon20HelpOutline
+    Icon16Done,
+    Icon20HelpOutline,
+    Icon28SettingsOutline
 } from '@vkontakte/icons';
 
 class HomePanelBase extends React.Component {
@@ -73,7 +73,7 @@ class HomePanelBase extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28Settings/></PanelHeaderButton>}>Выполнить</PanelHeader>
+                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28SettingsOutline/></PanelHeaderButton>}>Выполнить</PanelHeader>
                 <Group>
                     <FormItem top="Выберите раздел">
                         <NativeSelect 

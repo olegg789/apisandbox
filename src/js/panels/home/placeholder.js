@@ -38,7 +38,7 @@ class HomePanelPlaceholder extends React.Component {
                     Настройки
                 </PanelHeader>
                 <Group header={<Header mode="secondary">Основное</Header>}>
-                    <CellButton before={<Avatar shadow={false} size={45}><Icon28MessagesOutline/></Avatar>} href="https://vk.me/vkapisandbox">Поддержка</CellButton>
+                    <CellButton before={<Avatar shadow={false} size={45}><Icon28MessagesOutline/></Avatar>} href="https://vk.me/vkapisandbox" onClick={bridge.send("VKWebAppTapticImpactOccurred", {"style" : "heavy"})}>Поддержка</CellButton>
 
                     <CellButton before={<Avatar shadow={false} size={45}><Icon28FavoriteOutline/></Avatar>} onClick={() => bridge.send("VKWebAppAddToFavorites")}>Добавить в избранное</CellButton>
 
@@ -57,7 +57,7 @@ class HomePanelPlaceholder extends React.Component {
                 </Group>
                 <Group header={<Header mode="secondary">Тема</Header>}>
                     <Div>
-                        <Button  size="l" stretched={true} mode="secondary" onClick={() =>  this.props.openModal("MODAL_PAGE_BOTS_LIST")}>
+                        <Button  size="l" stretched={true} mode="secondary" onClick={() =>  {this.props.openModal("MODAL_PAGE_BOTS_LIST"); bridge.send("VKWebAppTapticImpactOccurred", {"style" : "heavy"})}}>
                             Выбор темы
                         </Button>
                     </Div>
