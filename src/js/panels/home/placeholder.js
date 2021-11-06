@@ -15,7 +15,13 @@ import {
     Div,
     Button
 } from "@vkontakte/vkui";
-import {Icon28FavoriteOutline, Icon28MessagesOutline, Icon28SmartphoneOutline} from '@vkontakte/icons';
+import {
+    Icon28FavoriteOutline,
+    Icon28MessagesOutline,
+    Icon28SmartphoneOutline,
+    Icon28UserOutline,
+    Icon28Users3Outline
+} from '@vkontakte/icons';
 import bridge from '@vkontakte/vk-bridge';
 
 class HomePanelPlaceholder extends React.Component {
@@ -37,6 +43,17 @@ class HomePanelPlaceholder extends React.Component {
                     <CellButton before={<Avatar shadow={false} size={45}><Icon28FavoriteOutline/></Avatar>} onClick={() => bridge.send("VKWebAppAddToFavorites")}>Добавить в избранное</CellButton>
 
                     <CellButton before={<Avatar shadow={false} size={45}><Icon28SmartphoneOutline/></Avatar>} onClick={() => bridge.send("VKWebAppAddToHomeScreen")}>Добавить на главный экран</CellButton>
+                </Group>
+                <Group header={<Header mode="secondary">Получение токенов через Implicit Flow</Header>}>
+                    <CellButton before={<Icon28UserOutline/>} href={
+                        "https://vk.com/dev/implicit_flow_user/"}>
+                        Как получить токен пользователя
+                    </CellButton>
+
+                    <CellButton before={<Icon28Users3Outline/>} href={
+                        "https://vk.com/dev/implicit_flow_group/"}>
+                        Как получить токен сообщества
+                    </CellButton>
                 </Group>
                 <Group header={<Header mode="secondary">Тема</Header>}>
                     <Div>
