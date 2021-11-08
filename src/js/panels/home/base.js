@@ -5,7 +5,7 @@ import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/r
 import {method, infoMethod} from '../../../infoMethod';
 import {sleep} from '../../../functions';
 
-import {
+import Div, {
     Panel,
     Group,
     PanelHeader,
@@ -14,13 +14,14 @@ import {
     FormItem,
     NativeSelect,
     PanelHeaderButton,
-    MiniInfoCell
+    MiniInfoCell, Button
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
     Icon20HelpOutline,
     Icon28SettingsOutline
 } from '@vkontakte/icons';
+import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelBase extends React.Component {
     constructor(props) {
@@ -67,6 +68,11 @@ class HomePanelBase extends React.Component {
         this.setState({ infMethod: value })
     }
 
+    getStorage(key) {
+        await bridge.send()
+            console.log(bridge.send("VKWebAppStorageGet", {"keys": key}))
+    }
+
     render() {
         const {id, setPage} = this.props;
         const {section, infoMethods, infMethod} = this.state;
@@ -105,6 +111,11 @@ class HomePanelBase extends React.Component {
                             {infoMethod[infMethod].description}
                         </MiniInfoCell>
                     }
+                </Group>
+                <Group>
+                    <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"}); this.getStorage("first")}}>
+                        TEST
+                    </Button>
                 </Group>
             </Panel>
         );
