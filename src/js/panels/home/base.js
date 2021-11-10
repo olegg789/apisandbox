@@ -5,7 +5,7 @@ import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/r
 import {method, infoMethod} from '../../../infoMethod';
 import {sleep} from '../../../functions';
 
-import Div, {
+import {
     Panel,
     Group,
     PanelHeader,
@@ -14,7 +14,9 @@ import Div, {
     FormItem,
     NativeSelect,
     PanelHeaderButton,
-    MiniInfoCell, Button
+    MiniInfoCell,
+    Button,
+    Div, Textarea
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -30,7 +32,7 @@ class HomePanelBase extends React.Component {
         this.state = { 
             section: null,
             infoMethods: null,
-            infMethod: null
+            infMethod: null,
         };
 
         this.onChangeSections = this.onChangeSections.bind(this);
@@ -68,9 +70,13 @@ class HomePanelBase extends React.Component {
         this.setState({ infMethod: value })
     }
 
-    getStorage(key) {
-        await bridge.send()
-            console.log(bridge.send("VKWebAppStorageGet", {"keys": key}))
+    async getStorage(key) {
+        try {
+            let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]})
+            console.log(response.keys[0].value)}
+        catch (err) {
+            console.log(err)
+        }
     }
 
     render() {
@@ -113,9 +119,14 @@ class HomePanelBase extends React.Component {
                     }
                 </Group>
                 <Group>
-                    <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"}); this.getStorage("first")}}>
-                        TEST
-                    </Button>
+                    <Div>
+                        <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"}); this.getStorage("first")}}>
+                            TEST
+                        </Button>
+                    </Div>
+                    <Div>
+                        <Textarea value={this.getStorage("first")}/>
+                    </Div>
                 </Group>
             </Panel>
         );
