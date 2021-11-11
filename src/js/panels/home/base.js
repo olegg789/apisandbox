@@ -73,7 +73,8 @@ class HomePanelBase extends React.Component {
     async getStorage(key) {
         try {
             let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]})
-            console.log(response.keys[0].value)}
+            console.log(response.keys[0].value)
+            return response.keys[0].value}
         catch (err) {
             console.log(err)
         }
