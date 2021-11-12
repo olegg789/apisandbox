@@ -16,7 +16,7 @@ import {
     PanelHeaderButton,
     MiniInfoCell,
     Button,
-    Div, Textarea
+    Div
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -118,15 +118,11 @@ class HomePanelBase extends React.Component {
                             {infoMethod[infMethod].description}
                         </MiniInfoCell>
                     }
-                </Group>
-                <Group>
+
                     <Div>
-                        <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"}); this.getStorage("first")}}>
-                            TEST
+                        <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"})}}>
+                            Выполнить
                         </Button>
-                    </Div>
-                    <Div>
-                        <Textarea value={this.getStorage("first")}/>
                     </Div>
                 </Group>
             </Panel>
