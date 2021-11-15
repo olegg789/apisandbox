@@ -1,17 +1,8 @@
-<FormItem top="Выберите метод">
-    <NativeSelect placeholder="Не выбран">
-        <option value="a">account.ban</option>
-        <option value="a">account.changePassword</option>
-        <option value="a">account.getActiveOffers</option>
-        <option value="a">account.getAppPermissions</option>
-        <option value="a">account.getBanned</option>
-        <option value="a">account.getCounters</option>
-        <option value="a">account.getInfo</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
-        <option value="a">account.ban</option>
+
+<Group header={<Header mode="secondary">Тема</Header>}>
+    <Div>
+        <Button  size="l" stretched={true} mode="secondary" onClick={() =>  {this.props.openModal("MODAL_PAGE_BOTS_LIST"); bridge.send("VKWebAppTapticImpactOccurred", {"style" : "heavy"})}}>
+            Выбор темы
+        </Button>
+    </Div>
+</Group>

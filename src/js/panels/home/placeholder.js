@@ -9,11 +9,8 @@ import {
     PanelHeader,
     PanelHeaderBack,
     Group,
-    CellButton,
     Avatar,
     Header,
-    Div,
-    Button
 } from "@vkontakte/vkui";
 import {
     Icon28FavoriteOutline,
@@ -37,31 +34,23 @@ class HomePanelPlaceholder extends React.Component {
                 >
                     Настройки
                 </PanelHeader>
-                <Group header={<Header mode="secondary">Основное</Header>}>
-                    <CellButton before={<Avatar shadow={false} size={45}><Icon28MessagesOutline/></Avatar>} href="https://vk.me/vkapisandbox" onClick={bridge.send("VKWebAppTapticImpactOccurred", {"style" : "heavy"})}>Поддержка</CellButton>
+                <Group header={<Header mode="secondary">Прочее</Header>}>
+                    <SimpleCell before={<Avatar shadow={false} size={45}><Icon28MessagesOutline fill="#3F8AE0"/></Avatar>} href="https://vk.me/vkapisandbox">Поддержка</SimpleCell>
 
-                    <CellButton before={<Avatar shadow={false} size={45}><Icon28FavoriteOutline/></Avatar>} onClick={() => bridge.send("VKWebAppAddToFavorites")}>Добавить в избранное</CellButton>
+                    <SimpleCell before={<Avatar shadow={false} size={45}><Icon28FavoriteOutline fill="#3F8AE0"/></Avatar>} onClick={() => bridge.send("VKWebAppAddToFavorites")}>Добавить в избранное</SimpleCell>
 
-                    <CellButton before={<Avatar shadow={false} size={45}><Icon28SmartphoneOutline/></Avatar>} onClick={() => bridge.send("VKWebAppAddToHomeScreen")}>Добавить на главный экран</CellButton>
+                    <SimpleCell before={<Avatar shadow={false} size={45}><Icon28SmartphoneOutline fill="#3F8AE0"/></Avatar>} onClick={() => bridge.send("VKWebAppAddToHomeScreen")}>Добавить на главный экран</SimpleCell>
                 </Group>
                 <Group header={<Header mode="secondary">Получение токенов через Implicit Flow</Header>}>
-                    <CellButton before={<Icon28UserOutline/>} href={
+                    <SimpleCell before={<Icon28UserOutline fill="#3F8AE0"/>} href={
                         "https://vk.com/dev/implicit_flow_user"}>
                         Как получить токен пользователя
-                    </CellButton>
+                    </SimpleCell>
 
-                    <CellButton before={<Icon28Users3Outline/>} href={
+                    <SimpleCell before={<Icon28Users3Outline fill="#3F8AE0"/>} href={
                         "https://vk.com/dev/implicit_flow_group"}>
                         Как получить токен сообщества
-                    </CellButton>
-                </Group>
-                <Group header={<Header mode="secondary">Тема</Header>}>
-                    <Div>
-                        <Button  size="l" stretched={true} mode="secondary" onClick={() =>  {this.props.openModal("MODAL_PAGE_BOTS_LIST"); bridge.send("VKWebAppTapticImpactOccurred", {"style" : "heavy"})}}>
-                            Выбор темы
-                        </Button>
-                    </Div>
-
+                    </SimpleCell>
                 </Group>
                 <Group header={<Header mode="secondary">разработчики</Header>}>
 

@@ -86,7 +86,7 @@ class HomePanelBase extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28SettingsOutline/></PanelHeaderButton>}>Выполнить</PanelHeader>
+                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28SettingsOutline fill="#3F8AE0"/></PanelHeaderButton>}>Выполнить</PanelHeader>
                 <Group>
                     <FormItem top="Выберите раздел">
                         <NativeSelect 
