@@ -16,7 +16,8 @@ import {
     PanelHeaderButton,
     MiniInfoCell,
     Button,
-    Div
+    Div,
+    Textarea
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -33,10 +34,10 @@ class HomePanelBase extends React.Component {
             section: null,
             infoMethods: null,
             infMethod: null,
+            responseAPI: ''
         };
 
-        this.onChangeSections = this.onChangeSections.bind(this);
-        this.onChangeMethods = this.onChangeMethods.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     openSnackbar() {
@@ -52,22 +53,19 @@ class HomePanelBase extends React.Component {
         );
     }
 
-    async onChangeSections(e) {
-        const { value } = e.currentTarget;
-        this.setState({ section: value })
+    async onChange(e) {
+        const { name, value } = e.currentTarget;
+        this.setState({ [name]: value })
 
-        await sleep(300) //setState не обновляется моментально => костыль
+        if (name === 'section') {
+            await sleep(1) //setState не обновляется моментально => костыль
 
-        let arrInfoMethods = []
-        for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
-            arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+            let arrInfoMethods = []
+            for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
+                arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+            }
+            this.setState({ infoMethods: arrInfoMethods })
         }
-        this.setState({ infoMethods: arrInfoMethods })
-    }
-
-    onChangeMethods(e) {
-        const { value } = e.currentTarget;
-        this.setState({ infMethod: value })
     }
 
     async getStorage(key) {
@@ -80,9 +78,21 @@ class HomePanelBase extends React.Component {
         }
     }
 
+    async executeMethod() {
+        try {
+            let response = await bridge.send('VKWebAppCallAPIMethod', {method: infoMethod[this.state.infMethod].name, params: this.state.params})
+            
+            window.responseAPI = response
+            this.props.openModal('viewResponse')
+        } catch(err) {
+            window.responseAPI = err
+            this.props.openModal('viewResponse')
+        }
+    }
+
     render() {
         const {id, setPage} = this.props;
-        const {section, infoMethods, infMethod} = this.state;
+        const {section, infoMethods, infMethod, params} = this.state;
 
         return (
             <Panel id={id}>
@@ -90,8 +100,9 @@ class HomePanelBase extends React.Component {
                 <Group>
                     <FormItem top="Выберите раздел">
                         <NativeSelect 
+                            name='section'
+                            onChange={this.onChange}
                             placeholder="Не выбран"
-                            onChange={this.onChangeSections}
                         >
                             {method.map((el, index) => {
                                 return <option value={index}>{el.name}</option>
@@ -102,8 +113,9 @@ class HomePanelBase extends React.Component {
                     {section !== null &&
                         <FormItem top="Выберите метод">
                             <NativeSelect
+                                name='infMethod'
+                                onChange={this.onChange}
                                 placeholder="Не выбран"
-                                onChange={this.onChangeMethods}
                             >
                                 {infoMethods}
                             </NativeSelect>
@@ -111,19 +123,35 @@ class HomePanelBase extends React.Component {
                     }
 
                     {infMethod !== null &&
-                        <MiniInfoCell
-                            before={<Icon20HelpOutline/>}
-                            textWrap='full'
-                        >
-                            {infoMethod[infMethod].description}
-                        </MiniInfoCell>
-                    }
+                        <>
+                            <MiniInfoCell
+                                before={<Icon20HelpOutline/>}
+                                textWrap='full'
+                            >
+                                {infoMethod[infMethod].description}
+                            </MiniInfoCell>
 
-                    <Div>
-                        <Button size="l" stretched={true} mode="secondary" onClick={() => {bridge.send("VKWebAppStorageSet", {"key": "first", "value": "САША ПРИВЕТ"})}}>
-                            Выполнить
-                        </Button>
-                    </Div>
+                            <Div>
+                                <Textarea
+                                    name='params'
+                                    value={params}
+                                    onChange={this.onChange}
+                                    placeholder='Введите параметры...'
+                                />
+                            </Div>
+
+                            <Div>
+                                <Button 
+                                    size="l" 
+                                    stretched
+                                    mode="secondary" 
+                                    onClick={() => this.executeMethod()}
+                                >
+                                    Выполнить
+                                </Button>
+                            </Div>
+                        </>
+                    }
                 </Group>
             </Panel>
         );

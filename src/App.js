@@ -35,7 +35,7 @@ import HomePanelPlaceholder from './js/panels/home/placeholder';
 import MorePanelBase from './js/panels/more/base';
 
 import HomeBotsListModal from './js/components/modals/HomeBotsListModal';
-import HomeBotInfoModal from './js/components/modals/HomeBotInfoModal';
+import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -90,7 +90,7 @@ class App extends React.Component {
   }
 
   changeScheme(scheme) {
-    this.setState({scheme: scheme})
+    this.setState({ scheme: scheme })
   }
 
   render() {
@@ -108,17 +108,12 @@ class App extends React.Component {
           onClose={() => closeModal()}
           changeScheme={(scheme) => this.changeScheme(scheme)}
         />
-        <HomeBotInfoModal
-          id="MODAL_PAGE_BOT_INFO"
+        <ViewResponseAPIModal
+          id="viewResponse"
           onClose={() => closeModal()}
         />
       </ModalRoot>
     );
-
-
-
-
-
 
     return (     
       <ConfigProvider platform={Platform} isWebView={true} scheme={this.state.scheme}>

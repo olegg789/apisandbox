@@ -22,3 +22,18 @@
     margin-bottom: 24px;
     color: var(--text_secondary)
 }
+
+/*renderjson*/
+.renderjson a              { text-decoration: none; }
+.renderjson .disclosure    { 
+    color: crimson;
+    font-size: 150%; 
+}
+.renderjson .syntax        { color: grey; }
+.renderjson .string        { color: #036a07; }
+.renderjson .number        { color: #0000cd; }
+.renderjson .boolean       { color: plum; }
+.renderjson .key           { color: #318495; }
+.renderjson .keyword       { color: lightgoldenrodyellow; }
+.renderjson .object.syntax { color: grey; }
+.renderjson .array.syntax  { color: lightsalmon; } 
