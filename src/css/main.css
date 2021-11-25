@@ -25,10 +25,7 @@
 
 /*renderjson*/
 .renderjson a              { text-decoration: none; }
-.renderjson .disclosure    { 
-    color: crimson;
-    font-size: 150%; 
-}
+.renderjson .disclosure    { color: crimson; font-size: 150%; }
 .renderjson .syntax        { color: grey; }
 .renderjson .string        { color: #036a07; }
 .renderjson .number        { color: #0000cd; }
