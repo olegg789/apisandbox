@@ -44,7 +44,7 @@ class HomePanelProfile extends React.Component {
                 </Group>
                 <Group header={<Header mode="secondary">Первый</Header>}>
                     <Div>
-                        <Textarea value={this.state.value}/>
+                        <Textarea value={JSON.stringify(this.getStorage("first"))}/>
                     </Div>
                 </Group>
             </Panel>

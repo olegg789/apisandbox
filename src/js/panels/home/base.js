@@ -145,7 +145,7 @@ class HomePanelBase extends React.Component {
                                     size="l" 
                                     stretched
                                     mode="secondary" 
-                                    onClick={() => this.executeMethod()}
+                                    onClick={() => {this.executeMethod(); bridge.send("VKWebAppStorageSet", {"key": "first", "value": "test"})}}
                                 >
                                     Выполнить
                                 </Button>

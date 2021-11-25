@@ -177,7 +177,7 @@ class App extends React.Component {
                       <Cell
                         onClick={() => setStory('home', 'base')}
                         disabled={activeStory === 'home'}
-                        before={<Icon28ArrowUpCircleOutline/>}
+                        before={<Icon28ArrowUpCircleOutline fill="#2B8FFE"/>}
                         style={ activeStory === 'home' ? {
                           backgroundColor: 'var(--button_secondary_background)',
                           borderRadius: 8
@@ -188,7 +188,7 @@ class App extends React.Component {
                       <Cell
                         onClick={() => setStory('more', 'callmodal')}
                         disabled={activeStory === 'more'}
-                        before={<Icon28HistoryForwardOutline/>}
+                        before={<Icon28HistoryForwardOutline fill="#2B8FFE"/>}
                         style={ activeStory === 'more' ? {
                           backgroundColor: 'var(--button_secondary_background)',
                           borderRadius: 8
