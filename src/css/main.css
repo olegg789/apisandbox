@@ -33,4 +33,16 @@
 .renderjson .key           { color: #318495; }
 .renderjson .keyword       { color: lightgoldenrodyellow; }
 .renderjson .object.syntax { color: grey; }
-.renderjson .array.syntax  { color: lightsalmon; } 
+.renderjson .array.syntax  { color: lightsalmon; }
+
+.vkuiTabbarItem--selected {
+    color: #2B8FFE;
+}
+
+.vkuiTabbarItem {
+
+}
+
+.vkuiPanelHeader__content-in {
+    color: #2B8FFE;
+}

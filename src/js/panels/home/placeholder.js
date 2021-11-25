@@ -14,10 +14,11 @@ import {
 } from "@vkontakte/vkui";
 import {
     Icon28FavoriteOutline,
-    Icon28MessagesOutline,
+    Icon28MessagesOutline, Icon28ShareOutline,
     Icon28SmartphoneOutline,
     Icon28UserOutline,
-    Icon28Users3Outline
+    Icon28Users3Outline,
+
 } from '@vkontakte/icons';
 import bridge from '@vkontakte/vk-bridge';
 
@@ -42,7 +43,7 @@ class HomePanelPlaceholder extends React.Component {
                                 shadow={false} 
                                 size={45}
                             >
-                                <Icon28FavoriteOutline fill="#3F8AE0"/>
+                                <Icon28FavoriteOutline fill="#2B8FFE"/>
                                 </Avatar>
                         } 
                         onClick={() => bridge.send("VKWebAppAddToFavorites")}
@@ -56,7 +57,7 @@ class HomePanelPlaceholder extends React.Component {
                                 shadow={false} 
                                 size={45}
                             >
-                                <Icon28SmartphoneOutline fill="#3F8AE0"/>
+                                <Icon28SmartphoneOutline fill="#2B8FFE"/>
                             </Avatar>
                         } 
                         onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
@@ -70,26 +71,42 @@ class HomePanelPlaceholder extends React.Component {
                                 shadow={false} 
                                 size={45}
                             >
-                                <Icon28MessagesOutline fill="#3F8AE0"/>
+                                <Icon28MessagesOutline fill="#2B8FFE"/>
                             </Avatar>
                         } 
                         href="https://vk.me/vkapisandbox"
                     >
                         Поддержка
                     </SimpleCell>
+
+                    <SimpleCell
+                        before={
+                            <Avatar
+                                shadow={false}
+                                size={45}
+                            >
+                                <Icon28ShareOutline fill="#2B8FFE"/>
+                            </Avatar>
+                        }
+                        onClick={() => bridge.send("VKWebAppShare")}
+                    >
+                        Поделиться приложением
+                    </SimpleCell>
                 </Group>
 
                 <Group header={<Header mode="secondary">Получение токенов через Implicit Flow</Header>}>
                     <SimpleCell 
-                        before={<Icon28UserOutline fill="#3F8AE0"/>} 
+                        before={<Icon28UserOutline fill="#2B8FFE"/>}
                         href="https://vk.com/dev/implicit_flow_user"
+                        target="_blank"
                     >
                         Как получить токен пользователя
                     </SimpleCell>
 
                     <SimpleCell 
-                        before={<Icon28Users3Outline fill="#3F8AE0"/>} 
+                        before={<Icon28Users3Outline fill="#2B8FFE"/>}
                         href="https://vk.com/dev/implicit_flow_group"
+                        target="_blank"
                     >
                         Как получить токен сообщества
                     </SimpleCell>
@@ -106,7 +123,7 @@ class HomePanelPlaceholder extends React.Component {
 
                     <SimpleCell 
                         href="https://vk.com/olejii"
-                        description="Ничего не делал"
+                        description="кто такой Александр Кузнецов"
                         before={<Avatar src="https://sun7-14.userapi.com/s/v1/ig2/csPM9GKlyYZX3WngNXADJJT8C0eNfgPK5epHhWMVgRXv-NY52DKBSPL815IZVOQAUhPjjgczOdGBoyqdMadvN3N9.jpg?size=200x200&quality=96&crop=231,222,371,371&ava=1"/>}
                     >
                         Олег Чикелёв
