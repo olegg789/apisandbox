@@ -8,7 +8,10 @@ import {
     PanelHeader,
     Group,
     Textarea,
-    Div, Header
+    Div,
+    Header,
+    Card,
+    CardGrid
 } from "@vkontakte/vkui";
 import {
 
@@ -37,16 +40,11 @@ class HomePanelProfile extends React.Component {
         return (
             <Panel id={id}>
                 <PanelHeader>История</PanelHeader>
-                <Group>
-                    <div align="center">
-                        Показываются последние 5 вызовов
-                    </div>
-                </Group>
-                <Group header={<Header mode="secondary">Первый</Header>}>
                     <Div>
-                        <Textarea value={JSON.stringify(this.getStorage("first"))}/>
+                        <Card mode="outline">
+                            попа
+                        </Card>
                     </Div>
-                </Group>
             </Panel>
         );
     }

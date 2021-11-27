@@ -33,6 +33,11 @@
     animation-duration: 0.7s;
 }
 
+.vkuiPanelHeaderButton--vkcom {
+    animation-name: boop;
+    animation-duration: 0.7s;
+}
+
 @keyframes boop {
     25% {
         -moz-transform: scale(1.1);
