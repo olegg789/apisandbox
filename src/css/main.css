@@ -23,6 +23,43 @@
     color: var(--text_secondary)
 }
 
+.TabbarItem--selected .vkuiIcon {
+    animation-name: boop;
+    animation-duration: 0.7s;
+}
+
+.Cell--disabled .vkuiIcon {
+    animation-name: boop;
+    animation-duration: 0.7s;
+}
+
+@keyframes boop {
+    25% {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    50% {
+        -moz-transform: scale(0.9);
+        -webkit-transform: scale(0.9);
+        -o-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+    100% {
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -o-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+
 /*renderjson*/
 .renderjson a              { text-decoration: none; }
 .renderjson .disclosure    { color: crimson; font-size: 150%; }
