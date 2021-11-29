@@ -27,6 +27,7 @@
     "@vkontakte/vkjs": "^0.21.0",
     "@vkontakte/vkui": "^4.7.0",
     "babel-eslint": "^9.0.0",
+    "bugy": "^1.0.5",
     "chalk": "^2.4.2",
     "core-js": "^2.6.11",
     "eruda": "^2.4.1",

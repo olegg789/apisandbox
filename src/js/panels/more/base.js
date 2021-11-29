@@ -6,17 +6,20 @@ import {setPage, openPopout, closePopout} from "../../store/router/actions";
 import {
     Panel,
     PanelHeader,
-    Group,
-    Textarea,
     Div,
-    Header,
     Card,
-    CardGrid
 } from "@vkontakte/vkui";
 import {
 
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
+
+import { bug, openDialog, bugIconText } from 'bugy';
+
+bug({
+    onclick: () => openDialog({ id: 1 }),
+    text: bugIconText({ text: "Test" })
+});
 
 class HomePanelProfile extends React.Component {
 
