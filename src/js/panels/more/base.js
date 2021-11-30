@@ -7,7 +7,7 @@ import {
     Panel,
     PanelHeader,
     Div,
-    Card,
+    Card, Group, Header, Button, Textarea,
 } from "@vkontakte/vkui";
 import {
 
@@ -45,7 +45,35 @@ class HomePanelProfile extends React.Component {
                 <PanelHeader>История</PanelHeader>
                     <Div>
                         <Card mode="outline">
-                            попа
+                            <Group
+                                header={<Header
+                                    mode="secondary"
+                                >
+                                    Метод
+                                </Header>}>
+                                <Div>
+                                    TEST METHOD
+                                </Div>
+                            <Header
+                                mode="secondary"
+                            >
+                                Ответ
+                            </Header>
+                                <Div>
+
+                                    <Textarea
+                                        value="TEST RESPONSE"
+                                    />
+                                </Div>
+                                <Div>
+                                    <Button
+                                        stretched
+                                        size="s"
+                                    >
+                                        Скопировать
+                                    </Button>
+                                </Div>
+                            </Group>
                         </Card>
                     </Div>
             </Panel>

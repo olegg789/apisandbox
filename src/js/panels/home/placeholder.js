@@ -112,7 +112,7 @@ class HomePanelPlaceholder extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">разработчики</Header>}>
+                <Group header={<Header mode="secondary">Разработчики</Header>}>
                     <SimpleCell 
                         href="https://vk.com/kuz_s"
                         description="где я"
