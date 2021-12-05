@@ -56,7 +56,7 @@ class ViewResponseAPIModal extends React.Component {
                     </ModalPageHeader>
                 }
                 onClose={onClose}
-                settlingHeight={100}
+                settlingHeight={200}
             >
                 <Card>
                     <Div>

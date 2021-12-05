@@ -116,8 +116,7 @@ class HomePanelPlaceholder extends React.Component {
                     <SimpleCell 
                         href="https://vk.com/kuz_s"
                         description="где я"
-                        before={<Avatar src="https://sun7-7.userapi.com/s/v1/ig2/fiUFyDy1oyIR6PH_6SzNNKz76np2pFBqzZRUWZjbiuV6eBwiZSgm7lc9ZrN2s6g57Op56hRXTX2SHlTovp69GeVn.jpg?size=200x200&quality=95&crop=0,170,919,919&ava=1"/>}
-                    >
+                        before={<Avatar src="https://sun7-14.userapi.com/s/v1/ig2/kaVMv0uPh6vFOP4HTYfRsL5n9_y3zDg_jMQtqYRwPxt3d3CKTKFK-U4KR5kCxE12JSqCAtNE0eKkJMXy4zTA1zLH.jpg?size=200x200&quality=95&crop=649,695,270,270&ava=1"/>}>
                         Александр Кузнецов
                     </SimpleCell>
 
