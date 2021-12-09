@@ -14,13 +14,6 @@ import {
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 
-import { bug, openDialog, bugIconText } from 'bugy';
-
-bug({
-    onclick: () => openDialog({ id: 1 }),
-    text: bugIconText({ text: "Test" })
-});
-
 class HomePanelProfile extends React.Component {
 
     state = {
@@ -62,13 +55,14 @@ class HomePanelProfile extends React.Component {
                                 <Div>
 
                                     <Textarea
-                                        value="TEST RESPONSE"
+                                        value={JSON.stringify(this.getStorage("first"))}
                                     />
                                 </Div>
                                 <Div>
                                     <Button
                                         stretched
                                         size="s"
+
                                     >
                                         Скопировать
                                     </Button>
