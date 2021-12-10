@@ -17,7 +17,9 @@ import {
     MiniInfoCell,
     Button,
     Div,
-    Textarea
+    Textarea,
+    PromoBanner,
+    FixedLayout
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -34,7 +36,8 @@ class HomePanelBase extends React.Component {
             section: null,
             infoMethods: null,
             infMethod: null,
-            responseAPI: ''
+            responseAPI: '',
+            promoBannerProps: this.promoBannerProps()
         };
 
         this.onChange = this.onChange.bind(this);
@@ -51,7 +54,7 @@ class HomePanelBase extends React.Component {
                 Какой-то текст
             </Snackbar>
         );
-    }
+    };
 
     async onChange(e) {
         const { name, value } = e.currentTarget;
@@ -88,6 +91,13 @@ class HomePanelBase extends React.Component {
             window.responseAPI = err
             this.props.openModal('viewResponse')
         }
+    }
+
+    promoBannerProps() {
+        bridge.send('VKWebAppGetAds')
+            .then((promoBannerProps) => {
+            this.setState({promoBannerProps});
+        })
     }
 
     render() {
@@ -152,6 +162,9 @@ class HomePanelBase extends React.Component {
                             </Div>
                         </>
                     }
+                    <FixedLayout vertical="bottom">
+                        { this.state.promoBannerProps && <PromoBanner bannerData={ this.state.promoBannerProps } /> }
+                    </FixedLayout>
                 </Group>
             </Panel>
         );
