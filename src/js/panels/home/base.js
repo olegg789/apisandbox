@@ -18,8 +18,6 @@ import {
     Button,
     Div,
     Textarea,
-    PromoBanner,
-    FixedLayout
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -37,7 +35,6 @@ class HomePanelBase extends React.Component {
             infoMethods: null,
             infMethod: null,
             responseAPI: '',
-            promoBannerProps: this.promoBannerProps()
         };
 
         this.onChange = this.onChange.bind(this);
@@ -91,13 +88,6 @@ class HomePanelBase extends React.Component {
             window.responseAPI = err
             this.props.openModal('viewResponse')
         }
-    }
-
-    promoBannerProps() {
-        bridge.send('VKWebAppGetAds')
-            .then((promoBannerProps) => {
-            this.setState({promoBannerProps});
-        })
     }
 
     render() {
@@ -162,9 +152,6 @@ class HomePanelBase extends React.Component {
                             </Div>
                         </>
                     }
-                    <FixedLayout vertical="bottom">
-                        { this.state.promoBannerProps && <PromoBanner bannerData={ this.state.promoBannerProps } /> }
-                    </FixedLayout>
                 </Group>
             </Panel>
         );

@@ -17,21 +17,32 @@ import bridge from "@vkontakte/vk-bridge";
 class HomePanelProfile extends React.Component {
 
     state = {
-        value: null
+        textButton: true,
+        disabledButton: false
     };
 
     async getStorage(key) {
         try {
-            let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]})
-            console.log(response.keys[0].value)
+            let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]});
+            console.log(response.keys[0].value);
             return response.keys[0].value}
         catch (err) {
             console.log(err)
         }
     };
 
+    async copy() {
+        await bridge.send("VKWebAppCopyText", {"text": 'АЛЕ ГАРАЖ'})
+
+        this.setState({
+            textButton: false,
+            disabledButton: true
+        })
+    }
+
     render() {
         const {id} = this.props;
+        const {disabledButton, textButton} = this.state
 
         return (
             <Panel id={id}>
@@ -55,16 +66,18 @@ class HomePanelProfile extends React.Component {
                                 <Div>
 
                                     <Textarea
-                                        value={JSON.stringify(this.getStorage("first"))}
+                                        value={this.getStorage('first')}
+                                        disabled
                                     />
                                 </Div>
                                 <Div>
                                     <Button
                                         stretched
                                         size="s"
-
+                                        onClick={() => this.copy()}
+                                        disabled={disabledButton}
                                     >
-                                        Скопировать
+                                        {textButton ? "Скопировать" : "Скопировано!"}
                                     </Button>
                                 </Div>
                             </Group>
