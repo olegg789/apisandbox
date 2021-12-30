@@ -2,24 +2,39 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {setPage, openPopout, closePopout} from "../../store/router/actions";
+import {method, } from '../../../infoMethodBridge';
 
 import {
+    Group,
+    FormItem,
+    NativeSelect,
     Panel,
     PanelHeader,
-    Div,
-    Card, Group, Header, Button, Textarea,
+    PanelHeaderButton, Textarea, MiniInfoCell
 } from "@vkontakte/vkui";
 import {
+    Icon20HelpOutline,
+    Icon28SettingsOutline
 
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
+import {sleep} from "../../../functions";
+import {infoMethod} from "../../../infoMethod";
+
 
 class HomePanelProfile extends React.Component {
+    constructor(props) {
+        super(props);
 
-    state = {
-        textButton: true,
-        disabledButton: false
-    };
+        this.state = {
+            section: null,
+            infoMethods: null,
+            infoMethodBridge: null,
+            infMethod: null
+        };
+
+        this.onChange = this.onChange.bind(this);
+    }
 
     async getStorage(key) {
         try {
@@ -31,58 +46,60 @@ class HomePanelProfile extends React.Component {
         }
     };
 
+    async onChange(e) {
+        const { name, value } = e.currentTarget;
+        this.setState({ [name]: value })
+
+        if (name === 'section') {
+            await sleep(1) //setState не обновляется моментально => костыль
+
+            let arrInfoMethods = []
+            for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
+                arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+            }
+            this.setState({ infoMethods: arrInfoMethods })
+        }
+    }
+
     async copy() {
         await bridge.send("VKWebAppCopyText", {"text": 'АЛЕ ГАРАЖ'})
 
         this.setState({
-            textButton: false,
-            disabledButton: true
+
         })
     }
 
     render() {
         const {id} = this.props;
-        const {disabledButton, textButton} = this.state
+        const {section, infoMethodBridge, infoMethods, infMethod} = this.state;
 
         return (
             <Panel id={id}>
-                <PanelHeader>История</PanelHeader>
-                    <Div>
-                        <Card mode="outline">
-                            <Group
-                                header={<Header
-                                    mode="secondary"
-                                >
-                                    Метод
-                                </Header>}>
-                                <Div>
-                                    TEST METHOD
-                                </Div>
-                            <Header
-                                mode="secondary"
-                            >
-                                Ответ
-                            </Header>
-                                <Div>
-
-                                    <Textarea
-                                        value={this.getStorage('first')}
-                                        disabled
-                                    />
-                                </Div>
-                                <Div>
-                                    <Button
-                                        stretched
-                                        size="s"
-                                        onClick={() => this.copy()}
-                                        disabled={disabledButton}
-                                    >
-                                        {textButton ? "Скопировать" : "Скопировано!"}
-                                    </Button>
-                                </Div>
-                            </Group>
-                        </Card>
-                    </Div>
+                <PanelHeader
+                    left={<PanelHeaderButton onClick={() => setPage('more', 'placeholder')}><Icon28SettingsOutline fill="#2B8FFE"/></PanelHeaderButton>}
+                    >
+                        VK BRIDGE
+                    </PanelHeader>
+                <Group>
+                    <FormItem top="Выберите метод">
+                        <NativeSelect
+                            name='section'
+                            onChange={this.onChange}
+                            placeholder="Не выбран"
+                        >
+                            {method.map((el, index) => {
+                                return <option value={index}>{el.name}</option>
+                            })}
+                        </NativeSelect>
+                    </FormItem>
+                    {section !== null &&
+                        <MiniInfoCell
+                            before={<Icon20HelpOutline/>}
+                            textWrap='full'
+                        >
+                            {}
+                        </MiniInfoCell>}
+                </Group>
             </Panel>
         );
     }

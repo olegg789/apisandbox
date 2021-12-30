@@ -25,8 +25,8 @@ import {
 } from "@vkontakte/vkui";
 
 import {
-  Icon28HistoryForwardOutline,
-  Icon28ArrowUpCircleOutline
+  Icon28ArrowUpCircleOutline,
+  Icon28BookOutline
 } from '@vkontakte/icons';
 
 import HomePanelBase from './js/panels/home/base';
@@ -134,13 +134,13 @@ class App extends React.Component {
                   <TabbarItem
                     onClick={() => setStory('home', 'base')}
                     selected={activeStory === 'home'}
-                    text='Выполнить'
+                    text='API'
                   ><Icon28ArrowUpCircleOutline/></TabbarItem>
                   <TabbarItem
                     onClick={() => setStory('more', 'callmodal')}
                     selected={activeStory === 'more'}
-                    text='История'
-                  ><Icon28HistoryForwardOutline/></TabbarItem>
+                    text='BRIDGE'
+                  ><Icon28BookOutline/></TabbarItem>
                 </Tabbar>}>
                   <Root id="home" activeView={activeView} popout={popout}>
                     <View
@@ -183,18 +183,18 @@ class App extends React.Component {
                           borderRadius: 8
                         } : {}}
                       >
-                        Выполнить
+                        API
                       </Cell>
                       <Cell
                         onClick={() => setStory('more', 'callmodal')}
                         disabled={activeStory === 'more'}
-                        before={<Icon28HistoryForwardOutline fill="#2B8FFE"/>}
+                        before={<Icon28BookOutline fill="#2B8FFE"/>}
                         style={ activeStory === 'more' ? {
                           backgroundColor: 'var(--button_secondary_background)',
                           borderRadius: 8
                         } : {}}
                       >
-                        История
+                        BRIDGE
                       </Cell>
                     </Group>
                   </Panel>

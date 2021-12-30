@@ -88,7 +88,6 @@
 .vkuiPanelHeader__content-in {
     color: #2B8FFE;
 }
-
-.vkuiPanelHeader__content {
-    cursor: default;
+.vkuiTabbarItem--android {
+    padding-bottom: None;
 }
