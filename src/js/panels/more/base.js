@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {setPage, openPopout, closePopout} from "../../store/router/actions";
+import {setPage, openPopout, closePopout, openModal} from "../../store/router/actions";
 import {method, } from '../../../infoMethodBridge';
 
 import {
@@ -10,7 +10,10 @@ import {
     NativeSelect,
     Panel,
     PanelHeader,
-    PanelHeaderButton, Textarea, MiniInfoCell
+    PanelHeaderButton,
+    Textarea,
+    MiniInfoCell,
+    Div, Button,
 } from "@vkontakte/vkui";
 import {
     Icon20HelpOutline,
@@ -30,7 +33,8 @@ class HomePanelProfile extends React.Component {
             section: null,
             infoMethods: null,
             infoMethodBridge: null,
-            infMethod: null
+            infMethod: null,
+            responseBridge: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -61,6 +65,18 @@ class HomePanelProfile extends React.Component {
         }
     }
 
+    async executeMethod() {
+        try {
+            let response = await bridge.send(method[this.state.section].name, [this.state.params])
+
+            window.responseAPI = response
+            this.props.openModal('viewResponse')
+        } catch(err) {
+            window.responseAPI = err
+            this.props.openModal('viewResponse')
+        }
+    }
+
     async copy() {
         await bridge.send("VKWebAppCopyText", {"text": 'АЛЕ ГАРАЖ'})
 
@@ -71,7 +87,7 @@ class HomePanelProfile extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, infoMethodBridge, infoMethods, infMethod} = this.state;
+        const {section, params} = this.state;
 
         return (
             <Panel id={id}>
@@ -93,12 +109,34 @@ class HomePanelProfile extends React.Component {
                         </NativeSelect>
                     </FormItem>
                     {section !== null &&
+                        <>
                         <MiniInfoCell
                             before={<Icon20HelpOutline/>}
                             textWrap='full'
                         >
-                            {}
-                        </MiniInfoCell>}
+                            {method[section].description}
+                        </MiniInfoCell>
+
+                            <Div>
+                                <Textarea
+                                    name='params'
+                                    value={params}
+                                    onChange={this.onChange}
+                                    placeholder='Введите параметры...'
+                                />
+                            </Div>
+
+                            <Div>
+                                <Button
+                                    size="l"
+                                    stretched
+                                    mode="secondary"
+                                    onClick={() => {this.executeMethod()}}
+                                >
+                                    Вызвать
+                                </Button>
+                            </Div>
+                    </>}
                 </Group>
             </Panel>
         );
@@ -109,7 +147,8 @@ class HomePanelProfile extends React.Component {
 const mapDispatchToProps = {
     setPage,
     openPopout,
-    closePopout
+    closePopout,
+    openModal
 };
 
 export default connect(null, mapDispatchToProps)(HomePanelProfile);

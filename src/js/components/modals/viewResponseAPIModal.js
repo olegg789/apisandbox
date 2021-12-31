@@ -26,6 +26,7 @@ class ViewResponseAPIModal extends React.Component {
     }
 
     componentDidMount() {
+        renderjson.set_show_to_level(1)
         document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
     }
 
