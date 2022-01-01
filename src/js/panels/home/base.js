@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {closePopout, goBack, openModal, openPopout, setPage} from '../../store/router/actions';
+import {closePopout, goBack, openModal, openPopout} from '../../store/router/actions';
 import {method, infoMethod} from '../../../infoMethod';
 import {sleep} from '../../../functions';
 
@@ -13,7 +13,6 @@ import {
     Avatar,
     FormItem,
     NativeSelect,
-    PanelHeaderButton,
     MiniInfoCell,
     Button,
     Div,
@@ -22,7 +21,6 @@ import {
 import {
     Icon16Done,
     Icon20HelpOutline,
-    Icon28SettingsOutline
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 
@@ -91,12 +89,12 @@ class HomePanelBase extends React.Component {
     }
 
     render() {
-        const {id, setPage} = this.props;
+        const {id} = this.props;
         const {section, infoMethods, infMethod, params} = this.state;
 
         return (
             <Panel id={id}>
-                <PanelHeader left={<PanelHeaderButton onClick={() => setPage('home', 'placeholder')}><Icon28SettingsOutline fill="#2B8FFE"/></PanelHeaderButton>}>VK API</PanelHeader>
+                <PanelHeader>VK API</PanelHeader>
                 <Group>
                     <FormItem top="Выберите раздел">
                         <NativeSelect 
@@ -160,7 +158,6 @@ class HomePanelBase extends React.Component {
 
 
 const mapDispatchToProps = {
-    setPage,
     goBack,
     openPopout,
     closePopout,

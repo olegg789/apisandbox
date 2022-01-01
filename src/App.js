@@ -26,13 +26,15 @@ import {
 
 import {
   Icon28ArrowUpCircleOutline,
-  Icon28BookOutline
+  Icon28BookOutline, Icon28SettingsOutline
 } from '@vkontakte/icons';
 
 import HomePanelBase from './js/panels/home/base';
 import HomePanelPlaceholder from './js/panels/home/placeholder';
 
 import MorePanelBase from './js/panels/more/base';
+
+import HomePanelSettings from "./js/panels/settings/settings";
 
 import HomeBotsListModal from './js/components/modals/HomeBotsListModal';
 import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
@@ -141,6 +143,11 @@ class App extends React.Component {
                     selected={activeStory === 'more'}
                     text='BRIDGE'
                   ><Icon28BookOutline/></TabbarItem>
+                  <TabbarItem
+                      onClick={() => setStory('settings', 'settings')}
+                      selected={activeStory === 'settings'}
+                      text='SETTINGS'
+                  ><Icon28SettingsOutline/></TabbarItem>
                 </Tabbar>}>
                   <Root id="home" activeView={activeView} popout={popout}>
                     <View
@@ -164,6 +171,17 @@ class App extends React.Component {
                     >
                       <MorePanelBase id="callmodal"/>
                       <HomePanelPlaceholder id="placeholder"/>
+                    </View>
+                  </Root>
+                  <Root id="settings" activeView={activeView} popout={popout}>
+                    <View
+                        id="settings"
+                        modal={homeModals}
+                        activePanel={getActivePanel("settings")}
+                        history={history}
+                        onSwipeBack={() => goBack()}
+                    >
+                      <HomePanelSettings id="settings"/>
                     </View>
                   </Root>
                 </Epic>
@@ -195,6 +213,17 @@ class App extends React.Component {
                         } : {}}
                       >
                         BRIDGE
+                      </Cell>
+                      <Cell
+                          onClick={() => setStory('settings', 'settings')}
+                          disabled={activeStory === 'settings'}
+                          before={<Icon28SettingsOutline fill="#2B8FFE"/>}
+                          style={ activeStory === 'settings' ? {
+                            backgroundColor: 'var(--button_secondary_background)',
+                            borderRadius: 8
+                          } : {}}
+                      >
+                        SETTINGS
                       </Cell>
                     </Group>
                   </Panel>

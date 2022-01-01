@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {setPage, openPopout, closePopout, openModal} from "../../store/router/actions";
+import {closePopout, goBack, openModal, openPopout, setPage} from "../../store/router/actions";
 import {method, } from '../../../infoMethodBridge';
 
 import {
@@ -10,15 +10,12 @@ import {
     NativeSelect,
     Panel,
     PanelHeader,
-    PanelHeaderButton,
     Textarea,
     MiniInfoCell,
     Div, Button,
 } from "@vkontakte/vkui";
 import {
     Icon20HelpOutline,
-    Icon28SettingsOutline
-
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 import {sleep} from "../../../functions";
@@ -92,7 +89,6 @@ class HomePanelProfile extends React.Component {
         return (
             <Panel id={id}>
                 <PanelHeader
-                    left={<PanelHeaderButton onClick={() => setPage('more', 'placeholder')}><Icon28SettingsOutline fill="#2B8FFE"/></PanelHeaderButton>}
                     >
                         VK BRIDGE
                     </PanelHeader>
@@ -146,6 +142,7 @@ class HomePanelProfile extends React.Component {
 
 const mapDispatchToProps = {
     setPage,
+    goBack,
     openPopout,
     closePopout,
     openModal
