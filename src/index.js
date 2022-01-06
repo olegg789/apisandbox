@@ -18,6 +18,10 @@ import bridge from '@vkontakte/vk-bridge';
 
 import App from './App';
 
+export const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(thunk),
+));
+
 bridge.subscribe((e) => {
     switch (e.detail.type) {
         case 'VKWebAppUpdateConfig':
@@ -31,12 +35,6 @@ bridge.subscribe((e) => {
     }
 })
 
-bridge.send('VKWebAppInit', {})
-
-export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(thunk),
-));
-
 store.dispatch(setStory('home', 'base'));
 
 ReactDOM.render(
@@ -46,4 +44,5 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+bridge.send('VKWebAppInit', {})
 import('./eruda.js').then(({ default: eruda }) => {}) 

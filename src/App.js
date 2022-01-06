@@ -32,9 +32,9 @@ import {
 import HomePanelBase from './js/panels/home/base';
 import HomePanelPlaceholder from './js/panels/home/placeholder';
 
-import MorePanelBase from './js/panels/more/base';
+import HomePanelBridge from './js/panels/bridge/base';
 
-import HomePanelSettings from "./js/panels/settings/settings";
+import HomePanelSettings from "./js/panels/settings/base";
 
 import HomeBotsListModal from './js/components/modals/HomeBotsListModal';
 import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
@@ -139,12 +139,12 @@ class App extends React.Component {
                     text='API'
                   ><Icon28ArrowUpCircleOutline/></TabbarItem>
                   <TabbarItem
-                    onClick={() => setStory('more', 'callmodal')}
-                    selected={activeStory === 'more'}
+                    onClick={() => setStory('bridge', 'base')}
+                    selected={activeStory === 'bridge'}
                     text='BRIDGE'
                   ><Icon28BookOutline/></TabbarItem>
                   <TabbarItem
-                      onClick={() => setStory('settings', 'settings')}
+                      onClick={() => setStory('settings', 'base')}
                       selected={activeStory === 'settings'}
                       text='SETTINGS'
                   ><Icon28SettingsOutline/></TabbarItem>
@@ -161,15 +161,15 @@ class App extends React.Component {
                       <HomePanelPlaceholder id="placeholder"/>
                     </View>
                   </Root>
-                  <Root id="more" activeView={activeView} popout={popout}>
+                  <Root id="bridge" activeView={activeView} popout={popout}>
                     <View
-                      id="more"
+                      id="bridge"
                       modal={homeModals}
-                      activePanel={getActivePanel("more")}
+                      activePanel={getActivePanel("bridge")}
                       history={history}
                       onSwipeBack={() => goBack()}
                     >
-                      <MorePanelBase id="callmodal"/>
+                      <HomePanelBridge id="base"/>
                       <HomePanelPlaceholder id="placeholder"/>
                     </View>
                   </Root>
@@ -181,7 +181,7 @@ class App extends React.Component {
                         history={history}
                         onSwipeBack={() => goBack()}
                     >
-                      <HomePanelSettings id="settings"/>
+                      <HomePanelSettings id="base"/>
                     </View>
                   </Root>
                 </Epic>
@@ -204,8 +204,8 @@ class App extends React.Component {
                         API
                       </Cell>
                       <Cell
-                        onClick={() => setStory('more', 'callmodal')}
-                        disabled={activeStory === 'more'}
+                        onClick={() => setStory('bridge', 'base')}
+                        disabled={activeStory === 'bridge'}
                         before={<Icon28BookOutline fill="#2B8FFE"/>}
                         style={ activeStory === 'more' ? {
                           backgroundColor: 'var(--button_secondary_background)',
@@ -215,7 +215,7 @@ class App extends React.Component {
                         BRIDGE
                       </Cell>
                       <Cell
-                          onClick={() => setStory('settings', 'settings')}
+                          onClick={() => setStory('settings', 'base')}
                           disabled={activeStory === 'settings'}
                           before={<Icon28SettingsOutline fill="#2B8FFE"/>}
                           style={ activeStory === 'settings' ? {
