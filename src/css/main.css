@@ -95,3 +95,9 @@
     margin-top: -25px;
     margin-bottom: -30px;
 }
+
+.podpis {
+    display: flex;
+    justify-content: center;
+    white-space: pre-wrap;
+}

@@ -207,7 +207,7 @@ class App extends React.Component {
                         onClick={() => setStory('bridge', 'base')}
                         disabled={activeStory === 'bridge'}
                         before={<Icon28BookOutline fill="#2B8FFE"/>}
-                        style={ activeStory === 'more' ? {
+                        style={ activeStory === 'bridge' ? {
                           backgroundColor: 'var(--button_secondary_background)',
                           borderRadius: 8
                         } : {}}
