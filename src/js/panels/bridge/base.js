@@ -102,7 +102,7 @@ class HomePanelBridge extends React.Component {
         try {
             let params1 = {}
             this.state.param.map((el, index) => {
-                if (method[this.state.section].params.length === index || el === '') return 
+                if (method[this.state.section].params.length === index || el === '') return
                 params1[`${method[this.state.section].params[index].param}`] = el
             })
 
@@ -118,7 +118,7 @@ class HomePanelBridge extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, params, param} = this.state;
+        const {section, param} = this.state;
 
         return (
             <Panel id={id}>

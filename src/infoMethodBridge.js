@@ -573,7 +573,7 @@ export let method = [
         "params": [{
             "param": 'keys',
             "type": 'string[]',
-            "description":"Названия ключей [a-zA-Z_\-0-9], переданные массивом строк." 
+            "description":"Названия ключей [a-zA-Z0-9], переданные массивом строк."
         }]
     },
     {
@@ -596,7 +596,7 @@ export let method = [
         "params": [{
             "param": 'key',
             "type": 'string',
-            "description":"Название ключа, [a-zA-Z_\-0-9]. Максимальная длина — 100 символов." 
+            "description":"Название ключа, [a-zA-Z0-9]. Максимальная длина — 100 символов."
         },
         {
             "param": 'value',

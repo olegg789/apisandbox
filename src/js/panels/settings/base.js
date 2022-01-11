@@ -13,6 +13,7 @@ import {
     Footer,
     Link,
     Div,
+    Button,
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline, Icon20BugOutline,
@@ -20,17 +21,44 @@ import {
     Icon28MessagesOutline,
     Icon28ShareOutline,
     Icon28SmartphoneOutline,
-    Icon28UserOutline,
-    Icon28Users3Outline
-
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelSettings extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            market: null
+        };
+
+        this.onChange = this.onChange.bind(this);
+    }
+
+    async onChange(e) {
+        const { name, value } = e.currentTarget;
+        this.setState({ [name]: value })
+
+    }
+
+    actionCheckbox(index) {
+        let arr = this.state.param
+
+        if (arr[index] === '' || arr[index] === false) {
+            arr[index] = true
+        } else {
+            arr[index] = false
+        }
+
+        this.setState({ param: arr })
+    }
 
     async getToken() {
         try {
             let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: "friends, photos, video, stories, pages, status, notes, wall, docs, groups, stats, market"})
+
+            let test = this.state.market
+            console.log(test)
 
             window.responseToken = response
             this.props.openModal('viewResponseToken')
@@ -110,13 +138,17 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">Получение ключа доступа (access_token)</Header>}>
-                    <SimpleCell
-                        before={<Icon28UserOutline fill="#2B8FFE"/>}
-                        onClick={() => this.getToken()}
-                    >
-                        Получить ключ доступа пользователя
-                    </SimpleCell>
+                <Group header={<Header mode="secondary">Получение ключа доступа пользователя (access_token)</Header>}>
+                    <Div>
+                        <Button
+                            stretched
+                            mode="secondary"
+                            size="l"
+                            onClick={() => this.getToken()}
+                        >
+                            Получить токен со всеми правами
+                        </Button>
+                    </Div>
                 </Group>
 
                 <Footer>
