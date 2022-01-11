@@ -39,6 +39,8 @@ import HomePanelSettings from "./js/panels/settings/base";
 import HomeBotsListModal from './js/components/modals/HomeBotsListModal';
 import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
 
+import ViewResponseGetToken from "./js/components/modals/viewResponseGetToken";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -112,6 +114,10 @@ class App extends React.Component {
         />
         <ViewResponseAPIModal
           id="viewResponse"
+          onClose={() => closeModal()}
+        />
+        <ViewResponseGetToken
+          id="viewResponseToken"
           onClose={() => closeModal()}
         />
       </ModalRoot>

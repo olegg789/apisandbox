@@ -28,8 +28,22 @@ import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelSettings extends React.Component {
 
+    async getToken() {
+        try {
+            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: "friends, photos, video, stories, pages, status, notes, wall, docs, groups, stats, market"})
+
+            window.responseToken = response
+            this.props.openModal('viewResponseToken')
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
     render() {
         const {id} = this.props;
+
+
 
         return (
             <Panel id={id}>
@@ -96,26 +110,17 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">Получение токенов через Implicit Flow</Header>}>
+                <Group header={<Header mode="secondary">Получение ключа доступа (access_token)</Header>}>
                     <SimpleCell
                         before={<Icon28UserOutline fill="#2B8FFE"/>}
-                        href="https://dev.vk.com/api/access-token/implicit-flow-user"
-                        target="_blank"
+                        onClick={() => this.getToken()}
                     >
-                        Как получить токен пользователя
-                    </SimpleCell>
-
-                    <SimpleCell
-                        before={<Icon28Users3Outline fill="#2B8FFE"/>}
-                        href="https://dev.vk.com/api/access-token/implicit-flow-community"
-                        target="_blank"
-                    >
-                        Как получить токен сообщества
+                        Получить ключ доступа пользователя
                     </SimpleCell>
                 </Group>
 
                 <Footer>
-                    <Div>
+                    <Div className="podpis">
                         От <Link href="https://vk.com/kuz_s" target="_blank">@kuz_s</Link> и <Link href="https://vk.com/olejii" target="_blank">@olejii</Link>
                     </Div>
                     <Div className="podpis">
