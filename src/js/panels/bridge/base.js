@@ -101,7 +101,9 @@ class HomePanelBridge extends React.Component {
     async executeMethod() {
         try {
             let params1 = {}
+            // eslint-disable-next-line
             this.state.param.map((el, index) => {
+                // eslint-disable-next-line
                 if (method[this.state.section].params.length === index || el === '') return
                 params1[`${method[this.state.section].params[index].param}`] = el
             })
@@ -151,7 +153,7 @@ class HomePanelBridge extends React.Component {
                             {method[section].params.length === 0 ?
                                 <Placeholder className='fixPaddingPlaceholder'>
                                     У данного события отсутствуют параметры.
-                                </Placeholder> :
+                                </Placeholder> :  // eslint-disable-next-line
                                 method[section].params.map((el, index) => {
                                     if (el.type === 'string' || el.type === 'string[]') {
                                         return(

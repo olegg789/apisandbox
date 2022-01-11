@@ -1,4 +1,4 @@
-import {Avatar, Button, Card, Div, Group, Header, SimpleCell, Textarea} from "@vkontakte/vkui";
+import {Avatar, Button, Card, Checkbox, Div, Group, Header, SimpleCell, Textarea} from "@vkontakte/vkui";
 import React from "react";
 
 <Group header={<Header mode="secondary">Тема</Header>}>
@@ -62,3 +62,16 @@ import React from "react";
         Олег Чикелёв
     </SimpleCell>
 </Group>
+
+<Checkbox name="friends" onChange={(e) => this.setState({param: e.currentTarget.name})}>friends</Checkbox>
+<Checkbox name="photos" onChange={(e) => this.setState({param: e.currentTarget.name})}>photos</Checkbox>
+<Checkbox name='video' onChange={(e) => this.setState({param: e.currentTarget.name})}>video</Checkbox>
+<Checkbox name='stories' onChange={(e) => this.setState({param: e.currentTarget.name})}>stories</Checkbox>
+<Checkbox name='pages' onChange={(e) => this.setState({param: e.currentTarget.name})}>pages</Checkbox>
+<Checkbox name='status' onChange={(e) => this.setState({param: e.currentTarget.name})}>status</Checkbox>
+<Checkbox name='notes' onChange={(e) => this.setState({param: e.currentTarget.name})}>notes</Checkbox>
+<Checkbox name='wall' onChange={(e) => this.setState({param: e.currentTarget.name})}>wall</Checkbox>
+<Checkbox name='docs' onChange={(e) => this.setState({param: e.currentTarget.name})}>docs</Checkbox>
+<Checkbox name='groups' onChange={(e) => this.setState({param: e.currentTarget.name})}>groups</Checkbox>
+<Checkbox name='stats' onChange={(e) => this.setState({param: e.currentTarget.name})}>stats</Checkbox>
+<Checkbox name="market" onChange={(e) => this.setState({param: e.currentTarget.name})}>market</Checkbox>

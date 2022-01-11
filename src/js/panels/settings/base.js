@@ -14,6 +14,7 @@ import {
     Link,
     Div,
     Button,
+    Checkbox,
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline, Icon20BugOutline,
@@ -29,16 +30,28 @@ class HomePanelSettings extends React.Component {
         super(props);
 
         this.state = {
-            market: null
+
         };
 
-        this.onChange = this.onChange.bind(this);
     }
 
-    async onChange(e) {
-        const { name, value } = e.currentTarget;
-        this.setState({ [name]: value })
-
+    componentDidMount() {
+        this.setState({
+            param: [
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+            ]
+        })
     }
 
     actionCheckbox(index) {
@@ -55,10 +68,9 @@ class HomePanelSettings extends React.Component {
 
     async getToken() {
         try {
-            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: "friends, photos, video, stories, pages, status, notes, wall, docs, groups, stats, market"})
+            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: [this.state.param]})
 
-            let test = this.state.market
-            console.log(test)
+            console.log(this.state.param)
 
             window.responseToken = response
             this.props.openModal('viewResponseToken')
@@ -70,8 +82,6 @@ class HomePanelSettings extends React.Component {
 
     render() {
         const {id} = this.props;
-
-
 
         return (
             <Panel id={id}>
@@ -138,16 +148,35 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">Получение ключа доступа пользователя (access_token)</Header>}>
+                <Group header={<Header mode="secondary">Получение токена пользователя(access_token)</Header>}>
                     <Div>
-                        <Button
-                            stretched
-                            mode="secondary"
-                            size="l"
-                            onClick={() => this.getToken()}
-                        >
-                            Получить токен со всеми правами
-                        </Button>
+                        <Div>
+                            Права доступа токена
+                        </Div>
+
+                        <Checkbox name="friends" onChange={(e) => this.setState({param: e.currentTarget.name})}>friends</Checkbox>
+                        <Checkbox name="photos" onChange={(e) => this.setState({param: e.currentTarget.name})}>photos</Checkbox>
+                        <Checkbox name='video' onChange={(e) => this.setState({param: e.currentTarget.name})}>video</Checkbox>
+                        <Checkbox name='stories' onChange={(e) => this.setState({param: e.currentTarget.name})}>stories</Checkbox>
+                        <Checkbox name='pages' onChange={(e) => this.setState({param: e.currentTarget.name})}>pages</Checkbox>
+                        <Checkbox name='status' onChange={(e) => this.setState({param: e.currentTarget.name})}>status</Checkbox>
+                        <Checkbox name='notes' onChange={(e) => this.setState({param: e.currentTarget.name})}>notes</Checkbox>
+                        <Checkbox name='wall' onChange={(e) => this.setState({param: e.currentTarget.name})}>wall</Checkbox>
+                        <Checkbox name='docs' onChange={(e) => this.setState({param: e.currentTarget.name})}>docs</Checkbox>
+                        <Checkbox name='groups' onChange={(e) => this.setState({param: e.currentTarget.name})}>groups</Checkbox>
+                        <Checkbox name='stats' onChange={(e) => this.setState({param: e.currentTarget.name})}>stats</Checkbox>
+                        <Checkbox name="market" onChange={(e) => this.setState({param: e.currentTarget.name})}>market</Checkbox>
+
+                        <Div>
+                            <Button
+                                stretched
+                                mode="secondary"
+                                size="l"
+                                onClick={() => this.getToken()}
+                            >
+                                Получить токен
+                            </Button>
+                        </Div>
                     </Div>
                 </Group>
 
