@@ -30,6 +30,8 @@ class HomePanelSettings extends React.Component {
         super(props);
 
         this.state = {
+            textButton: true,
+            disabledButton: false,
 
         };
 
@@ -54,6 +56,7 @@ class HomePanelSettings extends React.Component {
         })
     }
 
+
     actionCheckbox(index) {
         let arr = this.state.param
 
@@ -68,9 +71,14 @@ class HomePanelSettings extends React.Component {
 
     async getToken() {
         try {
-            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: [this.state.param]})
+            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: this.state.param})
 
             console.log(this.state.param)
+
+            this.setState({
+                textButton: false,
+                disabledButton: true
+            })
 
             window.responseToken = response
             this.props.openModal('viewResponseToken')
@@ -82,6 +90,7 @@ class HomePanelSettings extends React.Component {
 
     render() {
         const {id} = this.props;
+        const {textButton, disabledButton} = this.state;
 
         return (
             <Panel id={id}>
@@ -154,18 +163,18 @@ class HomePanelSettings extends React.Component {
                             Права доступа токена
                         </Div>
 
-                        <Checkbox name="friends" onChange={(e) => this.setState({param: e.currentTarget.name})}>friends</Checkbox>
-                        <Checkbox name="photos" onChange={(e) => this.setState({param: e.currentTarget.name})}>photos</Checkbox>
-                        <Checkbox name='video' onChange={(e) => this.setState({param: e.currentTarget.name})}>video</Checkbox>
-                        <Checkbox name='stories' onChange={(e) => this.setState({param: e.currentTarget.name})}>stories</Checkbox>
-                        <Checkbox name='pages' onChange={(e) => this.setState({param: e.currentTarget.name})}>pages</Checkbox>
-                        <Checkbox name='status' onChange={(e) => this.setState({param: e.currentTarget.name})}>status</Checkbox>
-                        <Checkbox name='notes' onChange={(e) => this.setState({param: e.currentTarget.name})}>notes</Checkbox>
-                        <Checkbox name='wall' onChange={(e) => this.setState({param: e.currentTarget.name})}>wall</Checkbox>
-                        <Checkbox name='docs' onChange={(e) => this.setState({param: e.currentTarget.name})}>docs</Checkbox>
-                        <Checkbox name='groups' onChange={(e) => this.setState({param: e.currentTarget.name})}>groups</Checkbox>
-                        <Checkbox name='stats' onChange={(e) => this.setState({param: e.currentTarget.name})}>stats</Checkbox>
-                        <Checkbox name="market" onChange={(e) => this.setState({param: e.currentTarget.name})}>market</Checkbox>
+                        <Checkbox name="friends" onChange={this.actionCheckbox('friends')}>friends</Checkbox>
+                        <Checkbox name="photos" onChange={this.actionCheckbox('photos')}>photos</Checkbox>
+                        <Checkbox name='video' onChange={this.actionCheckbox('video')}>video</Checkbox>
+                        <Checkbox name='stories' onChange={this.actionCheckbox('stories')}>stories</Checkbox>
+                        <Checkbox name='pages' onChange={this.actionCheckbox('pages')}>pages</Checkbox>
+                        <Checkbox name='status' onChange={this.actionCheckbox('status')}>status</Checkbox>
+                        <Checkbox name='notes' onChange={this.actionCheckbox('notes')}>notes</Checkbox>
+                        <Checkbox name='wall' onChange={this.actionCheckbox('wall')}>wall</Checkbox>
+                        <Checkbox name='docs' onChange={this.actionCheckbox('docs')}>docs</Checkbox>
+                        <Checkbox name='groups' onChange={this.actionCheckbox('groups')}>groups</Checkbox>
+                        <Checkbox name='stats' onChange={this.actionCheckbox('stats')}>stats</Checkbox>
+                        <Checkbox name="market" onChange={this.actionCheckbox('market')}>market</Checkbox>
 
                         <Div>
                             <Button
@@ -173,8 +182,9 @@ class HomePanelSettings extends React.Component {
                                 mode="secondary"
                                 size="l"
                                 onClick={() => this.getToken()}
+                                disabled={disabledButton}
                             >
-                                Получить токен
+                                {textButton ? "Получить токен" : "Токен получен!"}
                             </Button>
                         </Div>
                     </Div>

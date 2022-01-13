@@ -88,7 +88,6 @@ class HomePanelBridge extends React.Component {
 
     actionCheckbox(index) {
         let arr = this.state.param
-
         if (arr[index] === '' || arr[index] === false) {
             arr[index] = true
         } else {
