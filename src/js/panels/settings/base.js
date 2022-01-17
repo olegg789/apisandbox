@@ -14,7 +14,6 @@ import {
     Link,
     Div,
     Button,
-    Checkbox,
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline, Icon20BugOutline,
@@ -56,24 +55,9 @@ class HomePanelSettings extends React.Component {
         })
     }
 
-
-    actionCheckbox(index) {
-        let arr = this.state.param
-
-        if (arr[index] === '' || arr[index] === false) {
-            arr[index] = true
-        } else {
-            arr[index] = false
-        }
-
-        this.setState({ param: arr })
-    }
-
     async getToken() {
         try {
-            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: this.state.param})
-
-            console.log(this.state.param)
+            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: 'friends, photos, video, stories, pages, status, notes, wall, docs, groups, stats, market'})
 
             this.setState({
                 textButton: false,
@@ -159,34 +143,15 @@ class HomePanelSettings extends React.Component {
 
                 <Group header={<Header mode="secondary">Получение токена пользователя(access_token)</Header>}>
                     <Div>
-                        <Div>
-                            Права доступа токена
-                        </Div>
-
-                        <Checkbox name="friends" onChange={this.actionCheckbox('friends')}>friends</Checkbox>
-                        <Checkbox name="photos" onChange={this.actionCheckbox('photos')}>photos</Checkbox>
-                        <Checkbox name='video' onChange={this.actionCheckbox('video')}>video</Checkbox>
-                        <Checkbox name='stories' onChange={this.actionCheckbox('stories')}>stories</Checkbox>
-                        <Checkbox name='pages' onChange={this.actionCheckbox('pages')}>pages</Checkbox>
-                        <Checkbox name='status' onChange={this.actionCheckbox('status')}>status</Checkbox>
-                        <Checkbox name='notes' onChange={this.actionCheckbox('notes')}>notes</Checkbox>
-                        <Checkbox name='wall' onChange={this.actionCheckbox('wall')}>wall</Checkbox>
-                        <Checkbox name='docs' onChange={this.actionCheckbox('docs')}>docs</Checkbox>
-                        <Checkbox name='groups' onChange={this.actionCheckbox('groups')}>groups</Checkbox>
-                        <Checkbox name='stats' onChange={this.actionCheckbox('stats')}>stats</Checkbox>
-                        <Checkbox name="market" onChange={this.actionCheckbox('market')}>market</Checkbox>
-
-                        <Div>
-                            <Button
-                                stretched
-                                mode="secondary"
-                                size="l"
-                                onClick={() => this.getToken()}
-                                disabled={disabledButton}
-                            >
-                                {textButton ? "Получить токен" : "Токен получен!"}
-                            </Button>
-                        </Div>
+                        <Button
+                            stretched
+                            mode="secondary"
+                            size="l"
+                            onClick={() => {this.getToken()}}
+                            disabled={disabledButton}
+                        >
+                            {textButton ? "Получить токен(со всеми правами)" : "Токен получен!"}
+                        </Button>
                     </Div>
                 </Group>
 
