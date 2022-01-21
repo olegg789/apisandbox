@@ -41,6 +41,20 @@ import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
 
 import ViewResponseGetToken from "./js/components/modals/viewResponseGetToken";
 
+import Intro from "./js/panels/Intro";
+
+import bridge from "@vkontakte/vk-bridge";
+
+const ROUTES = {
+  HOME: "home",
+  OFFLINE: "offline",
+  INTRO: "intro",
+};
+
+const STORAGE_KEYS = {
+  STATUS: "status",
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -48,8 +62,11 @@ class App extends React.Component {
     this.state = {
       hasHeader: true,
       isDesktop: false,
-      Platform: platform()
-    }
+      Platform: platform(),
+      user: null,
+    };
+
+    this.viewIntro = this.viewIntro.bind(this);
 
     this.lastAndroidBackAction = 0;
   }
@@ -90,6 +107,19 @@ class App extends React.Component {
       let pageScrollPosition = scrollPosition[activeStory + "_" + activeView + "_" + activePanel] || 0;
 
       window.scroll(0, pageScrollPosition);
+    }
+  }
+
+  viewIntro() {
+    document.body.style.overflow = "visible";
+    try {
+      bridge.send("VKWebAppStorageSet", {
+        key: STORAGE_KEYS.STATUS,
+        value: "true",
+      });
+      this.setState({ activePanel: ROUTES.HOME });
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -188,6 +218,19 @@ class App extends React.Component {
                         onSwipeBack={() => goBack()}
                     >
                       <HomePanelSettings id="base"/>
+                    </View>
+                  </Root>
+                  <Root id='intro' activeView={activeView} popout={popout}>
+                    <View
+                        id="intro"
+                        activePanel={getActivePanel('intro')}
+                        history={history}
+                    >
+                      <Intro
+                          id='intro'
+                          go={this.viewIntro}
+                          user={this.state.user}
+                      />
                     </View>
                   </Root>
                 </Epic>
