@@ -18,10 +18,11 @@ import bridge from '@vkontakte/vk-bridge';
 
 import App from './App';
 
+import Intro from "./js/panels/Intro";
+
 export const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk),
 ));
-
 bridge.subscribe((e) => {
     switch (e.detail.type) {
         case 'VKWebAppUpdateConfig':
@@ -36,6 +37,17 @@ bridge.subscribe((e) => {
 })
 
 store.dispatch(setStory('home', 'base'));
+
+let userSeenIntroCheck = bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
+
+console.log(userSeenIntroCheck)
+/*
+{userSeenIntroCheck === false &&
+    <Provider store={store}>
+        <Intro/>
+    </Provider>,
+    document.getElementById('root')
+}*/
 
 ReactDOM.render(
     <Provider store={store}>

@@ -25,6 +25,7 @@ import {
 } from "@vkontakte/vkui";
 
 import {
+  Icon28AppleWatchOutlite,
   Icon28ArrowUpCircleOutline,
   Icon28BookOutline, Icon28SettingsOutline
 } from '@vkontakte/icons';
@@ -184,6 +185,13 @@ class App extends React.Component {
                       selected={activeStory === 'settings'}
                       text='SETTINGS'
                   ><Icon28SettingsOutline/></TabbarItem>
+                  <TabbarItem
+                      onClick={() => setStory('test', 'base')}
+                      selected={activeStory === 'test'}
+                      text='test'
+                  >
+                    <Icon28AppleWatchOutlite/>
+                  </TabbarItem>
                 </Tabbar>}>
                   <Root id="home" activeView={activeView} popout={popout}>
                     <View
@@ -220,17 +228,15 @@ class App extends React.Component {
                       <HomePanelSettings id="base"/>
                     </View>
                   </Root>
-                  <Root id='intro' activeView={activeView} popout={popout}>
+                  <Root id="test" activeView={activeView} popout={popout}>
                     <View
-                        id="intro"
-                        activePanel={getActivePanel('intro')}
+                        id="test"
+                        modal={homeModals}
+                        activePanel={getActivePanel("test")}
                         history={history}
+                        onSwipeBack={() => goBack()}
                     >
-                      <Intro
-                          id='intro'
-                          go={this.viewIntro}
-                          user={this.state.user}
-                      />
+                      <Intro id="base"/>
                     </View>
                   </Root>
                 </Epic>
@@ -273,6 +279,17 @@ class App extends React.Component {
                           } : {}}
                       >
                         SETTINGS
+                      </Cell>
+                      <Cell
+                          onClick={() => setStory('test', 'base')}
+                          disabled={activeStory === 'test'}
+                          before={<Icon28SettingsOutline fill="#2B8FFE"/>}
+                          style={ activeStory === 'test' ? {
+                            backgroundColor: 'var(--button_secondary_background)',
+                            borderRadius: 8
+                          } : {}}
+                      >
+                        test
                       </Cell>
                     </Group>
                   </Panel>
