@@ -1,42 +1,83 @@
-import React, { Fragment } from "react";
-import {Panel, Group, Div, Title, Text, Button, Placeholder} from "@vkontakte/vkui";
-import {Icon56DiamondOutline} from "@vkontakte/icons";
+import React from "react";
+
+import {
+    Panel,
+    Div,
+    Button,
+    Group,
+    Gallery,
+    FormItem,
+    Text,
+    Title,
+} from "@vkontakte/vkui";
+
+import {
+
+} from "@vkontakte/icons";
+
 import bridge from "@vkontakte/vk-bridge";
+import {setStory} from "../store/router/actions";
+import {store} from "../../index";
 
 class Intro extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            userSeenIntro: false
-
+            userSeenIntro: 'false',
         };
 
     }
 
     async setUserSeenIntro() {
-        this.setState({userSeenIntro: false})
-        bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: String(this.state.userSeenIntro)})
+        this.setState({userSeenIntro: true})
+        await bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: 'true'})
         let check = await bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
         console.log(check)
+        store.dispatch(setStory('home', 'base'))
     };
 
     render() {
+        const {id} = this.props;
+        const { } = this.state
+
         return (
-            <Panel id='id'>
-                <Div>
-                    <Placeholder
-                        icon={<Icon56DiamondOutline/>}
-                        header="okok"
-                    >
-                        ЗАГЛУШКА ТЕСТ
-                    </Placeholder>
-                    <Button
-                        onClick={() => this.setUserSeenIntro()}
-                    >
-                        TEST
-                    </Button>
-                </Div>
+            <Panel id={id}>
+                <Group>
+                    <Div>
+                        <Gallery
+                            slideWidth="100%"
+                            align="center"
+                            style={{ height: 500 }}
+                            showArrows
+                        >
+                            <Div>
+                                <Title level="1" weight="semibold" style={{ marginBottom: 16 }}>
+                                    ПРИВЕТ
+                                </Title>
+                            </Div>
+                            <Div>
+                                <Title level="1" weight="semibold" style={{ marginBottom: 16 }}>
+                                    ЭТО АПИ СЕНДБОКС
+                                </Title>
+                            </Div>
+                            <Div>
+                                <Title level="1" weight="semibold" style={{ marginBottom: 16 }}>
+                                    ПОЕХАЛИ
+                                </Title>
+                                <Div>
+                                    <Button
+                                        stretched
+                                        size='l'
+                                        onClick={() => this.setUserSeenIntro()}
+                                    >
+                                        СТАРТ
+                                    </Button>
+                                </Div>
+                            </Div>
+                        </Gallery>
+                    </Div>
+                </Group>
             </Panel>
         )
     }

@@ -25,9 +25,9 @@ import {
 } from "@vkontakte/vkui";
 
 import {
-  Icon28AppleWatchOutlite,
   Icon28ArrowUpCircleOutline,
-  Icon28BookOutline, Icon28SettingsOutline
+  Icon28BookOutline,
+  Icon28SettingsOutline
 } from '@vkontakte/icons';
 
 import HomePanelBase from './js/panels/home/base';
@@ -44,18 +44,6 @@ import ViewResponseGetToken from "./js/components/modals/viewResponseGetToken";
 
 import Intro from "./js/panels/Intro";
 
-import bridge from "@vkontakte/vk-bridge";
-
-const ROUTES = {
-  HOME: "home",
-  OFFLINE: "offline",
-  INTRO: "intro",
-};
-
-const STORAGE_KEYS = {
-  STATUS: "status",
-};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -64,10 +52,7 @@ class App extends React.Component {
       hasHeader: true,
       isDesktop: false,
       Platform: platform(),
-      user: null,
     };
-
-    this.viewIntro = this.viewIntro.bind(this);
 
     this.lastAndroidBackAction = 0;
   }
@@ -108,19 +93,6 @@ class App extends React.Component {
       let pageScrollPosition = scrollPosition[activeStory + "_" + activeView + "_" + activePanel] || 0;
 
       window.scroll(0, pageScrollPosition);
-    }
-  }
-
-  viewIntro() {
-    document.body.style.overflow = "visible";
-    try {
-      bridge.send("VKWebAppStorageSet", {
-        key: STORAGE_KEYS.STATUS,
-        value: "true",
-      });
-      this.setState({ activePanel: ROUTES.HOME });
-    } catch (error) {
-      console.log(error)
     }
   }
 
@@ -185,13 +157,6 @@ class App extends React.Component {
                       selected={activeStory === 'settings'}
                       text='SETTINGS'
                   ><Icon28SettingsOutline/></TabbarItem>
-                  <TabbarItem
-                      onClick={() => setStory('test', 'base')}
-                      selected={activeStory === 'test'}
-                      text='test'
-                  >
-                    <Icon28AppleWatchOutlite/>
-                  </TabbarItem>
                 </Tabbar>}>
                   <Root id="home" activeView={activeView} popout={popout}>
                     <View
@@ -228,11 +193,11 @@ class App extends React.Component {
                       <HomePanelSettings id="base"/>
                     </View>
                   </Root>
-                  <Root id="test" activeView={activeView} popout={popout}>
+                  <Root id="Intro" activeView={activeView} popout={popout}>
                     <View
-                        id="test"
+                        id="Intro"
                         modal={homeModals}
-                        activePanel={getActivePanel("test")}
+                        activePanel={getActivePanel("Intro")}
                         history={history}
                         onSwipeBack={() => goBack()}
                     >
@@ -279,17 +244,6 @@ class App extends React.Component {
                           } : {}}
                       >
                         SETTINGS
-                      </Cell>
-                      <Cell
-                          onClick={() => setStory('test', 'base')}
-                          disabled={activeStory === 'test'}
-                          before={<Icon28SettingsOutline fill="#2B8FFE"/>}
-                          style={ activeStory === 'test' ? {
-                            backgroundColor: 'var(--button_secondary_background)',
-                            borderRadius: 8
-                          } : {}}
-                      >
-                        test
                       </Cell>
                     </Group>
                   </Panel>

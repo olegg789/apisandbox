@@ -14,9 +14,10 @@ import {
     Link,
     Div,
     Button,
+    MiniInfoCell
 } from "@vkontakte/vkui";
 import {
-    Icon16LikeOutline, Icon20BugOutline,
+    Icon16LikeOutline, Icon20BugOutline, Icon20HelpOutline,
     Icon28FavoriteOutline,
     Icon28MessagesOutline,
     Icon28ShareOutline,
@@ -82,6 +83,10 @@ class HomePanelSettings extends React.Component {
                 >
                     SETTINGS
                 </PanelHeader>
+
+                <Button onClick={() => bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: 'false'})}>
+                    СБРОСИТЬ ОНБОРДИНГ
+                </Button>
 
                 <Group header={<Header mode="secondary">Прочее</Header>}>
                     <SimpleCell
@@ -152,6 +157,13 @@ class HomePanelSettings extends React.Component {
                         >
                             {textButton ? "Получить токен(со всеми правами)" : "Токен получен!"}
                         </Button>
+                        <MiniInfoCell
+                            before={<Icon20HelpOutline/>}
+                            textWrap="full"
+                        >
+                            Для работы со всеми методами API вам необходимо передавать в запросе access_token — специальный ключ доступа. Он представляет собой строку из латинских букв и цифр и может соответствовать отдельному пользователю, сообществу или вашему приложению.
+                            При нажатии кнопки "Получить токен", Вас попросят дать права доступа для приложения. Это необходимо, чтобы Вам стали доступны все возможные методы.
+                        </MiniInfoCell>
                     </Div>
                 </Group>
 

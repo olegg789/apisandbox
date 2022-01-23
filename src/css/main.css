@@ -106,3 +106,8 @@
     overflow-x: scroll;
     width: auto;
 }
+
+.start {
+    justify-content: center;
+    font-size: 50px;
+}

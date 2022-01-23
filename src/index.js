@@ -18,8 +18,6 @@ import bridge from '@vkontakte/vk-bridge';
 
 import App from './App';
 
-import Intro from "./js/panels/Intro";
-
 export const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk),
 ));
@@ -36,25 +34,29 @@ bridge.subscribe((e) => {
     }
 })
 
-store.dispatch(setStory('home', 'base'));
+async function startApp() {
 
-let userSeenIntroCheck = bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
+    let userSeenIntroCheck = await bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
 
-console.log(userSeenIntroCheck)
-/*
-{userSeenIntroCheck === false &&
-    <Provider store={store}>
-        <Intro/>
-    </Provider>,
-    document.getElementById('root')
-}*/
+    console.log(userSeenIntroCheck)
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    document.getElementById('root')
-);
+    if (userSeenIntroCheck.keys[0].value === 'false') {
+        store.dispatch(setStory('Intro', 'base'))
+    }
+    else {
+        store.dispatch(setStory('home', 'base'));
 
-bridge.send('VKWebAppInit', {})
-import('./eruda.js').then(({ default: eruda }) => {}) 
+    }
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        document.getElementById('root')
+    );
+    bridge.send('VKWebAppInit', {})
+    import('./eruda.js').then(({ default: eruda }) => {})
+};
+
+
+startApp()
