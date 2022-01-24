@@ -116,3 +116,12 @@
     background-color: var(--button_secondary_background);
     border-radius: 8px
 }
+
+.btn_onboarding {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.vkuiGallery--vkcom {
+    margin-right: 50px;
+}
