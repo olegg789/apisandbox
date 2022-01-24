@@ -17,7 +17,9 @@ import {
     MiniInfoCell
 } from "@vkontakte/vkui";
 import {
-    Icon16LikeOutline, Icon20BugOutline, Icon20HelpOutline,
+    Icon16LikeOutline, 
+    Icon20BugOutline, 
+    Icon20HelpOutline,
     Icon28FavoriteOutline,
     Icon28MessagesOutline,
     Icon28ShareOutline,
@@ -79,12 +81,9 @@ class HomePanelSettings extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader
-                >
-                    SETTINGS
-                </PanelHeader>
+                <PanelHeader>SETTINGS</PanelHeader>
 
-                <Button onClick={() => bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: 'false'})}>
+                <Button onClick={() => bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: ''})}>
                     СБРОСИТЬ ОНБОРДИНГ
                 </Button>
 
