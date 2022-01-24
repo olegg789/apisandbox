@@ -21,6 +21,7 @@ import App from './App';
 export const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk),
 ));
+
 bridge.subscribe((e) => {
     switch (e.detail.type) {
         case 'VKWebAppUpdateConfig':
@@ -35,17 +36,12 @@ bridge.subscribe((e) => {
 })
 
 async function startApp() {
-
     let userSeenIntroCheck = await bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
 
-    console.log(userSeenIntroCheck)
-
-    if (userSeenIntroCheck.keys[0].value === 'false') {
+    if (userSeenIntroCheck.keys[0].value === '') {
         store.dispatch(setStory('Intro', 'base'))
-    }
-    else {
+    } else {
         store.dispatch(setStory('home', 'base'));
-
     }
 
     ReactDOM.render(
@@ -54,6 +50,7 @@ async function startApp() {
         </Provider>,
         document.getElementById('root')
     );
+    
     bridge.send('VKWebAppInit', {})
     import('./eruda.js').then(({ default: eruda }) => {})
 };

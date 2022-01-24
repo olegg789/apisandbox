@@ -14,11 +14,11 @@ import {
 } from "@vkontakte/vkui";
 import {
     Icon28FavoriteOutline,
-    Icon28MessagesOutline, Icon28ShareOutline,
+    Icon28MessagesOutline,
+    Icon28ShareOutline,
     Icon28SmartphoneOutline,
     Icon28UserOutline,
     Icon28Users3Outline,
-
 } from '@vkontakte/icons';
 import bridge from '@vkontakte/vk-bridge';
 
@@ -27,12 +27,9 @@ class HomePanelPlaceholder extends React.Component {
     render() {
         const {id, goBack} = this.props;
 
-
         return (
             <Panel id={id}>
-                <PanelHeader
-                    left={<PanelHeaderBack onClick={() => goBack()}/>}
-                >
+                <PanelHeader left={<PanelHeaderBack onClick={() => goBack()}/>}>
                     Настройки
                 </PanelHeader>
 

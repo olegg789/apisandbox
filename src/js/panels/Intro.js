@@ -1,4 +1,8 @@
 import React from "react";
+import {connect} from 'react-redux';
+
+import {setStory} from "../store/router/actions";
+import {store} from "../../index";
 
 import {
     Panel,
@@ -6,40 +10,22 @@ import {
     Button,
     Group,
     Gallery,
-    FormItem,
-    Text,
     Title,
 } from "@vkontakte/vkui";
-
-import {
-
-} from "@vkontakte/icons";
-
 import bridge from "@vkontakte/vk-bridge";
-import {setStory} from "../store/router/actions";
-import {store} from "../../index";
 
 class Intro extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            userSeenIntro: 'false',
-        };
+    setUserSeenIntro() {
+        let {panelsHistory} = this.props;
 
-    }
-
-    async setUserSeenIntro() {
-        this.setState({userSeenIntro: true})
-        await bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: 'true'})
-        let check = await bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
-        console.log(check)
+        bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: 'true'})
+        delete panelsHistory.Intro
         store.dispatch(setStory('home', 'base'))
     };
 
     render() {
         const {id} = this.props;
-        const { } = this.state
 
         return (
             <Panel id={id}>
@@ -48,7 +34,7 @@ class Intro extends React.Component {
                         <Gallery
                             slideWidth="100%"
                             align="center"
-                            style={{ height: 500 }}
+                            style={{ height: '100%' }}
                             showArrows
                         >
                             <Div>
@@ -81,7 +67,13 @@ class Intro extends React.Component {
             </Panel>
         )
     }
-
 }
 
-export default Intro;
+const mapStateToProps = (state) => {
+    return {
+      panelsHistory: state.router.panelsHistory
+    };
+};
+
+const mapDispatchToProps = { setStory };
+export default connect(mapStateToProps, mapDispatchToProps)(Intro);

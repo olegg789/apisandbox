@@ -140,24 +140,25 @@ class App extends React.Component {
                 width={isDesktop ? '560px' : '100%'}
                 maxWidth={isDesktop ? '560px' : '100%'}
               >   
-                <Epic activeStory={activeStory} tabbar={ !isDesktop && 
-                <Tabbar>
-                  <TabbarItem
-                    onClick={() => setStory('home', 'base')}
-                    selected={activeStory === 'home'}
-                    text='API'
-                  ><Icon28ArrowUpCircleOutline/></TabbarItem>
-                  <TabbarItem
-                    onClick={() => setStory('bridge', 'base')}
-                    selected={activeStory === 'bridge'}
-                    text='BRIDGE'
-                  ><Icon28BookOutline/></TabbarItem>
-                  <TabbarItem
-                      onClick={() => setStory('settings', 'base')}
-                      selected={activeStory === 'settings'}
-                      text='SETTINGS'
-                  ><Icon28SettingsOutline/></TabbarItem>
-                </Tabbar>}>
+                <Epic activeStory={activeStory} tabbar={ !isDesktop && activeStory !== 'Intro' && 
+                  <Tabbar>
+                    <TabbarItem
+                      onClick={() => setStory('home', 'base')}
+                      selected={activeStory === 'home'}
+                      text='VK API'
+                    ><Icon28ArrowUpCircleOutline/></TabbarItem>
+                    <TabbarItem
+                      onClick={() => setStory('bridge', 'base')}
+                      selected={activeStory === 'bridge'}
+                      text='VK Bridge'
+                    ><Icon28BookOutline/></TabbarItem>
+                    <TabbarItem
+                        onClick={() => setStory('settings', 'base')}
+                        selected={activeStory === 'settings'}
+                        text='Настройки'
+                    ><Icon28SettingsOutline/></TabbarItem>
+                  </Tabbar>
+                }>
                   <Root id="home" activeView={activeView} popout={popout}>
                     <View
                       id="home"
@@ -166,7 +167,7 @@ class App extends React.Component {
                       history={history}
                       onSwipeBack={() => goBack()}
                     >
-                      <HomePanelBase id="base" withoutEpic={false}/>
+                      <HomePanelBase id="base"/>
                       <HomePanelPlaceholder id="placeholder"/>
                     </View>
                   </Root>
@@ -184,22 +185,22 @@ class App extends React.Component {
                   </Root>
                   <Root id="settings" activeView={activeView} popout={popout}>
                     <View
-                        id="settings"
-                        modal={homeModals}
-                        activePanel={getActivePanel("settings")}
-                        history={history}
-                        onSwipeBack={() => goBack()}
+                      id="settings"
+                      modal={homeModals}
+                      activePanel={getActivePanel("settings")}
+                      history={history}
+                      onSwipeBack={() => goBack()}
                     >
                       <HomePanelSettings id="base"/>
                     </View>
                   </Root>
                   <Root id="Intro" activeView={activeView} popout={popout}>
                     <View
-                        id="Intro"
-                        modal={homeModals}
-                        activePanel={getActivePanel("Intro")}
-                        history={history}
-                        onSwipeBack={() => goBack()}
+                      id="Intro"
+                      modal={homeModals}
+                      activePanel={getActivePanel("Intro")}
+                      history={history}
+                      onSwipeBack={() => goBack()}
                     >
                       <Intro id="base"/>
                     </View>
@@ -207,7 +208,7 @@ class App extends React.Component {
                 </Epic>
               </SplitCol>
 
-              {isDesktop && (
+              {isDesktop && activeStory !== 'Intro' && (
                 <SplitCol fixed width='280px' maxWidth='280px'>
                   <Panel id='menuDesktop'>
                     {hasHeader && <PanelHeader/>}
@@ -216,34 +217,25 @@ class App extends React.Component {
                         onClick={() => setStory('home', 'base')}
                         disabled={activeStory === 'home'}
                         before={<Icon28ArrowUpCircleOutline fill="#2B8FFE"/>}
-                        style={ activeStory === 'home' ? {
-                          backgroundColor: 'var(--button_secondary_background)',
-                          borderRadius: 8
-                        } : {}}
+                        className={activeStory === 'home' ? 'activeCellMenu' : ''}
                       >
-                        API
+                        VK API
                       </Cell>
                       <Cell
                         onClick={() => setStory('bridge', 'base')}
                         disabled={activeStory === 'bridge'}
                         before={<Icon28BookOutline fill="#2B8FFE"/>}
-                        style={ activeStory === 'bridge' ? {
-                          backgroundColor: 'var(--button_secondary_background)',
-                          borderRadius: 8
-                        } : {}}
+                        className={activeStory === 'bridge' ? 'activeCellMenu' : ''}
                       >
-                        BRIDGE
+                        VK Bridge
                       </Cell>
                       <Cell
                           onClick={() => setStory('settings', 'base')}
                           disabled={activeStory === 'settings'}
                           before={<Icon28SettingsOutline fill="#2B8FFE"/>}
-                          style={ activeStory === 'settings' ? {
-                            backgroundColor: 'var(--button_secondary_background)',
-                            borderRadius: 8
-                          } : {}}
+                          className={activeStory === 'settings' ? 'activeCellMenu' : ''}
                       >
-                        SETTINGS
+                        Настройки
                       </Cell>
                     </Group>
                   </Panel>
