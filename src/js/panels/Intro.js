@@ -45,7 +45,7 @@ class Intro extends React.Component {
                         <Div>
                             <Gallery
                                 align="center"
-                                style={{ height: '100%', justifyContent: "center"}}
+                                style={{ height: '100%'}}
                                 slideIndex={slideIndex}
                             >
                                 <div>
@@ -54,7 +54,7 @@ class Intro extends React.Component {
                                         header="Привет, это сервис VK API/VK Bridge Sandbox"
                                         action={<Button onClick={() => this.setState({slideIndex: this.state.slideIndex + 1})} size="m">Дальше</Button>}
                                     >
-                                        Здесь ты можешь легко и быстро протестировать любой метод из API или Bridge.<br/><br/>
+                                        Здесь ты можешь легко и быстро протестировать любой метод из API или Bridge.
                                     </Placeholder>
                                 </div>
                                 <div>
@@ -69,7 +69,9 @@ class Intro extends React.Component {
                                         }
 
                                     >
-                                        Все просто:<br/> 1) Выбираешь нужный тебе метод API или Bridge на соответствующей панели<br/> 2) Вводишь необходимые параметры и получаешь ответ
+                                        Все просто:<br/>
+                                        1) Выбираешь нужный тебе метод API или Bridge на соответствующей панели.<br/>
+                                        2) Вводишь необходимые параметры и получаешь ответ.
                                     </Placeholder>
                                 </div>
                                 <div>
@@ -96,7 +98,7 @@ class Intro extends React.Component {
                                         action={
                                             <>
                                                 <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex - 1})} size="l">Назад</Button>
-                                                <Button size='l' onClick={() => this.setUserSeenIntro()}>Поехали!</Button>
+                                                <Button className='btn_onboarding' size='l' onClick={() => this.setUserSeenIntro()}>Поехали!</Button>
                                             </>
                                         }
                                     >

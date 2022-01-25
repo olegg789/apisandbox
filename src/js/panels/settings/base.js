@@ -17,10 +17,13 @@ import {
     MiniInfoCell
 } from "@vkontakte/vkui";
 import {
-    Icon16LikeOutline, 
-    Icon20BugOutline, 
+    Icon16LikeOutline,
+    Icon20BugOutline,
     Icon20HelpOutline,
+    Icon28ArrowUpCircleOutline,
+    Icon28BookOutline,
     Icon28FavoriteOutline,
+    Icon28KeyOutline,
     Icon28MessagesOutline,
     Icon28ShareOutline,
     Icon28SmartphoneOutline,
@@ -81,7 +84,7 @@ class HomePanelSettings extends React.Component {
 
         return (
             <Panel id={id}>
-                <PanelHeader>SETTINGS</PanelHeader>
+                <PanelHeader>Настройки</PanelHeader>
 
                 <Button onClick={() => bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: ''})}>
                     СБРОСИТЬ ОНБОРДИНГ
@@ -89,6 +92,7 @@ class HomePanelSettings extends React.Component {
 
                 <Group header={<Header mode="secondary">Прочее</Header>}>
                     <SimpleCell
+                        className='btn_settings'
                         before={
                             <Avatar
                                 shadow={false}
@@ -103,6 +107,7 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
 
                     <SimpleCell
+                        className='btn_settings'
                         before={
                             <Avatar
                                 shadow={false}
@@ -117,6 +122,7 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
 
                     <SimpleCell
+                        className='btn_settings'
                         before={
                             <Avatar
                                 shadow={false}
@@ -142,6 +148,53 @@ class HomePanelSettings extends React.Component {
                         onClick={() => bridge.send("VKWebAppShare")}
                     >
                         Поделиться приложением
+                    </SimpleCell>
+                </Group>
+
+                <Group header={<Header mode='secondary'>Полезные ссылки</Header> }>
+                    <SimpleCell
+                        className='btn_settings'
+                        before={
+                            <Avatar
+                                shadow={false}
+                                size={43}
+                            >
+                                <Icon28ArrowUpCircleOutline fill="#2B8FFE"/>
+                            </Avatar>
+                        }
+                        href="https://dev.vk.com/reference"
+                        target='_blank'
+                    >
+                        Документация VK API
+                    </SimpleCell>
+                    <SimpleCell
+                        className='btn_settings'
+                        before={
+                            <Avatar
+                                shadow={false}
+                                size={43}
+                            >
+                                <Icon28BookOutline fill="#2B8FFE"/>
+                            </Avatar>
+                        }
+                        href="https://dev.vk.com/bridge/getting-started"
+                        target='_blank'
+                    >
+                        Документация VK Bridge
+                    </SimpleCell>
+                    <SimpleCell
+                        before={
+                            <Avatar
+                                shadow={false}
+                                size={43}
+                            >
+                                <Icon28KeyOutline fill="#2B8FFE"/>
+                            </Avatar>
+                        }
+                        href="https://dev.vk.com/api/access-token/getting-started"
+                        target='_blank'
+                    >
+                        Про ключи доступа
                     </SimpleCell>
                 </Group>
 
