@@ -1,5 +1,18 @@
-import {Avatar, Button, Card, Checkbox, Div, Group, Header, SimpleCell, Textarea} from "@vkontakte/vkui";
+import {
+    Avatar,
+    Button,
+    Card,
+    Checkbox,
+    Div,
+    Gallery,
+    Group,
+    Header,
+    Placeholder,
+    SimpleCell,
+    Textarea
+} from "@vkontakte/vkui";
 import React from "react";
+import {Icon20HelpOutline, Icon28CarOutline, Icon56GestureOutline} from "@vkontakte/icons";
 
 <Group header={<Header mode="secondary">Тема</Header>}>
     <Div>
@@ -75,3 +88,69 @@ import React from "react";
 <Checkbox name='groups' onChange={(e) => this.setState({param: e.currentTarget.name})}>groups</Checkbox>
 <Checkbox name='stats' onChange={(e) => this.setState({param: e.currentTarget.name})}>stats</Checkbox>
 <Checkbox name="market" onChange={(e) => this.setState({param: e.currentTarget.name})}>market</Checkbox>
+
+
+
+<Gallery
+    align="center"
+    style={{ height: '100%'}}
+    slideIndex={slideIndex}
+>
+    <div>
+        <Placeholder
+            icon={<Icon56GestureOutline />}
+            header="Привет, это сервис VK API/VK Bridge Sandbox"
+            action={<Button onClick={() => this.setState({slideIndex: this.state.slideIndex + 1})} size="m">Дальше</Button>}
+        >
+            Здесь ты можешь легко и быстро протестировать любой метод из API или Bridge.
+        </Placeholder>
+    </div>
+    <div>
+        <Placeholder
+            icon={<Icon20HelpOutline width={56} height={56}/>}
+            header="Что и как"
+            action={
+                <>
+                    <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex - 1})} size="m">Назад</Button>
+                    <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex + 1})} size="m">Дальше</Button>
+                </>
+            }
+
+        >
+            Все просто:<br/>
+            1) Выбираешь нужный тебе метод API или Bridge на соответствующей панели.<br/>
+            2) Вводишь необходимые параметры и получаешь ответ.
+        </Placeholder>
+    </div>
+    <div>
+        <Placeholder
+            icon={<Icon20HelpOutline width={56} height={56}/>}
+            header="А что если у меня нет токена?"
+            action={
+                <>
+                    <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex - 1})} size="m">Назад</Button>
+                    <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex + 1})} size="m">Дальше</Button>
+                </>
+            }
+        >
+            Ты можешь получить его у нас. Перейди на панель "Настройки" и нажми кнопку "Получить токен".<br/>
+            К сожалению, с таким токеном получится вызвать не все методы API(
+
+        </Placeholder>
+    </div>
+
+    <div>
+        <Placeholder
+            icon={<Icon28CarOutline width={56} height={56}/>}
+            header='Всё понятно?'
+            action={
+                <>
+                    <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: this.state.slideIndex - 1})} size="l">Назад</Button>
+                    <Button className='btn_onboarding' size='l' onClick={() => this.setUserSeenIntro()}>Поехали!</Button>
+                </>
+            }
+        >
+
+        </Placeholder>
+    </div>
+</Gallery>
