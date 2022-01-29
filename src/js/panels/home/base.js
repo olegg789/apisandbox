@@ -53,7 +53,7 @@ class HomePanelBase extends React.Component {
 
     async executeMethod() {
         try {
-            let response = await bridge.send('VKWebAppCallAPIMethod', {method: infoMethod[this.state.infMethod].name, params: this.state.params})
+            let response = await bridge.send('VKWebAppCallAPIMethod', {method: infoMethod[this.state.section].methods[this.state.infMethod].title, params: this.state.params})
             
             window.responseAPI = response
             this.props.openModal('viewResponse')
