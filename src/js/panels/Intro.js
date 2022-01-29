@@ -41,7 +41,7 @@ class Intro extends React.Component {
         return (
             <Panel id={id}>
                 <FixedLayout vertical='top' className='fixOnbordingFixedLayout'>
-                    <Group>
+                    <Group style={{width: 500}}>
                         <Div>
                             <Gallery
                                 align="center"
@@ -54,7 +54,7 @@ class Intro extends React.Component {
                                     header="Привет, это сервис VK API/VK Bridge Sandbox"
                                     action={<Button onClick={() => this.setState({slideIndex: (slideIndex + 1) % 4})} size="m">Дальше</Button>}
                                 >
-                                    Здесь ты можешь легко и быстро протестировать любой метод из API или Bridge.
+                                    Здесь ты можешь легко и быстро протестировать любой метод из <b>VK API</b> или <b>VK Bridge</b>.
                                 </Placeholder>
 
                                 <Placeholder
@@ -68,9 +68,8 @@ class Intro extends React.Component {
                                     }
 
                                 >
-                                    Все просто:<br/>
-                                    1) Выбираешь нужный тебе метод API или Bridge на соответствующей панели.<br/>
-                                    2) Вводишь необходимые параметры и получаешь ответ.
+                                    • Выбираешь нужный тебе метод <b>VK API</b> или <b>VK Bridge</b> на соответствующей панели. <br/><br/>
+                                    • Вводишь необходимые параметры и получаешь ответ.
                                 </Placeholder>
 
                                 <Placeholder
@@ -83,8 +82,8 @@ class Intro extends React.Component {
                                         </>
                                     }
                                 >
-                                    Ты можешь получить его у нас. Перейди на панель "Настройки" и нажми кнопку "Получить токен".<br/>
-                                    К сожалению, с таким токеном получится вызвать не все методы API(
+                                    Ты можешь получить его у нас.<br/> 
+                                    Перейди на панель "Настройки" и нажми кнопку "Получить токен".
                                 </Placeholder>
 
                                 <Placeholder

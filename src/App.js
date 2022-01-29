@@ -137,8 +137,8 @@ class App extends React.Component {
               <SplitCol
                 animate={!isDesktop}
                 spaced={isDesktop}
-                width={isDesktop ? (activeStory !== 'Intro' ? '560px' : '1000px') : '100%'}
-                maxWidth={isDesktop ? (activeStory !== 'Intro' ? '560px' : '1000px') : '100%'}
+                width={isDesktop ? '560px' : '100%'}
+                maxWidth={isDesktop ? '560px' : '100%'}
               >   
                 <Epic activeStory={activeStory} tabbar={ !isDesktop && activeStory !== 'Intro' && 
                   <Tabbar>

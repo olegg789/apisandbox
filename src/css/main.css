@@ -126,10 +126,6 @@
     margin-bottom: 5px;
 }
 
-.fixOnbordingFixedLayout {
-    position: inherit;
-}
-
 .vkuiGallery__layer {
     cursor: default;
 }
