@@ -2,15 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {closePopout, goBack, openModal, openPopout} from '../../store/router/actions';
-import {method, infoMethod} from '../../../infoMethod';
+import {infoMethod} from '../../../infoMethod';
 import {sleep} from '../../../functions';
 
 import {
     Panel,
     Group,
     PanelHeader,
-    Snackbar,
-    Avatar,
     FormItem,
     MiniInfoCell,
     Button,
@@ -19,10 +17,7 @@ import {
     Select,
     CustomSelectOption
 } from '@vkontakte/vkui'
-import {
-    Icon16Done,
-    Icon20HelpOutline,
-} from '@vkontakte/icons';
+import { Icon20HelpOutline } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelBase extends React.Component {
@@ -39,19 +34,6 @@ class HomePanelBase extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    openSnackbar() {
-        this.props.openPopout(
-            <Snackbar
-                layout='vertical'
-                onClose={() => this.props.closePopout()}
-                action='Например кнопка'
-                before={<Avatar size={24} style={{ background: 'var(--accent)' }}> <Icon16Done fill='#fff' width={14} height={14}/> </Avatar>}
-            >
-                Какой-то текст
-            </Snackbar>
-        );
-    };
-
     async onChange(e) {
         const { name, value } = e.currentTarget;
         this.setState({ [name]: value })
@@ -60,9 +42,10 @@ class HomePanelBase extends React.Component {
             await sleep(1) //setState не обновляется моментально => костыль
 
             let arrInfoMethods = []
-            for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
-                arrInfoMethods.push({ value: index, label: infoMethod[index].name })
-            }
+            // eslint-disable-next-line
+            infoMethod[this.state.section].methods.map((el, index) => {
+                arrInfoMethods.push({ value: index, label: el.title })
+            })
 
             this.setState({ infoMethods: arrInfoMethods })
         }
@@ -92,8 +75,8 @@ class HomePanelBase extends React.Component {
                         <Select
                             name='section'
                             placeholder="Не выбран"
-                            options={method.map((el, index) => ({
-                                label: el.name,
+                            options={infoMethod.map((el, index) => ({
+                                label: el.title,
                                 value: index,
                             }))}
                             renderOption={({ option, ...restProps }) => (
@@ -132,7 +115,7 @@ class HomePanelBase extends React.Component {
                                 before={<Icon20HelpOutline/>}
                                 textWrap='full'
                             >
-                                {infoMethod[infMethod].description}
+                                {infoMethod[section].methods[infMethod].description}
                             </MiniInfoCell>
 
                             <Div>

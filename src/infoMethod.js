@@ -1,559 +1,2165 @@
-export let method = [
-	{"name": 'Account', "currentCount": 0, "totalCount": 18},
-	{"name": 'Ads', "currentCount": 19, "totalCount": 65},
-	{"name": 'Apps', "currentCount": 66, "totalCount": 76},
-	{"name": 'Board', "currentCount": 77, "totalCount": 89},
-	{"name": 'Database', "currentCount": 90, "totalCount": 101},
-	{"name": 'Docs', "currentCount": 102, "totalCount": 112},
-	{"name": 'Donut', "currentCount": 113, "totalCount": 116},
-	{"name": 'execute', "currentCount": 117, "totalCount": 117},
-	{"name": 'Fave', "currentCount": 118, "totalCount": 140},
-	{"name": 'Friends', "currentCount": 141, "totalCount": 158},
-	{"name": 'Gifts', "currentCount": 159, "totalCount": 159},
-	{"name": 'Groups', "currentCount": 160, "totalCount": 211},
-	{"name": 'LeadForms', "currentCount": 212, "totalCount": 218},
-	{"name": 'Likes', "currentCount": 219, "totalCount": 222},
-	{"name": 'Market', "currentCount": 223, "totalCount": 251},
-	{"name": 'Messages', "currentCount": 252, "totalCount": 291},
-	{"name": 'Newsfeed', "currentCount": 292, "totalCount": 306},
-	{"name": 'Notes', "currentCount": 307, "totalCount": 316},
-	{"name": 'Notifications', "currentCount": 317, "totalCount": 319},
-	{"name": 'Orders', "currentCount": 320, "totalCount": 327},
-	{"name": 'Pages', "currentCount": 328, "totalCount": 335},
-	{"name": 'Photos', "currentCount": 336, "totalCount": 381},
-	{"name": 'Podcasts', "currentCount": 382, "totalCount": 382},
-	{"name": 'Polls', "currentCount": 383, "totalCount": 391},
-	{"name": 'PrettyCards', "currentCount": 392, "totalCount": 397},
-	{"name": 'Search', "currentCount": 398, "totalCount": 398},
-	{"name": 'Secure', "currentCount": 399, "totalCount": 408},
-	{"name": 'Stats', "currentCount": 409, "totalCount": 411},
-	{"name": 'Status', "currentCount": 412, "totalCount": 413},
-	{"name": 'Storage', "currentCount": 414, "totalCount": 416},
-	{"name": 'Store', "currentCount": 417, "totalCount": 421},
-	{"name": 'Stories', "currentCount": 422, "totalCount": 437},
-	{"name": 'Streaming', "currentCount": 438, "totalCount": 442},
-	{"name": 'Users', "currentCount": 443, "totalCount": 447},
-	{"name": 'Utils', "currentCount": 448, "totalCount": 454},
-	{"name": 'Video', "currentCount": 455, "totalCount": 479},
-	{"name": 'Wall', "currentCount": 480, "totalCount": 502},
-	{"name": 'Widgets', "currentCount": 503, "totalCount": 504},
-]
-
 export let infoMethod = [
-	{ "name": "account.ban", "description": "Добавляет пользователя или группу в черный список."},
-	{ "name": "account.changePassword", "description": "Позволяет сменить пароль пользователя после успешного восстановления доступа к аккаунту через СМС, используя метод auth.restore."},
-	{ "name": "account.getActiveOffers", "description": "Возвращает список активных рекламных предложений (офферов), выполнив которые пользователь сможет получить соответствующее количество голосов на свой счёт внутри приложения."},
-	{ "name": "account.getAppPermissions", "description": "Получает настройки текущего пользователя в данном приложении."},
-	{ "name": "account.getBanned", "description": "Возвращает список пользователей, находящихся в черном списке."},
-	{ "name": "account.getCounters", "description": "Возвращает ненулевые значения счетчиков пользователя."},
-	{ "name": "account.getInfo", "description": "Возвращает информацию о текущем аккаунте."},
-	{ "name": "account.getProfileInfo", "description": "Возвращает информацию о текущем профиле."},
-	{ "name": "account.getPushSettings", "description": "Позволяет получать настройки Push-уведомлений."},
-	{ "name": "account.registerDevice", "description": "Подписывает устройство на базе iOS, Android, Windows Phone или Mac на получение Push-уведомлений."},
-	{ "name": "account.saveProfileInfo", "description": "Редактирует информацию текущего профиля."},
-	{ "name": "account.setInfo", "description": "Позволяет редактировать информацию о текущем аккаунте."},
-	{ "name": "account.setNameInMenu", "description": "Устанавливает короткое название приложения (до 17 символов), которое выводится пользователю в левом меню."},
-	{ "name": "account.setOffline", "description": "Помечает текущего пользователя как offline (только в текущем приложении)."},
-	{ "name": "account.setOnline", "description": "Помечает текущего пользователя как online на 5 минут."},
-	{ "name": "account.setPushSettings", "description": "Изменяет настройку Push-уведомлений."},
-	{ "name": "account.setSilenceMode", "description": "Отключает push-уведомления на заданный промежуток времени."},
-	{ "name": "account.unban", "description": "Удаляет пользователя или группу из черного списка."},
-	{ "name": "account.unregisterDevice", "description": "Отписывает устройство от Push уведомлений."},
-	{ "name": "ads.addOfficeUsers", "description": "Добавляет администраторов и/или наблюдателей в рекламный кабинет."},
-	{ "name": "ads.checkLink", "description": "Проверяет ссылку на рекламируемый объект."},
-	{ "name": "ads.createAds", "description": "Создает рекламные объявления."},
-	{ "name": "ads.createCampaigns", "description": "Создает рекламные кампании."},
-	{ "name": "ads.createClients", "description": "Создаёт клиентов рекламного агентства."},
-	{ "name": "ads.createLookalikeRequest", "description": "Создаёт запрос на поиск похожей аудитории."},
-	{ "name": "ads.createTargetGroup", "description": "Создает аудиторию для ретаргетинга рекламных объявлений на пользователей, которые посетили сайт рекламодателя (просмотрели информации о товаре, зарегистрировались и т.д.)."},
-	{ "name": "ads.createTargetPixel", "description": "Создаёт пиксель ретаргетинга."},
-	{ "name": "ads.deleteAds", "description": "Архивирует рекламные объявления."},
-	{ "name": "ads.deleteCampaigns", "description": "Архивирует рекламные кампании."},
-	{ "name": "ads.deleteClients", "description": "Архивирует клиентов рекламного агентства."},
-	{ "name": "ads.deleteTargetGroup", "description": "Удаляет аудиторию ретаргетинга."},
-	{ "name": "ads.deleteTargetPixel", "description": "Удаляет пиксель ретаргетинга."},
-	{ "name": "ads.getAccounts", "description": "Возвращает список рекламных кабинетов."},
-	{ "name": "ads.getAds", "description": "Возвращает список рекламных объявлений."},
-	{ "name": "ads.getAdsLayout", "description": "Возвращает описания внешнего вида рекламных объявлений."},
-	{ "name": "ads.getAdsTargeting", "description": "Возвращает параметры таргетинга рекламных объявлений"},
-	{ "name": "ads.getBudget", "description": "Возвращает текущий бюджет рекламного кабинета."},
-	{ "name": "ads.getCampaigns", "description": "Возвращает список кампаний рекламного кабинета."},
-	{ "name": "ads.getCategories", "description": "Позволяет получить возможные тематики рекламных объявлений."},
-	{ "name": "ads.getClients", "description": "Возвращает список клиентов рекламного агентства."},
-	{ "name": "ads.getDemographics", "description": "Возвращает демографическую статистику по рекламным объявлениям или кампаниям."},
-	{ "name": "ads.getFloodStats", "description": "Возвращает информацию о текущем состоянии счетчика — количество оставшихся запусков методов и время до следующего обнуления счетчика в секундах."},
-	{ "name": "ads.getLookalikeRequests", "description": "Возвращает список запросов на поиск похожей аудитории."},
-	{ "name": "ads.getMusicians", "description": "Возвращает информацию о музыкантах, на слушателей которых доступно таргетирование."},
-	{ "name": "ads.getMusiciansByIds", "description": "Возвращает информацию о музыкантах на слушателей, для которых доступно таргетирование."},
-	{ "name": "ads.getOfficeUsers", "description": "Возвращает список администраторов и наблюдателей рекламного кабинета."},
-	{ "name": "ads.getPostsReach", "description": "Возвращает подробную статистику по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества."},
-	{ "name": "ads.getRejectionReason", "description": "Возвращает причину, по которой указанному объявлению было отказано в прохождении премодерации."},
-	{ "name": "ads.getStatistics", "description": "Возвращает статистику показателей эффективности по рекламным объявлениям, кампаниям, клиентам или всему кабинету."},
-	{ "name": "ads.getSuggestions", "description": "Возвращает набор подсказок для различных параметров таргетинга."},
-	{ "name": "ads.getTargetGroups", "description": "Возвращает список аудиторий ретаргетинга."},
-	{ "name": "ads.getTargetPixels", "description": "Возвращает список пикселей ретаргетинга."},
-	{ "name": "ads.getTargetingStats", "description": "Возвращает размер целевой аудитории таргетинга, а также рекомендованные значения CPC и CPM."},
-	{ "name": "ads.getUploadURL", "description": "Возвращает URL-адрес для загрузки фотографии рекламного объявления."},
-	{ "name": "ads.getVideoUploadURL", "description": "Возвращает URL-адрес для загрузки видеозаписи рекламного объявления."},
-	{ "name": "ads.importTargetContacts", "description": "Импортирует список контактов рекламодателя для учета зарегистрированных во ВКонтакте пользователей в аудитории ретаргетинга."},
-	{ "name": "ads.removeOfficeUsers", "description": "Удаляет администраторов и/или наблюдателей из рекламного кабинета."},
-	{ "name": "ads.removeTargetContacts", "description": "Принимает запрос на исключение контактов рекламодателя из аудитории ретаргетинга."},
-	{ "name": "ads.saveLookalikeRequestResult", "description": "Сохраняет результат поиска похожей аудитории."},
-	{ "name": "ads.shareTargetGroup", "description": "Предоставляет доступ к аудитории ретаргетинга другому рекламному кабинету. В результате выполнения метода возвращается идентификатор аудитории для указанного кабинета."},
-	{ "name": "ads.updateAds", "description": "Редактирует рекламные объявления."},
-	{ "name": "ads.updateCampaigns", "description": "Редактирует рекламные кампании."},
-	{ "name": "ads.updateClients", "description": "Редактирует клиентов рекламного агентства."},
-	{ "name": "ads.updateOfficeUsers", "description": "Добавляет/редактирует администраторов и/или наблюдателей в рекламный кабинет."},
-	{ "name": "ads.updateTargetGroup", "description": "Редактирует аудиторию ретаргетинга."},
-	{ "name": "ads.updateTargetPixel", "description": "Редактирует пиксель ретаргетинга."},
-	{ "name": "apps.deleteAppRequests", "description": "Удаляет все уведомления о запросах, отправленных из текущего приложения"},
-	{ "name": "apps.get", "description": "Возвращает данные о запрошенном приложении."},
-	{ "name": "apps.getCatalog", "description": "Возвращает список приложений, доступных для пользователей сайта через каталог приложений."},
-	{ "name": "apps.getFriendsList", "description": "Создает список друзей, который будет использоваться при отправке пользователем приглашений в приложение и игровых запросов."},
-	{ "name": "apps.getLeaderboard", "description": "Возвращает рейтинг пользователей в игре."},
-	{ "name": "apps.getMiniAppPolicies", "description": ""},
-	{ "name": "apps.getScopes", "description": ""},
-	{ "name": "apps.getScore", "description": "Метод возвращает количество очков пользователя в этой игре."},
-	{ "name": "apps.promoHasActiveGift", "description": "Проверить есть ли у пользователя подарок в игре."},
-	{ "name": "apps.promoUseGift", "description": "Использовать подарок, полученный пользователем в промо-акции."},
-	{ "name": "apps.sendRequest", "description": "Позволяет отправить запрос другому пользователю в приложении, использующем авторизацию ВКонтакте."},
-	{ "name": "board.addTopic", "description": "Создает новую тему в списке обсуждений группы."},
-	{ "name": "board.closeTopic", "description": "Закрывает тему в списке обсуждений группы (в такой теме невозможно оставлять новые сообщения)."},
-	{ "name": "board.createComment", "description": "Добавляет новый комментарий в обсуждении."},
-	{ "name": "board.deleteComment", "description": "Удаляет сообщение темы в обсуждениях сообщества."},
-	{ "name": "board.deleteTopic", "description": "Удаляет тему в обсуждениях группы."},
-	{ "name": "board.editComment", "description": "Редактирует одно из сообщений в обсуждении сообщества."},
-	{ "name": "board.editTopic", "description": "Изменяет заголовок темы в списке обсуждений группы."},
-	{ "name": "board.fixTopic", "description": "Закрепляет тему в списке обсуждений группы (такая тема при любой сортировке выводится выше остальных)."},
-	{ "name": "board.getComments", "description": "Возвращает список сообщений в указанной теме."},
-	{ "name": "board.getTopics", "description": "Возвращает список тем в обсуждениях указанной группы."},
-	{ "name": "board.openTopic", "description": "Открывает ранее закрытую тему (в ней станет возможно оставлять новые сообщения)."},
-	{ "name": "board.restoreComment", "description": "Восстанавливает удаленное сообщение темы в обсуждениях группы."},
-	{ "name": "board.unfixTopic", "description": "Отменяет прикрепление темы в списке обсуждений группы (тема будет выводиться согласно выбранной сортировке)."},
-	{ "name": "database.getChairs", "description": "Возвращает список кафедр университета по указанному факультету."},
-	{ "name": "database.getCities", "description": "Возвращает список городов."},
-	{ "name": "database.getCitiesById", "description": "Возвращает информацию о городах и регионах по их идентификаторам."},
-	{ "name": "database.getCountries", "description": "Возвращает список стран."},
-	{ "name": "database.getCountriesById", "description": "Возвращает информацию о странах по их идентификаторам"},
-	{ "name": "database.getFaculties", "description": "Возвращает список факультетов."},
-	{ "name": "database.getMetroStations", "description": "Возвращает список станций метро"},
-	{ "name": "database.getMetroStationsById", "description": "Возвращает информацию об одной или нескольких станциях метро по их идентификаторам."},
-	{ "name": "database.getRegions", "description": "Возвращает список регионов."},
-	{ "name": "database.getSchoolClasses", "description": "Возвращает список классов, характерных для школ определенной страны."},
-	{ "name": "database.getSchools", "description": "Возвращает список школ."},
-	{ "name": "database.getUniversities", "description": "Возвращает список высших учебных заведений."},
-	{ "name": "docs.add", "description": "Копирует документ в документы текущего пользователя."},
-	{ "name": "docs.delete", "description": "Удаляет документ пользователя или группы."},
-	{ "name": "docs.edit", "description": "Редактирует документ пользователя или группы."},
-	{ "name": "docs.get", "description": "Возвращает расширенную информацию о документах пользователя или сообщества."},
-	{ "name": "docs.getById", "description": "Возвращает информацию о документах по их идентификаторам."},
-	{ "name": "docs.getMessagesUploadServer", "description": "Получает адрес сервера для загрузки документа в личное сообщение."},
-	{ "name": "docs.getTypes", "description": "Возвращает доступные для пользователя типы документов."},
-	{ "name": "docs.getUploadServer", "description": "Возвращает адрес сервера для загрузки документов."},
-	{ "name": "docs.getWallUploadServer", "description": "Возвращает адрес сервера для загрузки документов в папку Отправленные, для последующей отправки документа на стену или личным сообщением."},
-	{ "name": "docs.save", "description": "Сохраняет документ после его успешной  загрузки на сервер."},
-	{ "name": "docs.search", "description": "Возвращает результаты поиска по документам."},
-	{ "name": "donut.getFriends", "description": "Возвращает список донов, которые подписаны на определенные сообщества, из числа друзей пользователя."},
-	{ "name": "donut.getSubscription", "description": "Возвращает информацию о подписке VK Donut."},
-	{ "name": "donut.getSubscriptions", "description": "Возвращает информацию о подписках пользователя."},
-	{ "name": "donut.isDon", "description": "Возвращает информацию о том, подписан ли пользователь на платный контент (является доном)."},
-	{ "name": "execute", "description": "Универсальный метод, который позволяет запускать последовательность других методов, сохраняя и фильтруя промежуточные результаты."},
-	{ "name": "fave.addArticle", "description": "Добавляет статью в закладки."},
-	{ "name": "fave.addLink", "description": "Добавляет ссылку в закладки."},
-	{ "name": "fave.addPage", "description": "Добавляет сообщество или пользователя в закладки."},
-	{ "name": "fave.addPost", "description": "Добавляет запись со стены пользователя или сообщества в закладки."},
-	{ "name": "fave.addProduct", "description": "Добавляет товар в закладки."},
-	{ "name": "fave.addTag", "description": "Создает метку закладок."},
-	{ "name": "fave.addVideo", "description": "Добавляет видеозапись в закладки."},
-	{ "name": "fave.editTag", "description": "Редактирует метку."},
-	{ "name": "fave.get", "description": "Возвращает объекты, добавленные в закладки пользователя."},
-	{ "name": "fave.getPages", "description": "Возвращает страницы пользователей и сообществ, добавленных в закладки."},
-	{ "name": "fave.getTags", "description": "Возвращает список меток в закладках."},
-	{ "name": "fave.markSeen", "description": "Отмечает закладки как просмотренные."},
-	{ "name": "fave.removeArticle", "description": "Удаляет статью из закладок."},
-	{ "name": "fave.removeLink", "description": "Удаляет ссылку из списка закладок пользователя."},
-	{ "name": "fave.removePage", "description": "Удаляет из закладок сообщество или страницу пользователя."},
-	{ "name": "fave.removePost", "description": "Удаляет из закладок запись на стене пользователя или сообщества."},
-	{ "name": "fave.removeProduct", "description": "Удаляет товар из закладок."},
-	{ "name": "fave.removeTag", "description": "Удаляет метку закладок."},
-	{ "name": "fave.removeVideo", "description": "Удаляет видеозапись из списка закладок."},
-	{ "name": "fave.reorderTags", "description": "Меняет порядок меток закладок в списке."},
-	{ "name": "fave.setPageTags", "description": "Устанавливает метку странице пользователя или сообщества."},
-	{ "name": "fave.setTags", "description": "Устанавливает метку выбранному объекту в списке закладок."},
-	{ "name": "fave.trackPageInteraction", "description": "Устанавливает страницу пользователя или сообщества в топ закладок."},
-	{ "name": "friends.add", "description": "Одобряет или создает заявку на добавление в друзья."},
-	{ "name": "friends.addList", "description": "Создает новый список друзей у текущего пользователя."},
-	{ "name": "friends.areFriends", "description": "Возвращает информацию о том, добавлен ли текущий пользователь в друзья у указанных пользователей."},
-	{ "name": "friends.delete", "description": "Удаляет пользователя из списка друзей или отклоняет заявку в друзья."},
-	{ "name": "friends.deleteAllRequests", "description": "Отмечает все входящие заявки на добавление в друзья как просмотренные."},
-	{ "name": "friends.deleteList", "description": "Удаляет существующий список друзей текущего пользователя."},
-	{ "name": "friends.edit", "description": "Редактирует списки друзей для выбранного друга."},
-	{ "name": "friends.editList", "description": "Редактирует существующий список друзей текущего пользователя."},
-	{ "name": "friends.get", "description": "Возвращает список идентификаторов друзей пользователя или расширенную информацию о друзьях пользователя (при использовании параметра fields)."},
-	{ "name": "friends.getAppUsers", "description": "Возвращает список идентификаторов друзей текущего пользователя, которые установили данное приложение."},
-	{ "name": "friends.getByPhones", "description": "Возвращает список друзей пользователя, у которых завалидированные или указанные в профиле телефонные номера входят в заданный список."},
-	{ "name": "friends.getLists", "description": "Возвращает список меток друзей пользователя."},
-	{ "name": "friends.getMutual", "description": "Возвращает список идентификаторов общих друзей между парой пользователей."},
-	{ "name": "friends.getOnline", "description": "Возвращает список идентификаторов друзей пользователя, находящихся на сайте."},
-	{ "name": "friends.getRecent", "description": "Возвращает список идентификаторов недавно добавленных друзей текущего пользователя."},
-	{ "name": "friends.getRequests", "description": "Возвращает информацию о полученных или отправленных заявках на добавление в друзья для текущего пользователя."},
-	{ "name": "friends.getSuggestions", "description": "Возвращает список профилей пользователей, которые могут быть друзьями текущего пользователя."},
-	{ "name": "friends.search", "description": "Позволяет искать по списку друзей пользователей."},
-	{ "name": "gifts.get", "description": "Возвращает список полученных подарков пользователя."},
-	{ "name": "groups.addAddress", "description": "Позволяет добавить адрес в сообщество. Список адресов может быть получен методом groups.getAddresses. Для того, чтобы воспользоваться этим методом, Вы должны быть администратором сообщества"},
-	{ "name": "groups.addCallbackServer", "description": "Добавляет сервер для Callback API в сообщество."},
-	{ "name": "groups.addLink", "description": "Позволяет добавлять ссылки в сообщество."},
-	{ "name": "groups.approveRequest", "description": "Позволяет одобрить заявку в группу от пользователя."},
-	{ "name": "groups.ban", "description": "Добавляет пользователя или группу в черный список сообщества."},
-	{ "name": "groups.create", "description": "Создает новое сообщество."},
-	{ "name": "groups.deleteAddress", "description": "Удаляет адрес сообщества."},
-	{ "name": "groups.deleteCallbackServer", "description": "Удаляет сервер для Callback API из сообщества."},
-	{ "name": "groups.deleteLink", "description": "Позволяет удалить ссылки из сообщества."},
-	{ "name": "groups.disableOnline", "description": "Выключает статус «онлайн» в сообществе."},
-	{ "name": "groups.edit", "description": "Редактирует сообщество."},
-	{ "name": "groups.editAddress", "description": "Позволяет отредактировать адрес в сообществе. Список адресов может быть получен методом groups.getAddresses. Для того, чтобы воспользоваться этим методом, Вы должны быть администратором сообщества"},
-	{ "name": "groups.editCallbackServer", "description": "Редактирует данные сервера для Callback API в сообществе."},
-	{ "name": "groups.editLink", "description": "Позволяет редактировать ссылки в сообществе."},
-	{ "name": "groups.editManager", "description": "Позволяет назначить/разжаловать руководителя в сообществе или изменить уровень его полномочий."},
-	{ "name": "groups.enableOnline", "description": "Включает статус «онлайн» в сообществе."},
-	{ "name": "groups.get", "description": "Возвращает список сообществ указанного пользователя."},
-	{ "name": "groups.getAddresses", "description": "Возвращает адрес указанного сообщества."},
-	{ "name": "groups.getBanned", "description": "Возвращает список забаненных пользователей и сообществ в сообществе."},
-	{ "name": "groups.getById", "description": "Возвращает информацию о заданном сообществе или о нескольких сообществах."},
-	{ "name": "groups.getCallbackConfirmationCode", "description": "Позволяет получить строку, необходимую для подтверждения адреса сервера в Callback API."},
-	{ "name": "groups.getCallbackServers", "description": "Получает информацию о серверах для Callback API в сообществе."},
-	{ "name": "groups.getCallbackSettings", "description": "Позволяет получить настройки уведомлений Callback API для сообщества."},
-	{ "name": "groups.getCatalog", "description": "Возвращает список сообществ выбранной категории каталога."},
-	{ "name": "groups.getCatalogInfo", "description": "Возвращает список категорий для каталога сообществ."},
-	{ "name": "groups.getInvitedUsers", "description": "Возвращает список пользователей, которые были приглашены в группу."},
-	{ "name": "groups.getInvites", "description": "Данный метод возвращает список приглашений в сообщества и встречи текущего пользователя."},
-	{ "name": "groups.getLongPollServer", "description": "Возвращает данные для подключения к Bots Longpoll API."},
-	{ "name": "groups.getLongPollSettings", "description": "Получает настройки Bots Longpoll API для сообщества."},
-	{ "name": "groups.getMembers", "description": "Возвращает список участников сообщества."},
-	{ "name": "groups.getOnlineStatus", "description": "Получает информацию о статусе «онлайн» в сообществе."},
-	{ "name": "groups.getRequests", "description": "Возвращает список заявок на вступление в сообщество."},
-	{ "name": "groups.getSettings", "description": "Позволяет получать данные, необходимые для отображения страницы редактирования данных сообщества."},
-	{ "name": "groups.getTagList", "description": "Возвращает список тегов сообщества"},
-	{ "name": "groups.getTokenPermissions", "description": "Возвращает настройки прав для ключа доступа сообщества."},
-	{ "name": "groups.invite", "description": "Позволяет приглашать друзей в группу."},
-	{ "name": "groups.isMember", "description": "Возвращает информацию о том, является ли пользователь участником сообщества."},
-	{ "name": "groups.join", "description": "Данный метод позволяет вступить в группу, публичную страницу, а также подтвердить участие во встрече."},
-	{ "name": "groups.leave", "description": "Позволяет покинуть сообщество или отклонить приглашение в сообщество."},
-	{ "name": "groups.removeUser", "description": "Позволяет исключить пользователя из группы или отклонить заявку на вступление."},
-	{ "name": "groups.reorderLink", "description": "Позволяет менять местоположение ссылки в списке."},
-	{ "name": "groups.search", "description": "Осуществляет поиск сообществ по заданной подстроке."},
-	{ "name": "groups.setCallbackSettings", "description": "Позволяет задать настройки уведомлений о событиях в Callback API."},
-	{ "name": "groups.setLongPollSettings", "description": "Задаёт настройки для Bots Long Poll API в сообществе."},
-	{ "name": "groups.setSettings", "description": "Устанавливает настройки сообщества"},
-	{ "name": "groups.setUserNote", "description": "Позволяет создать или отредактировать заметку о пользователе в рамках переписки пользователя с сообществом"},
-	{ "name": "groups.tagAdd", "description": "Позволяет добавить новый тег в сообщество"},
-	{ "name": "groups.tagBind", "description": "Позволяет 'привязывать' и 'отвязывать' теги сообщества к беседам."},
-	{ "name": "groups.tagDelete", "description": "Позволяет удалить тег сообщества"},
-	{ "name": "groups.tagUpdate", "description": "Позволяет переименовать существующий тег"},
-	{ "name": "groups.toggleMarket", "description": "переключает функционал раздела 'Товаров' в выбранной группе."},
-	{ "name": "groups.unban", "description": "Убирает пользователя или группу из черного списка сообщества."},
-	{ "name": "leadForms.create", "description": "Создаёт форму сбора заявок."},
-	{ "name": "leadForms.delete", "description": "Удаляет форму сбора заявок."},
-	{ "name": "leadForms.get", "description": "Возвращает информацию о форме сбора заявок."},
-	{ "name": "leadForms.getLeads", "description": "Возвращает заявки формы."},
-	{ "name": "leadForms.getUploadURL", "description": "Возвращает URL для загрузки обложки для формы."},
-	{ "name": "leadForms.list", "description": "Возвращает список форм сообщества."},
-	{ "name": "leadForms.update", "description": "Обновляет форму сбора заявок."},
-	{ "name": "likes.add", "description": "Добавляет указанный объект в список Мне нравится текущего пользователя."},
-	{ "name": "likes.delete", "description": "Удаляет указанный объект из списка Мне нравится текущего пользователя"},
-	{ "name": "likes.getList", "description": "Получает список идентификаторов пользователей, которые добавили заданный объект в свой список Мне нравится."},
-	{ "name": "likes.isLiked", "description": "Проверяет, находится ли объект в списке Мне нравится заданного пользователя."},
-	{ "name": "market.add", "description": "Добавляет новый товар."},
-	{ "name": "market.addAlbum", "description": "Добавляет новую подборку с товарами."},
-	{ "name": "market.addToAlbum", "description": "Добавляет товар в одну или несколько выбранных подборок."},
-	{ "name": "market.createComment", "description": "Создает новый комментарий к товару."},
-	{ "name": "market.delete", "description": "Удаляет товар."},
-	{ "name": "market.deleteAlbum", "description": "Удаляет подборку с товарами."},
-	{ "name": "market.deleteComment", "description": "Удаляет комментарий к товару."},
-	{ "name": "market.edit", "description": "Редактирует товар."},
-	{ "name": "market.editAlbum", "description": "Редактирует подборку с товарами."},
-	{ "name": "market.editComment", "description": "Изменяет текст комментария к товару."},
-	{ "name": "market.editOrder", "description": "Редактирует заказ."},
-	{ "name": "market.get", "description": "Возвращает список товаров в сообществе."},
-	{ "name": "market.getAlbumById", "description": "Возвращает данные подборки с товарами."},
-	{ "name": "market.getAlbums", "description": "Возвращает список подборок с товарами."},
-	{ "name": "market.getById", "description": "Возвращает информацию о товарах по идентификаторам."},
-	{ "name": "market.getCategories", "description": "Возвращает список категорий для товаров."},
-	{ "name": "market.getComments", "description": "Возвращает список комментариев к товару."},
-	{ "name": "market.getGroupOrders", "description": "Возвращает заказы сообщества."},
-	{ "name": "market.getOrderById", "description": "Возвращает заказ по идентификатору."},
-	{ "name": "market.getOrderItems", "description": "Возвращает товары в заказе."},
-	{ "name": "market.getOrders", "description": "Возвращает заказы."},
-	{ "name": "market.removeFromAlbum", "description": "Удаляет товар из одной или нескольких выбранных подборок."},
-	{ "name": "market.reorderAlbums", "description": "Изменяет положение подборки с товарами в списке."},
-	{ "name": "market.reorderItems", "description": "Изменяет положение товара в подборке."},
-	{ "name": "market.report", "description": "Позволяет отправить жалобу на товар."},
-	{ "name": "market.reportComment", "description": "Позволяет оставить жалобу на комментарий к товару."},
-	{ "name": "market.restore", "description": "Восстанавливает удаленный товар."},
-	{ "name": "market.restoreComment", "description": "Восстанавливает удаленный комментарий к товару."},
-	{ "name": "market.search", "description": "Ищет товары в каталоге сообщества."},
-	{ "name": "messages.addChatUser", "description": "Добавляет в мультидиалог нового пользователя."},
-	{ "name": "messages.allowMessagesFromGroup", "description": "Позволяет разрешить отправку сообщений от сообщества текущему пользователю."},
-	{ "name": "messages.createChat", "description": "Создаёт беседу с несколькими участниками."},
-	{ "name": "messages.delete", "description": "Удаляет сообщение."},
-	{ "name": "messages.deleteChatPhoto", "description": "Позволяет удалить фотографию мультидиалога."},
-	{ "name": "messages.deleteConversation", "description": "Удаляет беседу."},
-	{ "name": "messages.denyMessagesFromGroup", "description": "Позволяет запретить отправку сообщений от сообщества текущему пользователю."},
-	{ "name": "messages.edit", "description": "Редактирует сообщение."},
-	{ "name": "messages.editChat", "description": "Изменяет название беседы."},
-	{ "name": "messages.getByConversationMessageId", "description": "Возвращает сообщения по conversation_message_id."},
-	{ "name": "messages.getById", "description": "Возвращает сообщения по их идентификаторам."},
-	{ "name": "messages.getChat", "description": "Возвращает информацию о беседе."},
-	{ "name": "messages.getChatPreview", "description": "Получает данные для превью чата с приглашением по ссылке."},
-	{ "name": "messages.getConversationMembers", "description": "Позволяет получить список участников беседы."},
-	{ "name": "messages.getConversations", "description": "Возвращает список бесед пользователя."},
-	{ "name": "messages.getConversationsById", "description": "Позволяет получить беседу по её идентификатору."},
-	{ "name": "messages.getHistory", "description": "Возвращает историю сообщений для указанного диалога."},
-	{ "name": "messages.getHistoryAttachments", "description": "Возвращает материалы диалога или беседы."},
-	{ "name": "messages.getImportantMessages", "description": "Возвращает список важных сообщений пользователя."},
-	{ "name": "messages.getIntentUsers", "description": "Метод отдает пользователей, которые подписались на определенные интенты. https://vk.com/dev/bots_reply_rules"},
-	{ "name": "messages.getInviteLink", "description": "Получает ссылку для приглашения пользователя в беседу."},
-	{ "name": "messages.getLastActivity", "description": "Возвращает текущий статус и дату последней активности указанного пользователя."},
-	{ "name": "messages.getLongPollHistory", "description": "Возвращает обновления в личных сообщениях пользователя."},
-	{ "name": "messages.getLongPollServer", "description": "Возвращает данные, необходимые для подключения к Long Poll серверу."},
-	{ "name": "messages.isMessagesFromGroupAllowed", "description": "Возвращает информацию о том, разрешена ли отправка сообщений от сообщества пользователю."},
-	{ "name": "messages.joinChatByInviteLink", "description": "Позволяет присоединиться к чату по ссылке-приглашению."},
-	{ "name": "messages.markAsAnsweredConversation", "description": "Помечает беседу как отвеченную либо снимает отметку."},
-	{ "name": "messages.markAsImportant", "description": "Помечает сообщения как важные либо снимает отметку."},
-	{ "name": "messages.markAsImportantConversation", "description": "Помечает беседу как важную либо снимает отметку."},
-	{ "name": "messages.markAsRead", "description": "Помечает сообщения как прочитанные."},
-	{ "name": "messages.pin", "description": "Закрепляет сообщение."},
-	{ "name": "messages.removeChatUser", "description": "Исключает из мультидиалога пользователя, если текущий пользователь или сообщество является администратором беседы либо текущий пользователь пригласил исключаемого пользователя."},
-	{ "name": "messages.restore", "description": "Восстанавливает удаленное сообщение."},
-	{ "name": "messages.search", "description": "Возвращает список найденных личных сообщений текущего пользователя по введенной строке поиска."},
-	{ "name": "messages.searchConversations", "description": "Позволяет искать диалоги."},
-	{ "name": "messages.send", "description": "Отправляет сообщение."},
-	{ "name": "messages.sendMessageEventAnswer", "description": "Отправляет событие с действием, которое произойдет при нажатии на callback-кнопку."},
-	{ "name": "messages.setActivity", "description": "Изменяет статус набора текста пользователем в диалоге."},
-	{ "name": "messages.setChatPhoto", "description": "Позволяет установить фотографию мультидиалога, загруженную с помощью метода photos.getChatUploadServer."},
-	{ "name": "messages.unpin", "description": "Открепляет сообщение."},
-	{ "name": "newsfeed.addBan", "description": "Запрещает показывать новости от заданных пользователей и групп в ленте новостей текущего пользователя."},
-	{ "name": "newsfeed.deleteBan", "description": "Разрешает показывать новости от заданных пользователей и групп в ленте новостей текущего пользователя."},
-	{ "name": "newsfeed.deleteList", "description": "Метод позволяет удалить пользовательский список новостей"},
-	{ "name": "newsfeed.get", "description": "Возвращает данные, необходимые для показа списка новостей для текущего пользователя."},
-	{ "name": "newsfeed.getBanned", "description": "Возвращает список пользователей и групп, которые текущий пользователь скрыл из ленты новостей."},
-	{ "name": "newsfeed.getComments", "description": "Возвращает данные, необходимые для показа раздела комментариев в новостях пользователя."},
-	{ "name": "newsfeed.getLists", "description": "Возвращает пользовательские списки новостей."},
-	{ "name": "newsfeed.getMentions", "description": "Возвращает список записей пользователей на своих стенах, в которых упоминается указанный пользователь."},
-	{ "name": "newsfeed.getRecommended", "description": "Получает список новостей, рекомендованных пользователю."},
-	{ "name": "newsfeed.getSuggestedSources", "description": "Возвращает сообщества и пользователей, на которые текущему пользователю рекомендуется подписаться."},
-	{ "name": "newsfeed.ignoreItem", "description": "Позволяет скрыть объект из ленты новостей."},
-	{ "name": "newsfeed.saveList", "description": "Метод позволяет создавать или редактировать пользовательские списки для просмотра новостей."},
-	{ "name": "newsfeed.search", "description": "Возвращает результаты поиска по статусам. Новости возвращаются в порядке от более новых к более старым."},
-	{ "name": "newsfeed.unignoreItem", "description": "Позволяет вернуть ранее скрытый объект в ленту новостей."},
-	{ "name": "newsfeed.unsubscribe", "description": "Отписывает текущего пользователя от комментариев к заданному объекту."},
-	{ "name": "notes.add", "description": "Создает новую заметку у текущего пользователя."},
-	{ "name": "notes.createComment", "description": "Добавляет новый комментарий к заметке."},
-	{ "name": "notes.delete", "description": "Удаляет заметку текущего пользователя."},
-	{ "name": "notes.deleteComment", "description": "Удаляет комментарий к заметке."},
-	{ "name": "notes.edit", "description": "Редактирует заметку текущего пользователя."},
-	{ "name": "notes.editComment", "description": "Редактирует указанный комментарий у заметки."},
-	{ "name": "notes.get", "description": "Возвращает список заметок, созданных пользователем."},
-	{ "name": "notes.getById", "description": "Возвращает заметку по её id."},
-	{ "name": "notes.getComments", "description": "Возвращает список комментариев к заметке."},
-	{ "name": "notes.restoreComment", "description": "Восстанавливает удалённый комментарий."},
-	{ "name": "notifications.get", "description": "Возвращает список оповещений об ответах других пользователей на записи текущего пользователя."},
-	{ "name": "notifications.markAsViewed", "description": "Сбрасывает счетчик непросмотренных оповещений об ответах других пользователей на записи текущего пользователя."},
-	{ "name": "notifications.sendMessage", "description": "Отправляет уведомление пользователю приложения Mini Apps."},
-	{ "name": "orders.cancelSubscription", "description": "Отменяет подписку."},
-	{ "name": "orders.changeState", "description": "Изменяет состояние заказа."},
-	{ "name": "orders.get", "description": "Возвращает список заказов."},
-	{ "name": "orders.getAmount", "description": "Возвращает стоимость голосов в валюте пользователя."},
-	{ "name": "orders.getById", "description": "Возвращает информацию об отдельном заказе."},
-	{ "name": "orders.getUserSubscriptionById", "description": "Получает информацию о подписке по её идентификатору."},
-	{ "name": "orders.getUserSubscriptions", "description": "Получает список активных подписок пользователя."},
-	{ "name": "orders.updateSubscription", "description": "Обновляет цену подписки для пользователя."},
-	{ "name": "pages.clearCache", "description": "Позволяет очистить кеш отдельных внешних страниц, которые могут быть прикреплены к записям ВКонтакте. После очистки кеша при последующем прикреплении ссылки к записи, данные о странице будут обновлены."},
-	{ "name": "pages.get", "description": "Возвращает информацию о вики-странице."},
-	{ "name": "pages.getHistory", "description": "Возвращает список всех старых версий вики-страницы."},
-	{ "name": "pages.getTitles", "description": "Возвращает список вики-страниц в группе."},
-	{ "name": "pages.getVersion", "description": "Возвращает текст одной из старых версий страницы."},
-	{ "name": "pages.parseWiki", "description": "Возвращает html-представление вики-разметки."},
-	{ "name": "pages.save", "description": "Сохраняет текст вики-страницы."},
-	{ "name": "pages.saveAccess", "description": "Сохраняет новые настройки доступа на чтение и редактирование вики-страницы."},
-	{ "name": "photos.confirmTag", "description": "Подтверждает отметку на фотографии."},
-	{ "name": "photos.copy", "description": "Позволяет скопировать фотографию в альбом 'Сохраненные фотографии'"},
-	{ "name": "photos.createAlbum", "description": "Создает пустой альбом для фотографий."},
-	{ "name": "photos.createComment", "description": "Создает новый комментарий к фотографии."},
-	{ "name": "photos.delete", "description": "Удаление фотографии на сайте."},
-	{ "name": "photos.deleteAlbum", "description": "Удаляет указанный альбом для фотографий у текущего пользователя"},
-	{ "name": "photos.deleteComment", "description": "Удаляет комментарий к фотографии."},
-	{ "name": "photos.edit", "description": "Редактирует описание или геометку у фотографии."},
-	{ "name": "photos.editAlbum", "description": "Редактирует данные альбома для фотографий."},
-	{ "name": "photos.editComment", "description": "Изменяет текст комментария к фотографии."},
-	{ "name": "photos.get", "description": "Возвращает список фотографий в альбоме."},
-	{ "name": "photos.getAlbums", "description": "Возвращает список фотоальбомов пользователя или сообщества."},
-	{ "name": "photos.getAlbumsCount", "description": "Возвращает количество доступных альбомов пользователя или сообщества."},
-	{ "name": "photos.getAll", "description": "Возвращает все фотографии пользователя или сообщества в антихронологическом порядке."},
-	{ "name": "photos.getAllComments", "description": "Возвращает отсортированный в антихронологическом порядке список всех комментариев к конкретному альбому или ко всем альбомам пользователя."},
-	{ "name": "photos.getById", "description": "Возвращает информацию о фотографиях по их идентификаторам."},
-	{ "name": "photos.getChatUploadServer", "description": "Позволяет получить адрес для загрузки обложки чата."},
-	{ "name": "photos.getComments", "description": "Возвращает список комментариев к фотографии."},
-	{ "name": "photos.getMarketAlbumUploadServer", "description": "Возвращает адрес сервера для загрузки фотографии подборки товаров в сообществе."},
-	{ "name": "photos.getMarketUploadServer", "description": "Возвращает адрес сервера для загрузки фотографии товара."},
-	{ "name": "photos.getMessagesUploadServer", "description": "Возвращает адрес сервера для загрузки фотографии в личное сообщение."},
-	{ "name": "photos.getNewTags", "description": "Возвращает список фотографий, на которых есть непросмотренные отметки."},
-	{ "name": "photos.getOwnerCoverPhotoUploadServer", "description": "Получает адрес для загрузки обложки сообщества."},
-	{ "name": "photos.getOwnerPhotoUploadServer", "description": "Возвращает адрес сервера для загрузки главной фотографии на страницу пользователя или сообщества."},
-	{ "name": "photos.getTags", "description": "Возвращает список отметок на фотографии."},
-	{ "name": "photos.getUploadServer", "description": "Возвращает адрес сервера для загрузки фотографий."},
-	{ "name": "photos.getUserPhotos", "description": "Возвращает список фотографий, на которых отмечен пользователь"},
-	{ "name": "photos.getWallUploadServer", "description": "Возвращает адрес сервера для загрузки фотографии на стену пользователя или сообщества."},
-	{ "name": "photos.makeCover", "description": "Делает фотографию обложкой альбома."},
-	{ "name": "photos.move", "description": "Переносит фотографию из одного альбома в другой."},
-	{ "name": "photos.putTag", "description": "Добавляет отметку на фотографию."},
-	{ "name": "photos.removeTag", "description": "Удаляет отметку с фотографии."},
-	{ "name": "photos.reorderAlbums", "description": "Меняет порядок альбома в списке альбомов пользователя."},
-	{ "name": "photos.reorderPhotos", "description": "Меняет порядок фотографии в списке фотографий альбома пользователя."},
-	{ "name": "photos.report", "description": "Позволяет пожаловаться на фотографию."},
-	{ "name": "photos.reportComment", "description": "Позволяет пожаловаться на комментарий к фотографии."},
-	{ "name": "photos.restore", "description": "Восстанавливает удаленную фотографию."},
-	{ "name": "photos.restoreComment", "description": "Восстанавливает удаленный комментарий к фотографии."},
-	{ "name": "photos.save", "description": "Сохраняет фотографии после успешной загрузки."},
-	{ "name": "photos.saveMarketAlbumPhoto", "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом photos.getMarketAlbumUploadServer."},
-	{ "name": "photos.saveMarketPhoto", "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом photos.getMarketUploadServer."},
-	{ "name": "photos.saveMessagesPhoto", "description": "Сохраняет фотографию после успешной загрузки на URI, полученный методом photos.getMessagesUploadServer."},
-	{ "name": "photos.saveOwnerCoverPhoto", "description": "Сохраняет изображение для обложки сообщества после успешной загрузки."},
-	{ "name": "photos.saveOwnerPhoto", "description": "Позволяет сохранить главную фотографию пользователя или сообщества."},
-	{ "name": "photos.saveWallPhoto", "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом photos.getWallUploadServer."},
-	{ "name": "photos.search", "description": "Осуществляет поиск изображений по местоположению или описанию."},
-	{ "name": "podcasts.searchPodcast", "description": ""},
-	{ "name": "polls.addVote", "description": "Отдает голос текущего пользователя за выбранный вариант ответа в указанном опросе."},
-	{ "name": "polls.create", "description": "Позволяет создавать опросы, которые впоследствии можно прикреплять к записям на странице пользователя или сообщества."},
-	{ "name": "polls.deleteVote", "description": "Снимает голос текущего пользователя с выбранного варианта ответа в указанном опросе."},
-	{ "name": "polls.edit", "description": "Позволяет редактировать созданные опросы."},
-	{ "name": "polls.getBackgrounds", "description": "Возвращает варианты фонового изображения для опросов."},
-	{ "name": "polls.getById", "description": "Возвращает детальную информацию об опросе по его идентификатору."},
-	{ "name": "polls.getPhotoUploadServer", "description": "Возвращает адрес сервера для загрузки фоновой фотографии в опрос."},
-	{ "name": "polls.getVoters", "description": "Получает список идентификаторов пользователей, которые выбрали определенные варианты ответа в опросе."},
-	{ "name": "polls.savePhoto", "description": "Сохраняет фотографию, загруженную в опрос."},
-	{ "name": "prettyCards.create", "description": "Создаёт карточку карусели."},
-	{ "name": "prettyCards.delete", "description": "Удаляет карточку."},
-	{ "name": "prettyCards.edit", "description": "Редактирует карточку карусели."},
-	{ "name": "prettyCards.get", "description": "Возвращает неиспользованные карточки владельца."},
-	{ "name": "prettyCards.getById", "description": "Возвращает информацию о карточке."},
-	{ "name": "prettyCards.getUploadURL", "description": "Возвращает URL для загрузки фотографии для карточки."},
-	{ "name": "search.getHints", "description": "Метод позволяет получить результаты быстрого поиска по произвольной подстроке"},
-	{ "name": "secure.addAppEvent", "description": "Добавляет информацию о достижениях пользователя в приложении."},
-	{ "name": "secure.checkToken", "description": "Позволяет проверять валидность ключа доступа пользователя в iFrame, VK Mini Apps и Standalone-приложениях с помощью передаваемого в приложения параметра access_token."},
-	{ "name": "secure.getAppBalance", "description": "Возвращает платежный баланс (счет) приложения в сотых долях голоса."},
-	{ "name": "secure.getSMSHistory", "description": "Выводит список SMS-уведомлений, отосланных приложением с помощью метода secure.sendSMSNotification."},
-	{ "name": "secure.getTransactionsHistory", "description": "Выводит историю транзакций по переводу голосов между пользователями и приложением."},
-	{ "name": "secure.getUserLevel", "description": "Возвращает ранее выставленный игровой уровень одного или нескольких пользователей в приложении."},
-	{ "name": "secure.giveEventSticker", "description": "Выдает пользователю стикер и открывает игровое достижение."},
-	{ "name": "secure.sendNotification", "description": "Отправляет уведомление пользователю."},
-	{ "name": "secure.sendSMSNotification", "description": "Отправляет SMS-уведомление на мобильный телефон пользователя."},
-	{ "name": "secure.setCounter", "description": "Устанавливает счетчик, который выводится пользователю жирным шрифтом в левом меню."},
-	{ "name": "stats.get", "description": "Возвращает статистику сообщества или приложения."},
-	{ "name": "stats.getPostReach", "description": "Возвращает статистику для записи на стене."},
-	{ "name": "stats.trackVisitor", "description": "Добавляет данные о текущем сеансе в статистику посещаемости приложения."},
-	{ "name": "status.get", "description": "Получает текст статуса пользователя или сообщества."},
-	{ "name": "status.set", "description": "Устанавливает новый статус текущему пользователю или сообществу."},
-	{ "name": "storage.get", "description": "Возвращает значение переменной, название которой передано в параметре key."},
-	{ "name": "storage.getKeys", "description": "Возвращает названия всех переменных."},
-	{ "name": "storage.set", "description": "Сохраняет значение переменной, название которой передано в параметре key."},
-	{ "name": "store.addStickersToFavorite", "description": "Добавляет стикер в избранные."},
-	{ "name": "store.getFavoriteStickers", "description": "Возвращает список избранных стикеров."},
-	{ "name": "store.getProducts", "description": "Возвращает список продуктов."},
-	{ "name": "store.getStickersKeywords", "description": "Возвращает список ключевых слов для стикеров."},
-	{ "name": "store.removeStickersFromFavorite", "description": "Удаляет стикер из избранных."},
-	{ "name": "stories.banOwner", "description": "Позволяет скрыть из ленты новостей истории от выбранных источников."},
-	{ "name": "stories.delete", "description": "Удаляет историю."},
-	{ "name": "stories.get", "description": "Возвращает истории, доступные для текущего пользователя."},
-	{ "name": "stories.getBanned", "description": "Возвращает список источников историй, скрытых из ленты текущего пользователя."},
-	{ "name": "stories.getById", "description": "Возвращает информацию об истории по её идентификатору."},
-	{ "name": "stories.getPhotoUploadServer", "description": "Позволяет получить адрес для загрузки истории с фотографией."},
-	{ "name": "stories.getReplies", "description": "Позволяет получить ответы на историю."},
-	{ "name": "stories.getStats", "description": "Возвращает статистику истории."},
-	{ "name": "stories.getVideoUploadServer", "description": "Позволяет получить адрес для загрузки видеозаписи в историю."},
-	{ "name": "stories.getViewers", "description": "Возвращает список пользователей, просмотревших историю."},
-	{ "name": "stories.hideAllReplies", "description": "Скрывает все ответы автора за последние сутки на истории текущего пользователя."},
-	{ "name": "stories.hideReply", "description": "Скрывает ответ на историю."},
-	{ "name": "stories.save", "description": "Сохраняет историю. В upload_results нужно передать строку, которую возвращает stories.getPhotoUploadServer или stories.getVideoUploadServer"},
-	{ "name": "stories.search", "description": "Возвращает результаты поиска по историям."},
-	{ "name": "stories.sendInteraction", "description": "Отправляет фидбек на историю."},
-	{ "name": "stories.unbanOwner", "description": "Позволяет вернуть пользователя или сообщество в список отображаемых историй в ленте."},
-	{ "name": "streaming.getServerUrl", "description": "Позволяет получить данные для подключения к Streaming API."},
-	{ "name": "streaming.getSettings", "description": "Позволяет получить значение порога для Streaming API."},
-	{ "name": "streaming.getStats", "description": "Позволяет получить статистику для подготовленных и доставленных событий Streaming API."},
-	{ "name": "streaming.getStem", "description": "Позволяет получить основу слова."},
-	{ "name": "streaming.setSettings", "description": "Позволяет задать значение порога для Streaming API."},
-	{ "name": "users.get", "description": "Возвращает расширенную информацию о пользователях."},
-	{ "name": "users.getFollowers", "description": "Возвращает список идентификаторов пользователей, которые являются подписчиками пользователя."},
-	{ "name": "users.getSubscriptions", "description": "Возвращает список идентификаторов пользователей и публичных страниц, которые входят в список подписок пользователя."},
-	{ "name": "users.report", "description": "Позволяет пожаловаться на пользователя."},
-	{ "name": "users.search", "description": "Возвращает список пользователей в соответствии с заданным критерием поиска."},
-	{ "name": "utils.checkLink", "description": "Возвращает информацию о том, является ли внешняя ссылка заблокированной на сайте ВКонтакте."},
-	{ "name": "utils.deleteFromLastShortened", "description": "Удаляет сокращенную ссылку из списка пользователя."},
-	{ "name": "utils.getLastShortenedLinks", "description": "Получает список сокращенных ссылок для текущего пользователя."},
-	{ "name": "utils.getLinkStats", "description": "Возвращает статистику переходов по сокращенной ссылке."},
-	{ "name": "utils.getServerTime", "description": "Возвращает текущее время на сервере ВКонтакте в unixtime."},
-	{ "name": "utils.getShortLink", "description": "Позволяет получить URL, сокращенный с помощью vk.cc."},
-	{ "name": "utils.resolveScreenName", "description": "Определяет тип объекта (пользователь, сообщество, приложение) и его идентификатор по короткому имени screen_name."},
-	{ "name": "video.add", "description": "Добавляет видеозапись в список пользователя."},
-	{ "name": "video.addAlbum", "description": "Создает пустой альбом видеозаписей."},
-	{ "name": "video.addToAlbum", "description": "Позволяет добавить видеозапись в альбом."},
-	{ "name": "video.createComment", "description": "Cоздает новый комментарий к видеозаписи"},
-	{ "name": "video.delete", "description": "Удаляет видеозапись со страницы пользователя."},
-	{ "name": "video.deleteAlbum", "description": "Удаляет альбом видеозаписей."},
-	{ "name": "video.deleteComment", "description": "Удаляет комментарий к видеозаписи."},
-	{ "name": "video.edit", "description": "Редактирует данные видеозаписи."},
-	{ "name": "video.editAlbum", "description": "Редактирует альбом с видео."},
-	{ "name": "video.editComment", "description": "Изменяет текст комментария к видеозаписи."},
-	{ "name": "video.get", "description": "Возвращает информацию о видеозаписях."},
-	{ "name": "video.getAlbumById", "description": "Позволяет получить информацию об альбоме с видео."},
-	{ "name": "video.getAlbums", "description": "Возвращает список альбомов видеозаписей пользователя или сообщества."},
-	{ "name": "video.getAlbumsByVideo", "description": "Возвращает список альбомов, в которых находится видеозапись."},
-	{ "name": "video.getComments", "description": "Возвращает список комментариев к видеозаписи."},
-	{ "name": "video.removeFromAlbum", "description": "Позволяет убрать видеозапись из альбома."},
-	{ "name": "video.reorderAlbums", "description": "Позволяет изменить порядок альбомов с видео."},
-	{ "name": "video.reorderVideos", "description": "Позволяет переместить видеозапись в альбоме."},
-	{ "name": "video.report", "description": "Позволяет пожаловаться на видеозапись."},
-	{ "name": "video.reportComment", "description": "Позволяет пожаловаться на комментарий к видеозаписи."},
-	{ "name": "video.restore", "description": "Восстанавливает удаленную видеозапись."},
-	{ "name": "video.restoreComment", "description": "Восстанавливает удаленный комментарий к видеозаписи."},
-	{ "name": "video.save", "description": "Возвращает адрес сервера, необходимый для загрузки, и данные видеозаписи."},
-	{ "name": "video.search", "description": "Возвращает список видеозаписей в соответствии с заданным критерием поиска."},
-	{ "name": "wall.checkCopyrightLink", "description": "Проверяет ссылку для указания источника."},
-	{ "name": "wall.closeComments", "description": "Выключает комментирование записи"},
-	{ "name": "wall.createComment", "description": "Добавляет комментарий к записи на стене."},
-	{ "name": "wall.delete", "description": "Удаляет запись со стены."},
-	{ "name": "wall.deleteComment", "description": "Удаляет комментарий к записи на стене."},
-	{ "name": "wall.edit", "description": "Редактирует запись на стене."},
-	{ "name": "wall.editAdsStealth", "description": "Позволяет отредактировать скрытую запись."},
-	{ "name": "wall.editComment", "description": "Редактирует комментарий на стене."},
-	{ "name": "wall.get", "description": "Возвращает список записей со стены пользователя или сообщества."},
-	{ "name": "wall.getById", "description": "Возвращает список записей со стен пользователей или сообществ по их идентификаторам."},
-	{ "name": "wall.getComment", "description": "Получает информацию о комментарии на стене."},
-	{ "name": "wall.getComments", "description": "Возвращает список комментариев к записи на стене."},
-	{ "name": "wall.getReposts", "description": "Позволяет получать список репостов заданной записи."},
-	{ "name": "wall.openComments", "description": "Включает комментирование записи"},
-	{ "name": "wall.pin", "description": "Закрепляет запись на стене (запись будет отображаться выше остальных)."},
-	{ "name": "wall.post", "description": "Позволяет создать запись на стене, предложить запись на стене публичной страницы, опубликовать существующую отложенную запись."},
-	{ "name": "wall.postAdsStealth", "description": "Позволяет создать скрытую запись, которая не попадает на стену сообщества и в дальнейшем может быть использована  для создания рекламного объявления типа 'Запись в сообществе'."},
-	{ "name": "wall.reportComment", "description": "Позволяет пожаловаться на комментарий к записи."},
-	{ "name": "wall.reportPost", "description": "Позволяет пожаловаться на запись."},
-	{ "name": "wall.repost", "description": "Копирует объект на стену пользователя или сообщества."},
-	{ "name": "wall.restore", "description": "Восстанавливает удаленную запись на стене пользователя или сообщества."},
-	{ "name": "wall.restoreComment", "description": "Восстанавливает удаленный комментарий к записи на стене."},
-	{ "name": "wall.search", "description": "Позволяет искать записи на стене в соответствии с заданными критериями."},
-	{ "name": "wall.unpin", "description": "Отменяет закрепление записи на стене."},
-	{ "name": "widgets.getComments", "description": "Получает список комментариев к странице, оставленных через Виджет комментариев."},
-	{ "name": "widgets.getPages", "description": "Получает список страниц приложения/сайта, на которых установлен Виджет комментариев или «Мне нравится»."}
+  {
+    "title": "Account",
+    "methods": [
+      {
+        "title": "account.getActiveOffers",
+        "description": "Возвращает список активных рекламных предложений (офферов), выполнив которые, пользователь сможет получить соответствующее количество голосов на свой счёт внутри приложения.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "account.getAppPermissions",
+        "description": "Получает настройки текущего пользователя в данном приложении.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "account.getCounters",
+        "description": "Возвращает ненулевые значения счетчиков пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "account.setNameInMenu",
+        "description": "Устанавливает короткое название приложения (до 17 символов), которое выводится пользователю в левом меню.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Ads",
+    "methods": [
+      {
+        "title": "ads.addOfficeUsers",
+        "description": "Добавляет администраторов и/или наблюдателей в рекламный кабинет.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.checkLink",
+        "description": "Проверяет ссылку на рекламируемый объект.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createAds",
+        "description": "Создает рекламные объявления.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createCampaigns",
+        "description": "Создает рекламные кампании.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createClients",
+        "description": "Создаёт клиентов рекламного агентства.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createLookalikeRequest",
+        "description": "Создаёт запрос на поиск похожей аудитории.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createTargetGroup",
+        "description": "Создаёт аудиторию для ретаргетинга рекламных объявлений на пользователей, которые посетили сайт рекламодателя (просмотрели информации о товаре, зарегистрировались и т.д.).",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.createTargetPixel",
+        "description": "Создаёт пиксель ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.deleteAds",
+        "description": "Архивирует рекламные объявления.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.deleteCampaigns",
+        "description": "Архивирует рекламные кампании.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.deleteClients",
+        "description": "Архивирует клиентов рекламного агентства.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.deleteTargetGroup",
+        "description": "Удаляет аудиторию ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.deleteTargetPixel",
+        "description": "Удаляет пиксель ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getAccounts",
+        "description": "Возвращает список рекламных кабинетов.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getAds",
+        "description": "Возвращает список рекламных объявлений.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getAdsLayout",
+        "description": "Возвращает описания внешнего вида рекламных объявлений.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getAdsPostsReach",
+        "description": "Возвращает подробную информацию об охвате рекламных записей.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getAdsTargeting",
+        "description": "Возвращает параметры таргетинга рекламных объявлений",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getBudget",
+        "description": "Возвращает текущий бюджет рекламного кабинета.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getCampaigns",
+        "description": "Возвращает список кампаний рекламного кабинета.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getCategories",
+        "description": "Позволяет получить возможные тематики рекламных объявлений.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getClients",
+        "description": "Возвращает список клиентов рекламного агентства.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getDemographics",
+        "description": "Возвращает демографическую статистику по рекламным объявлениям или кампаниям.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getFloodStats",
+        "description": "Возвращает информацию о текущем состоянии счетчика — количество оставшихся запусков методов и время до следующего обнуления счетчика в секундах.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getLookalikeRequests",
+        "description": "Возвращает список запросов на поиск похожей аудитории.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getMusicians",
+        "description": "Возвращает информацию о музыкантах, на слушателей которых доступно таргетирование.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getMusiciansByIds",
+        "description": "Возвращает информацию о музыкантах на слушателей, для которых доступно таргетирование.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getOfficeUsers",
+        "description": "Возвращает список администраторов и наблюдателей рекламного кабинета.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getPostsReach",
+        "description": "Возвращает подробную статистику по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getRejectionReason",
+        "description": "Возвращает причину, по которой указанному объявлению было отказано в прохождении премодерации.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getStatistics",
+        "description": "Возвращает статистику показателей эффективности по рекламным объявлениям, кампаниям, клиентам или всему кабинету.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getSuggestions",
+        "description": "Возвращает набор подсказок для различных параметров таргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getTargetGroups",
+        "description": "Возвращает список аудиторий ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getTargetPixels",
+        "description": "Возвращает список пикселей ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getTargetingStats",
+        "description": "Возвращает размер целевой аудитории таргетинга, а также рекомендованные значения CPC и CPM.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getUploadURL",
+        "description": "Возвращает URL-адрес для загрузки фотографии рекламного объявления.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.getVideoUploadURL",
+        "description": "Возвращает URL-адрес для загрузки видеозаписи рекламного объявления.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.importTargetContacts",
+        "description": "Импортирует список контактов рекламодателя для учета зарегистрированных во ВКонтакте пользователей в аудитории ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.removeOfficeUsers",
+        "description": "Удаляет администраторов и/или наблюдателей из рекламного кабинета.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.removeTargetContacts",
+        "description": "Принимает запрос на исключение контактов рекламодателя из аудитории ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.saveLookalikeRequestResult",
+        "description": "Сохраняет результат поиска похожей аудитории.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.shareTargetGroup",
+        "description": "Предоставляет доступ к аудитории ретаргетинга другому рекламному кабинету. В результате выполнения метода возвращается идентификатор аудитории для указанного кабинета.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateAds",
+        "description": "Редактирует рекламные объявления.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateCampaigns",
+        "description": "Редактирует рекламные кампании.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateClients",
+        "description": "Редактирует клиентов рекламного агентства.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateOfficeUsers",
+        "description": "Добавляет или редактирует администраторов и/или наблюдателей в рекламный кабинет.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateTargetGroup",
+        "description": "Редактирует аудиторию ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "ads.updateTargetPixel",
+        "description": "Редактирует пиксель ретаргетинга.",
+        "access_rights": ["ads"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "AppWidgets",
+    "methods": [
+      {
+        "title": "appWidgets.getAppImageUploadServer",
+        "description": "Позволяет получить адрес для загрузки фотографии в коллекцию приложения для [виджетов приложений сообществ](api/community-apps-widgets/getting-started).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "appWidgets.getAppImages",
+        "description": "Позволяет получить коллекцию изображений, загруженных для приложения, в [виджетах приложений сообществ](api/community-apps-widgets/getting-started).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "appWidgets.getGroupImageUploadServer",
+        "description": "Позволяет получить адрес для загрузки фотографии в коллекцию сообщества для [виджетов приложений сообществ](api/community-apps-widgets/getting-started).",
+        "access_rights": [
+          "app_widget"
+        ],
+        "params": []
+      },
+      {
+        "title": "appWidgets.getGroupImages",
+        "description": "Позволяет получить коллекцию изображений, загруженных для приложения, в [виджетах приложений сообществ](api/community-apps-widgets/getting-started).",
+        "access_rights": [
+          "app_widget"
+        ],
+        "params": []
+      },
+      {
+        "title": "appWidgets.getImagesById",
+        "description": "Позволяет получить изображение для [виджетов приложений сообществ](api/community-apps-widgets/getting-started) по его идентификатору.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "appWidgets.saveAppImage",
+        "description": "Позволяет сохранить изображение в коллекцию приложения для [виджетов приложений сообществ](api/community-apps-widgets/getting-started) после загрузки на сервер.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "appWidgets.saveGroupImage",
+        "description": "Позволяет сохранить изображение в коллекцию сообщества для [виджетов приложений сообществ](api/community-apps-widgets/getting-started). после загрузки на сервер.",
+        "access_rights": [
+          "app_widget"
+        ],
+        "params": []
+      },
+      {
+        "title": "appWidgets.update",
+        "description": "Позволяет обновить [виджет приложения сообщества](api/community-apps-widgets/getting-started).",
+        "access_rights": [
+          "app_widget"
+        ],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Apps",
+    "methods": [
+      {
+        "title": "apps.get",
+        "description": "Возвращает данные о запрошенном приложении.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.getCatalog",
+        "description": "Возвращает список приложений, доступных для пользователей сайта через каталог приложений.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.getLeaderboard",
+        "description": "Возвращает рейтинг пользователей в игре.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.getMiniAppPolicies",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.getScopes",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.getScore",
+        "description": "Метод возвращает количество очков пользователя в этой игре.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.promoHasActiveGift",
+        "description": "Проверить есть ли у пользователя подарок в игре.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "apps.promoUseGift",
+        "description": "Использовать подарок, полученный пользователем в промо-акции.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Auth",
+    "methods": [
+      {
+        "title": "auth.checkPhone",
+        "description": "Проверяет правильность введённого номера (возможность его использования для регистрации или авторизации).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "auth.restore",
+        "description": "Позволяет восстановить доступ к аккаунту, используя код, полученный через SMS.\n\n> Данный метод доступен только приложениям, имеющим доступ к [Прямой авторизации](api/direct-auth).",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Board",
+    "methods": [
+      {
+        "title": "board.getComments",
+        "description": "Возвращает список сообщений в указанной теме.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "board.getTopics",
+        "description": "Возвращает список тем в обсуждениях указанной группы.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Database",
+    "methods": [
+      {
+        "title": "database.getChairs",
+        "description": "Возвращает список кафедр университета по указанному факультету.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getCities",
+        "description": "Возвращает список городов.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getCitiesById",
+        "description": "Возвращает информацию о городах и регионах по их идентификаторам.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getCountries",
+        "description": "Возвращает список стран.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getCountriesById",
+        "description": "Возвращает информацию о странах по их идентификаторам",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getFaculties",
+        "description": "Возвращает список факультетов.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getMetroStations",
+        "description": "Возвращает список станций метро",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getMetroStationsById",
+        "description": "Возвращает информацию об одной или нескольких станциях метро по их идентификаторам.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getRegions",
+        "description": "Возвращает список регионов.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getSchoolClasses",
+        "description": "Возвращает список классов, характерных для школ определенной страны.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getSchools",
+        "description": "Возвращает список школ.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "database.getUniversities",
+        "description": "Возвращает список высших учебных заведений.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Docs",
+    "methods": [
+      {
+        "title": "docs.add",
+        "description": "Копирует документ в документы текущего пользователя.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.delete",
+        "description": "Удаляет документ пользователя или группы.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.edit",
+        "description": "Редактирует документ пользователя или группы.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.get",
+        "description": "Возвращает расширенную информацию о документах пользователя или сообщества.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.getById",
+        "description": "Возвращает информацию о документах по их идентификаторам.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.getMessagesUploadServer",
+        "description": "Получает адрес сервера для [загрузки документа](upload_files_2%2310._%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0_%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2) в личное сообщение.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.getTypes",
+        "description": "Возвращает доступные для пользователя типы документов.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.getUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки документов](https://dev.vk.com/api/upload#%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0%20%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2).",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.getWallUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки документов](api/upload) в папку **Отправленные**, для последующей отправки документа на стену или личным сообщением.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.save",
+        "description": "Сохраняет документ после его успешной [загрузки](api/upload) на сервер.",
+        "access_rights": ["docs"],
+        "params": []
+      },
+      {
+        "title": "docs.search",
+        "description": "Возвращает результаты поиска по документам.",
+        "access_rights": ["docs"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Donut",
+    "methods": [
+      {
+        "title": "donut.getFriends",
+        "description": "Возвращает список донов, которые подписаны на определенные сообщества, из числа друзей пользователя.",
+        "access_rights": ["friends", "groups"],
+        "params": []
+      },
+      {
+        "title": "donut.getSubscription",
+        "description": "Возвращает информацию о подписке VK Donut.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "donut.getSubscriptions",
+        "description": "Возвращает информацию о подписках пользователя.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "donut.isDon",
+        "description": "Возвращает информацию о том, подписан ли пользователь на платный контент (является доном).",
+        "access_rights": ["groups"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "DownloadedGames",
+    "methods": [
+      {
+        "title": "downloadedGames.getPaidStatus",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Friends",
+    "methods": [
+      {
+        "title": "friends.areFriends",
+        "description": "Возвращает информацию о том, добавлен ли текущий пользователь в друзья у указанных пользователей.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.get",
+        "description": "Возвращает список идентификаторов друзей пользователя или расширенную информацию о друзьях пользователя (при использовании параметра `fields`).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "friends.getAppUsers",
+        "description": "Возвращает список идентификаторов друзей текущего пользователя, которые установили данное приложение.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.getAvailableForCall",
+        "description": "Позволяет получить список идентификаторов пользователей, доступных для вызова в приложении, используя метод [Client API](sdk/javascript) `callUser`.\n\nПодробнее о [схеме вызова](sdk/javascript) из приложений.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.getMutual",
+        "description": "Возвращает список идентификаторов общих друзей между парой пользователей.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.getOnline",
+        "description": "Возвращает список идентификаторов друзей пользователя, находящихся на сайте.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.getRecent",
+        "description": "Возвращает список идентификаторов недавно добавленных друзей текущего пользователя.",
+        "access_rights": ["friends"],
+        "params": []
+      },
+      {
+        "title": "friends.search",
+        "description": "Позволяет искать по списку друзей пользователей.",
+        "access_rights": ["friends"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Groups",
+    "methods": [
+      {
+        "title": "groups.get",
+        "description": "Возвращает список сообществ указанного пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getAddresses",
+        "description": "Возвращает адрес указанного сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getById",
+        "description": "Возвращает информацию о заданном сообществе или о нескольких сообществах.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getCatalog",
+        "description": "Возвращает список сообществ выбранной категории каталога.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getCatalogInfo",
+        "description": "Возвращает список категорий для каталога сообществ.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getMembers",
+        "description": "Возвращает список участников сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getOnlineStatus",
+        "description": "Получает информацию о статусе «онлайн» в сообществе.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.getTokenPermissions",
+        "description": "Возвращает настройки прав для ключа доступа сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.isMember",
+        "description": "Возвращает информацию о том, является ли пользователь участником сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.search",
+        "description": "Осуществляет поиск сообществ по заданной подстроке.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "groups.toggleMarket",
+        "description": "Переключает функционал раздела «Товаров» в выбранной группе.",
+        "access_rights": ["groups"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "LeadForms",
+    "methods": [
+      {
+        "title": "leadForms.create",
+        "description": "Создаёт форму сбора заявок.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.delete",
+        "description": "Удаляет форму сбора заявок.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.get",
+        "description": "Возвращает информацию о форме сбора заявок.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.getLeads",
+        "description": "Возвращает заявки формы.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.getUploadURL",
+        "description": "Возвращает URL для загрузки обложки для формы.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.list",
+        "description": "Возвращает список форм сообщества.",
+        "access_rights": ["groups"],
+        "params": []
+      },
+      {
+        "title": "leadForms.update",
+        "description": "Обновляет форму сбора заявок.",
+        "access_rights": ["groups"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Likes",
+    "methods": [
+      {
+        "title": "likes.getList",
+        "description": "Получает список идентификаторов пользователей, которые добавили заданный объект в свой список «Мне нравится».",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "likes.isLiked",
+        "description": "Проверяет, находится ли объект в списке **Мне нравится** заданного пользователя.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Market",
+    "methods": [
+      {
+        "title": "market.add",
+        "description": "Добавляет новый товар.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.addAlbum",
+        "description": "Добавляет новую подборку с товарами.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.addToAlbum",
+        "description": "Добавляет товар в одну или несколько выбранных подборок.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.createComment",
+        "description": "Создаёт новый комментарий к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.delete",
+        "description": "Удаляет товар.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.deleteAlbum",
+        "description": "Удаляет подборку с товарами.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.deleteComment",
+        "description": "Удаляет комментарий к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.edit",
+        "description": "Редактирует товар.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.editAlbum",
+        "description": "Редактирует подборку с товарами.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.editComment",
+        "description": "Изменяет текст комментария к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.editOrder",
+        "description": "Редактирует заказ.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.get",
+        "description": "Возвращает список товаров в сообществе.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getAlbumById",
+        "description": "Возвращает данные подборки с товарами.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getAlbums",
+        "description": "Возвращает список подборок с товарами.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getById",
+        "description": "Возвращает информацию о товарах по идентификаторам.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getCategories",
+        "description": "Возвращает список категорий для товаров.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getComments",
+        "description": "Возвращает список комментариев к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getGroupOrders",
+        "description": "Возвращает заказы сообщества.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getOrderById",
+        "description": "Возвращает заказ по идентификатору.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getOrderItems",
+        "description": "Возвращает товары в заказе.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.getOrders",
+        "description": "Возвращает заказы.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.removeFromAlbum",
+        "description": "Удаляет товар из одной или нескольких выбранных подборок.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.reorderAlbums",
+        "description": "Изменяет положение подборки с товарами в списке.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.reorderItems",
+        "description": "Изменяет положение товара в подборке.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.report",
+        "description": "Позволяет отправить жалобу на товар.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.reportComment",
+        "description": "Позволяет оставить жалобу на комментарий к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.restore",
+        "description": "Восстанавливает удаленный товар.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.restoreComment",
+        "description": "Восстанавливает удаленный комментарий к товару.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.search",
+        "description": "Ищет товары в каталоге сообщества.",
+        "access_rights": ["market"],
+        "params": []
+      },
+      {
+        "title": "market.searchItems",
+        "description": "",
+        "access_rights": ["market"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Newsfeed",
+    "methods": [
+      {
+        "title": "newsfeed.get",
+        "description": "Возвращает данные, необходимые для показа списка новостей для текущего пользователя.",
+        "access_rights": ["wall", "friends"],
+        "params": []
+      },
+      {
+        "title": "newsfeed.getMentions",
+        "description": "Возвращает список записей пользователей на своих стенах, в которых упоминается указанный пользователь.",
+        "access_rights": ["wall"],
+        "params": []
+      },
+      {
+        "title": "newsfeed.getRecommended",
+        "description": "Получает список новостей, рекомендованных пользователю.",
+        "access_rights": ["wall", "friends"],
+        "params": []
+      },
+      {
+        "title": "newsfeed.getSuggestedSources",
+        "description": "Возвращает сообщества и пользователей, на которые текущему пользователю рекомендуется подписаться.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "newsfeed.search",
+        "description": "Возвращает результаты поиска по статусам. Новости возвращаются в порядке от более новых к более старым.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Notes",
+    "methods": [
+      {
+        "title": "notes.add",
+        "description": "Создает новую заметку у текущего пользователя.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.delete",
+        "description": "Удаляет заметку текущего пользователя.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.edit",
+        "description": "Редактирует заметку текущего пользователя.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.get",
+        "description": "Возвращает список заметок, созданных пользователем.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.getById",
+        "description": "Возвращает заметку по её `id`.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.getComments",
+        "description": "Возвращает список комментариев к заметке.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      },
+      {
+        "title": "notes.getFriendsNotes",
+        "description": "Возвращает список заметок друзей пользователя.",
+        "access_rights": [
+          "notes"
+        ],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Notifications",
+    "methods": [
+      {
+        "title": "notifications.get",
+        "description": "Возвращает список оповещений об ответах других пользователей на записи текущего пользователя.",
+        "access_rights": [
+          "notifications"
+        ],
+        "params": []
+      },
+      {
+        "title": "notifications.markAsViewed",
+        "description": "Сбрасывает счетчик непросмотренных оповещений об ответах других пользователей на записи текущего пользователя.",
+        "access_rights": [
+          "notifications"
+        ],
+        "params": []
+      },
+      {
+        "title": "notifications.sendMessage",
+        "description": "Отправляет уведомление пользователю приложения Mini Apps.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Orders",
+    "methods": [
+      {
+        "title": "orders.cancelSubscription",
+        "description": "Отменяет подписку.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.changeState",
+        "description": "Изменяет состояние заказа.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.get",
+        "description": "Возвращает список заказов.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.getAmount",
+        "description": "Возвращает стоимость голосов в валюте пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.getById",
+        "description": "Возвращает информацию об отдельном заказе.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.getUserSubscriptionById",
+        "description": "Получает информацию о подписке по её идентификатору.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.getUserSubscriptions",
+        "description": "Получает список активных подписок пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "orders.updateSubscription",
+        "description": "Обновляет цену подписки для пользователя.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Pages",
+    "methods": [
+      {
+        "title": "pages.clearCache",
+        "description": "Позволяет очистить кеш отдельных внешних страниц, которые могут быть прикреплены к записям ВКонтакте. После очистки кеша при последующем прикреплении ссылки к записи, данные о странице будут обновлены.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "pages.get",
+        "description": "Возвращает информацию о вики-странице.",
+		"access_rights": ["pages"],
+        "params": []
+      },
+      {
+        "title": "pages.getHistory",
+        "description": "Возвращает список всех старых версий вики-страницы.",
+		"access_rights": ["pages"],
+        "params": []
+      },
+      {
+        "title": "pages.getTitles",
+        "description": "Возвращает список вики-страниц в группе.",
+        "access_rights": ["pages"],
+        "params": []
+      },
+      {
+        "title": "pages.getVersion",
+        "description": "Возвращает текст одной из старых версий страницы.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "pages.parseWiki",
+        "description": "Возвращает HTML-представление вики-разметки.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "pages.preview",
+        "description": "",
+        "access_rights": ["pages"],
+        "params": []
+      },
+      {
+        "title": "pages.save",
+        "description": "Сохраняет текст вики-страницы.",
+        "access_rights": ["pages"],
+        "params": []
+      },
+      {
+        "title": "pages.saveAccess",
+        "description": "Сохраняет новые настройки доступа на чтение и редактирование вики-страницы.",
+        "access_rights": ["pages"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Photos",
+    "methods": [
+      {
+        "title": "photos.createAlbum",
+        "description": "Создает пустой альбом для фотографий.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.edit",
+        "description": "Редактирует описание или геометку у фотографии.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.editAlbum",
+        "description": "Редактирует данные альбома для фотографий.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.get",
+        "description": "Возвращает список фотографий в альбоме.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getAlbums",
+        "description": "Возвращает список фотоальбомов пользователя или сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getAlbumsCount",
+        "description": "Возвращает количество доступных альбомов пользователя или сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getAll",
+        "description": "Возвращает все фотографии пользователя или сообщества в антихронологическом порядке.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.getAllComments",
+        "description": "Возвращает отсортированный в антихронологическом порядке список всех комментариев к конкретному альбому или ко всем альбомам пользователя.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.getById",
+        "description": "Возвращает информацию о фотографиях по их идентификаторам.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getComments",
+        "description": "Возвращает список комментариев к фотографии.",
+        "access_rights": [
+          "photos"
+        ],
+        "params": []
+      },
+      {
+        "title": "photos.getMailUploadServer",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getMarketAlbumUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки﻿ фотографии подборки товаров](api/upload#Загрузка%20фотографии%20для%20товара) в сообществе.",
+        "access_rights": ["market", "photos"],
+        "params": []
+      },
+      {
+        "title": "photos.getMarketUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки﻿ фотографии товара](api/upload#Загрузка%20фотографии%20для%20товара).",
+        "access_rights": ["market", "photos"],
+        "params": []
+      },
+      {
+        "title": "photos.getOwnerCoverPhotoUploadServer",
+        "description": "Получает адрес для [загрузки обложки сообщества](api/upload#Загрузка%20обложки%20сообщества).",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.getOwnerPhotoUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки главной фотографии](api/upload#Загрузка%20главной%20фотографии%20пользователя%20или%20сообщества) на страницу пользователя или сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getProfile",
+        "description": "Возвращает список фотографий со страницы пользователя или сообщества. \n\nМетод устарел, воспользуйтесь методом  с параметром `album_id` = `profile`.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки фотографий](api/upload#Загрузка%20фотографий%20в%20альбом).",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.getUserPhotos",
+        "description": "Возвращает список фотографий, на которых отмечен пользователь",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.getWallUploadServer",
+        "description": "Возвращает адрес сервера для [загрузки﻿ фотографии на стену](api/upload#Загрузка%20фотографий%20на%20стену) пользователя или сообщества.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.makeCover",
+        "description": "Делает фотографию обложкой альбома.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.move",
+        "description": "Переносит фотографию из одного альбома в другой.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.reorderAlbums",
+        "description": "Меняет порядок альбома в списке альбомов пользователя.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.reorderPhotos",
+        "description": "Меняет порядок фотографии в списке фотографий альбома пользователя.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.save",
+        "description": "Сохраняет фотографии после успешной загрузки.",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.saveMailPhoto",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.saveMarketAlbumPhoto",
+        "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом [photos.getMarketAlbumUploadServer](method/photos.getMarketAlbumUploadServer).",
+        "access_rights": ["market", "photos"],
+        "params": []
+      },
+      {
+        "title": "photos.saveMarketPhoto",
+        "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом .",
+        "access_rights": ["market", "photos"],
+        "params": []
+      },
+      {
+        "title": "photos.saveOwnerCoverPhoto",
+        "description": "Сохраняет изображение для обложки сообщества после [успешной загрузки](api/upload#Загрузка%20обложки%20сообщества).",
+        "access_rights": ["photos"],
+        "params": []
+      },
+      {
+        "title": "photos.saveOwnerPhoto",
+        "description": "Позволяет сохранить главную фотографию пользователя или сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.saveWallPhoto",
+        "description": "Сохраняет фотографии после успешной загрузки на URI, полученный методом [photos.getWallUploadServer](method/photos.getWallUploadServer).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "photos.search",
+        "description": "Осуществляет поиск изображений по местоположению или описанию.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Places",
+    "methods": [
+      {
+        "title": "places.getCheckins",
+        "description": "Возвращает список отметок пользователей в местах согласно заданным параметрам.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Podcasts",
+    "methods": [
+      {
+        "title": "podcasts.searchPodcast",
+        "description": "",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Polls",
+    "methods": [
+      {
+        "title": "polls.getById",
+        "description": "Возвращает детальную информацию об опросе по его идентификатору.",
+        "access_rights": [
+          "wall"
+        ],
+        "params": []
+      },
+      {
+        "title": "polls.getVoters",
+        "description": "Получает список идентификаторов пользователей, которые выбрали определенные варианты ответа в опросе.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "PrettyCards",
+    "methods": [
+      {
+        "title": "prettyCards.create",
+        "description": "Создаёт карточку карусели.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "prettyCards.delete",
+        "description": "Удаляет карточку.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "prettyCards.edit",
+        "description": "Редактирует карточку карусели.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "prettyCards.get",
+        "description": "Возвращает неиспользованные карточки владельца.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "prettyCards.getById",
+        "description": "Возвращает информацию о карточке.",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "prettyCards.getUploadURL",
+        "description": "Возвращает URL для загрузки фотографии для карточки.",
+        "access_rights": ["ads"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Search",
+    "methods": [
+      {
+        "title": "search.getHints",
+        "description": "Метод позволяет получить результаты быстрого поиска по произвольной подстроке. ",
+        "access_rights": ["friends", "groups"],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Secure",
+    "methods": [
+      {
+        "title": "secure.addAppEvent",
+        "description": "Добавляет информацию о достижениях пользователя в приложении.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.checkToken",
+        "description": "Позволяет проверять валидность ключа доступа пользователя в **iFrame**, **VK Mini Apps** и **Standalone**-приложениях с помощью передаваемого в приложения параметра `access_token`.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.getAppBalance",
+        "description": "Возвращает платежный баланс (счет) приложения в сотых долях голоса.",
+        "access_rights": [
+          "votes"
+        ],
+        "params": []
+      },
+      {
+        "title": "secure.getSMSHistory",
+        "description": "Выводит список SMS-уведомлений, отосланных приложением с помощью метода [secure.sendSMSNotification](method/secure.sendSMSNotification).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.getTransactionsHistory",
+        "description": "Выводит историю транзакций по переводу голосов между пользователями и приложением.",
+        "access_rights": [
+          "votes"
+        ],
+        "params": []
+      },
+      {
+        "title": "secure.getUserLevel",
+        "description": "Возвращает ранее выставленный игровой уровень одного или нескольких пользователей в приложении.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.giveEventSticker",
+        "description": "Выдает пользователю стикер и открывает игровое достижение.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.sendNotification",
+        "description": "Отправляет уведомление пользователю.",
+        "access_rights": [
+          "notify_global"
+        ],
+        "params": []
+      },
+      {
+        "title": "secure.sendSMSNotification",
+        "description": "Отправляет **SMS**-уведомление на мобильный телефон пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.setCounter",
+        "description": "Устанавливает счетчик, который выводится пользователю жирным шрифтом в левом меню.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "secure.setUserLevel",
+        "description": "Устанавливает игровой уровень пользователя в приложении, который смогут увидеть его друзья.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Stats",
+    "methods": [
+      {
+        "title": "stats.get",
+        "description": "Возвращает статистику сообщества или приложения.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "stats.getPostReach",
+        "description": "Возвращает статистику для записи на стене.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Status",
+    "methods": [
+      {
+        "title": "status.get",
+        "description": "Получает текст статуса пользователя или сообщества.",
+        "access_rights": [
+          "activity"
+        ],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Storage",
+    "methods": [
+      {
+        "title": "storage.get",
+        "description": "Возвращает значение переменной, название которой передано в параметре `key`.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "storage.getKeys",
+        "description": "Возвращает названия всех переменных.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "storage.set",
+        "description": "Сохраняет значение переменной, название которой передано в параметре `key`.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Stories",
+    "methods": [
+      {
+        "title": "stories.search",
+        "description": "Возвращает результаты поиска по историям.",
+        "access_rights": [
+          "stories"
+        ],
+        "params": []
+      },
+      {
+        "title": "stories.sendInteraction",
+        "description": "Отправляет фидбек на историю.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Streaming",
+    "methods": [
+      {
+        "title": "streaming.getServerUrl",
+        "description": "Позволяет получить данные для подключения к [Streaming API](api/streaming/getting-started).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "streaming.getSettings",
+        "description": "Позволяет получить значение порога для [Streaming API](api/streaming/getting-started).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "streaming.getStats",
+        "description": "Позволяет получить статистику для подготовленных и доставленных событий [Streaming API](api/streaming/getting-started).",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "streaming.getStem",
+        "description": "Позволяет получить основу слова.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "streaming.setSettings",
+        "description": "Позволяет задать значение порога для [Streaming API](api/streaming/getting-started).",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Users",
+    "methods": [
+      {
+        "title": "users.get",
+        "description": "Возвращает расширенную информацию о пользователях.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "users.getFollowers",
+        "description": "Возвращает список идентификаторов пользователей, которые являются подписчиками пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "users.getSubscriptions",
+        "description": "Возвращает список идентификаторов пользователей и публичных страниц, которые входят в список подписок пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "users.search",
+        "description": "Возвращает список пользователей в соответствии с заданным критерием поиска.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Utils",
+    "methods": [
+      {
+        "title": "utils.checkLink",
+        "description": "Возвращает информацию о том, является ли внешняя ссылка заблокированной на сайте ВКонтакте.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.deleteFromLastShortened",
+        "description": "Удаляет сокращенную ссылку из списка пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.getLastShortenedLinks",
+        "description": "Получает список сокращённых ссылок для текущего пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.getLinkStats",
+        "description": "Возвращает статистику переходов по [сокращённой](utils.getShortLink) ссылке.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.getServerTime",
+        "description": "Возвращает текущее время на сервере ВКонтакте в `unixtime`.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.getShortLink",
+        "description": "Позволяет получить URL, сокращённый с помощью vk.cc.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "utils.resolveScreenName",
+        "description": "Определяет тип объекта (пользователь, сообщество, приложение) и его идентификатор по короткому имени `screen_name`.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Video",
+    "methods": [
+      {
+        "title": "video.add",
+        "description": "Добавляет видеозапись в список пользователя.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.addAlbum",
+        "description": "Создает пустой альбом видеозаписей.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.addToAlbum",
+        "description": "Позволяет добавить видеозапись в альбом.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.createComment",
+        "description": "Cоздает новый комментарий к видеозаписи",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.delete",
+        "description": "Удаляет видеозапись со страницы пользователя.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.deleteAlbum",
+        "description": "Удаляет альбом видеозаписей.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.deleteComment",
+        "description": "Удаляет комментарий к видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.edit",
+        "description": "Редактирует данные видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.editAlbum",
+        "description": "Редактирует альбом с видео.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.editComment",
+        "description": "Изменяет текст комментария к видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.get",
+        "description": "Возвращает информацию о видеозаписях.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getAlbumById",
+        "description": "Позволяет получить информацию об альбоме с видео.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getAlbums",
+        "description": "Возвращает список альбомов видеозаписей пользователя или сообщества.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getAlbumsByVideo",
+        "description": "Возвращает список альбомов, в которых находится видеозапись.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getComments",
+        "description": "Возвращает список комментариев к видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getNewTags",
+        "description": "Возвращает список видеозаписей, на которых есть непросмотренные отметки.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.getTags",
+        "description": "Возвращает список отметок на видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.moveToAlbum",
+        "description": "Перемещает видеозаписи в альбом.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.putTag",
+        "description": "Добавляет отметку на видеозапись.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.removeFromAlbum",
+        "description": "Позволяет убрать видеозапись из альбома.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.removeTag",
+        "description": "Удаляет отметку с видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.reorderAlbums",
+        "description": "Позволяет изменить порядок альбомов с видео.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.reorderVideos",
+        "description": "Позволяет переместить видеозапись в альбоме.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.restore",
+        "description": "Восстанавливает удаленную видеозапись.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.restoreComment",
+        "description": "Восстанавливает удаленный комментарий к видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.save",
+        "description": "Возвращает адрес сервера, необходимый для [загрузки](api/upload), и данные видеозаписи.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      },
+      {
+        "title": "video.search",
+        "description": "Возвращает список видеозаписей в соответствии с заданным критерием поиска.",
+        "access_rights": [
+          "video"
+        ],
+        "params": []
+      }
+    ]
+  },
+
+  {
+    "title": "Wall",
+    "methods": [
+      {
+        "title": "wall.editAdsStealth",
+        "description": "Позволяет отредактировать скрытую запись.",
+        "access_rights": [
+          "ads"
+        ],
+        "params": []
+      },
+      {
+        "title": "wall.get",
+        "description": "Возвращает список записей со стены пользователя или сообщества.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "wall.getById",
+        "description": "Возвращает список записей со стен пользователей или сообществ по их идентификаторам.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "wall.getComment",
+        "description": "Получает информацию о комментарии на стене.",
+        "access_rights": ["wall"],
+        "params": []
+      },
+      {
+        "title": "wall.getComments",
+        "description": "Возвращает список комментариев к записи на стене.",
+        "access_rights": ["wall"],
+        "params": []
+      },
+      {
+        "title": "wall.getLikes",
+        "description": "Получает информацию о пользователях, которые добавили указанную запись в свой список **Мне нравится**.",
+        "access_rights": ["wall"],
+        "params": []
+      },
+      {
+        "title": "wall.getPhotoUploadServer",
+        "description": "Возвращает адрес сервера для загрузки фотографии на стену пользователя.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "wall.getReposts",
+        "description": "Позволяет получать список репостов заданной записи.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "wall.postAdsStealth",
+        "description": "Позволяет создать скрытую запись, которая не попадает на стену сообщества и в дальнейшем может быть использована  для создания рекламного объявления типа «Запись в сообществе».",
+        "access_rights": ["ads"],
+        "params": []
+      },
+      {
+        "title": "wall.search",
+        "description": "Позволяет искать записи на стене в соответствии с заданными критериями.",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  },
+  
+  {
+    "title": "Widgets",
+    "methods": [
+      {
+        "title": "widgets.getComments",
+        "description": "Получает список комментариев к странице, оставленных через Виджет комментариев.",
+        "access_rights": [],
+        "params": []
+      },
+      {
+        "title": "widgets.getPages",
+        "description": "Получает список страниц приложения/сайта, на которых установлен [Виджет комментариев](widgets/comments) или [«Мне нравится»](widgets/like).",
+        "access_rights": [],
+        "params": []
+      }
+    ]
+  }
 ]
-
-
-	/* ПОТОМ ВЕРНУ абоба
-	{ "name": "appWidgets.getAppImageUploadServer", "description": "Позволяет получить адрес для загрузки фотографии в коллекцию приложения для виджетов приложений сообществ."},
-	{ "name": "appWidgets.getAppImages", "description": "Позволяет получить коллекцию изображений, загруженных для приложения, в виджетах приложений сообществ."},
-	{ "name": "appWidgets.getGroupImageUploadServer", "description": "Позволяет получить адрес для загрузки фотографии в коллекцию сообщества для виджетов приложений сообществ."},
-	{ "name": "appWidgets.getGroupImages", "description": "Позволяет получить коллекцию изображений, загруженных для приложения, в виджетах приложений сообществ."},
-	{ "name": "appWidgets.getImagesById", "description": "Позволяет получить изображение для виджетов приложений сообществ по его идентификатору."},
-	{ "name": "appWidgets.saveAppImage", "description": "Позволяет сохранить изображение в коллекцию приложения для виджетов приложений сообществ после загрузки на сервер."},
-	{ "name": "appWidgets.saveGroupImage", "description": "Позволяет сохранить изображение в коллекцию сообщества для виджетов приложений сообществ. после загрузки на сервер."},
-	{ "name": "appWidgets.update", "description": "Позволяет обновить виджет приложения сообщества."},*/
