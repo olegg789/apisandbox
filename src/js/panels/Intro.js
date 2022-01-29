@@ -41,7 +41,7 @@ class Intro extends React.Component {
         return (
             <Panel id={id}>
                 <FixedLayout vertical='top' className='fixOnbordingFixedLayout'>
-                    <Group style={ isDesktop ? {width: 500} : {}}>
+                    <Group>
                         <Div>
                             <Gallery
                                 align="center"
