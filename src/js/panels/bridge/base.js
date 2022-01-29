@@ -11,7 +11,8 @@ import {infoMethod} from "../../../infoMethod";
 import {
     Group,
     FormItem,
-    NativeSelect,
+    Select,
+    CustomSelectOption,
     Panel,
     PanelHeader,
     Textarea,
@@ -125,19 +126,25 @@ class HomePanelBridge extends React.Component {
             <Panel id={id}>
                 <PanelHeader
                     >
-                        VK BRIDGE
+                        VK Bridge
                     </PanelHeader>
                 <Group>
                     <FormItem top="Выберите событие">
-                        <NativeSelect
+                        <Select
                             name='section'
-                            onChange={this.onChange}
                             placeholder="Не выбран"
-                        >
-                            {method.map((el, index) => {
-                                return <option value={index}>{el.name}</option>
-                            })}
-                        </NativeSelect>
+                            options={method.map((el, index) => ({
+                                label: el.name,
+                                value: index,
+                            }))}
+                            renderOption={({ option, ...restProps }) => (
+                                <CustomSelectOption
+                                    {...restProps}
+                                />
+                            )}
+                            onChange={this.onChange}
+                            searchable={true}
+                        />
                     </FormItem>
                     {section !== null &&
                         <>

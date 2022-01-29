@@ -12,11 +12,12 @@ import {
     Snackbar,
     Avatar,
     FormItem,
-    NativeSelect,
     MiniInfoCell,
     Button,
     Div,
     Textarea,
+    Select,
+    CustomSelectOption
 } from '@vkontakte/vkui'
 import {
     Icon16Done,
@@ -30,7 +31,7 @@ class HomePanelBase extends React.Component {
 
         this.state = { 
             section: null,
-            infoMethods: null,
+            infoMethods: [],
             infMethod: null,
             responseAPI: '',
         };
@@ -60,19 +61,10 @@ class HomePanelBase extends React.Component {
 
             let arrInfoMethods = []
             for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
-                arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+                arrInfoMethods.push({ value: index, label: infoMethod[index].name })
             }
-            this.setState({ infoMethods: arrInfoMethods })
-        }
-    }
 
-    async getStorage(key) {
-        try {
-            let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]})
-            console.log(response.keys[0].value)
-            return response.keys[0].value}
-        catch (err) {
-            console.log(err)
+            this.setState({ infoMethods: arrInfoMethods })
         }
     }
 
@@ -97,26 +89,40 @@ class HomePanelBase extends React.Component {
                 <PanelHeader>VK API</PanelHeader>
                 <Group>
                     <FormItem top="Выберите раздел">
-                        <NativeSelect 
+                        <Select
                             name='section'
-                            onChange={this.onChange}
                             placeholder="Не выбран"
-                        >
-                            {method.map((el, index) => {
-                                return <option value={index}>{el.name}</option>
-                            })}
-                        </NativeSelect>
+                            options={method.map((el, index) => ({
+                                label: el.name,
+                                value: index,
+                            }))}
+                            renderOption={({ option, ...restProps }) => (
+                                <CustomSelectOption
+                                    {...restProps}
+                                />
+                            )}
+                            onChange={this.onChange}
+                            searchable={true}
+                        />
                     </FormItem>
 
                     {section !== null &&
                         <FormItem top="Выберите метод">
-                            <NativeSelect
+                            <Select
                                 name='infMethod'
-                                onChange={this.onChange}
                                 placeholder="Не выбран"
-                            >
-                                {infoMethods}
-                            </NativeSelect>
+                                options={infoMethods.map((el) => ({
+                                    label: el.label,
+                                    value: el.value,
+                                }))}
+                                renderOption={({ option, ...restProps }) => (
+                                    <CustomSelectOption
+                                        {...restProps}
+                                    />
+                                )}
+                                onChange={this.onChange}
+                                searchable={true}
+                            />
                         </FormItem>
                     }
 
