@@ -1,3 +1,12 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .div-center {
     display: table;
     margin: 0 auto;
@@ -66,16 +75,16 @@
 
 
 /*renderjson*/
-.renderjson a              { text-decoration: none; }
-.renderjson .disclosure    { color: crimson; font-size: 150%; }
-.renderjson .syntax        { color: grey; }
-.renderjson .string        { color: #036a07; }
-.renderjson .number        { color: #0000cd; }
-.renderjson .boolean       { color: plum; }
-.renderjson .key           { color: #318495; }
-.renderjson .keyword       { color: lightgoldenrodyellow; }
-.renderjson .object.syntax { color: grey; }
-.renderjson .array.syntax  { color: lightsalmon; }
+.renderjson a              { text-decoration: none; user-select: text; }
+.renderjson .disclosure    { color: crimson; font-size: 150%; user-select: text; }
+.renderjson .syntax        { color: grey; user-select: text; }
+.renderjson .string        { color: #036a07; user-select: text; }
+.renderjson .number        { color: #0000cd; user-select: text; }
+.renderjson .boolean       { color: plum; user-select: text; }
+.renderjson .key           { color: #318495; user-select: text; }
+.renderjson .keyword       { color: lightgoldenrodyellow; user-select: text; }
+.renderjson .object.syntax { color: grey; user-select: text; }
+.renderjson .array.syntax  { color: lightsalmon; user-select: text; }
 
 .vkuiTabbarItem--selected {
     color: #2B8FFE;
