@@ -198,7 +198,7 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">Получение токена пользователя(access_token)</Header>}>
+                <Group header={<Header mode="secondary">Получение токена пользователя (access_token)</Header>}>
                     <Div>
                         <Button
                             stretched

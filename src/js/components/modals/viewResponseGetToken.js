@@ -62,13 +62,11 @@ class ViewResponseGetToken extends React.Component {
                 settlingHeight={200}
             >
                 <Card>
-                    <Div className="scroll">
+                    <Div>
                         Ваш токен:
-                        <div id='responseTokenAccessToken'></div>
-                    </Div>
-                    <Div className="scroll">
+                        <div className='scroll' id='responseTokenAccessToken'/>
                         Права доступа токена:
-                        <div id='responseTokenScope'></div>
+                        <div className='scroll' id='responseTokenScope'/>
                     </Div>
                 </Card>
 

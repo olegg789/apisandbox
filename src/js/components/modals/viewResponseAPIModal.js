@@ -60,7 +60,7 @@ class ViewResponseAPIModal extends React.Component {
                 settlingHeight={200}
             >
                 <Card>
-                    <Div>
+                    <Div style={{ overflowX: "scroll"}}>
                         <div id='responseAPI'></div>
                     </Div>
                 </Card>

@@ -112,8 +112,9 @@ body {
 }
 
 .scroll {
-    overflow-x: scroll;
     width: auto;
+    overflow-x: scroll;
+    margin-right: 10px;
 }
 
 .start {
