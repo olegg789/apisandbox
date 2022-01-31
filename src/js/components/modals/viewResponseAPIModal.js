@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-    ModalPage, 
-    ModalPageHeader, 
-    PanelHeaderButton, 
-    withPlatform, 
+    ModalPage,
+    ModalPageHeader,
+    PanelHeaderButton,
+    withPlatform,
     IOS,
     Card,
     Div,
-    Button
+    Button, Textarea
 } from "@vkontakte/vkui";
 import { 
     Icon24Dismiss, 
@@ -27,7 +27,14 @@ class ViewResponseAPIModal extends React.Component {
 
     componentDidMount() {
         renderjson.set_show_to_level(30)
-        document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
+        //document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
+        //this.output(this.syntaxHighlight(window.responseAPI))
+        //document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
+        this.output(JSON.stringify(window.responseAPI, undefined, 1))
+    }
+
+    output(inp) {
+        document.getElementById('responseAPI').innerHTML = inp;
     }
 
     async copy() {
@@ -57,12 +64,13 @@ class ViewResponseAPIModal extends React.Component {
                     </ModalPageHeader>
                 }
                 onClose={onClose}
-                settlingHeight={200}
+                settlingHeight={100}
             >
                 <Card>
-                    <Div style={{ overflowX: "scroll"}}>
-                        <div id='responseAPI'></div>
-                    </Div>
+                    <div>
+                        <pre className='scroll' id='responseAPI'></pre>
+                    </div>
+
                 </Card>
 
                 <Div>

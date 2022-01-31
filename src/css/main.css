@@ -112,9 +112,19 @@ body {
 }
 
 .scroll {
-    width: auto;
-    overflow-x: scroll;
-    margin-right: 10px;
+    width: available !important;
+    overflow-x: scroll !important;
+    word-wrap: normal;
+}
+
+.span.string {
+    overflow-x: scroll !important;
+    width: auto !important;
+}
+
+.div#responseTokenAccessToken.scroll {
+    overflow-x: scroll !important;
+    width: auto !important;
 }
 
 .start {
@@ -139,3 +149,10 @@ body {
 .vkuiGallery__layer {
     cursor: default;
 }
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
