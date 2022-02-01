@@ -15,7 +15,10 @@ import {
     Div,
     Textarea,
     Select,
-    CustomSelectOption
+    CustomSelectOption,
+    Placeholder,
+    Input,
+    Checkbox,
 } from '@vkontakte/vkui'
 import { Icon20HelpOutline } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
@@ -65,7 +68,7 @@ class HomePanelBase extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, infoMethods, infMethod, params} = this.state;
+        const {section, infoMethods, infMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -118,21 +121,70 @@ class HomePanelBase extends React.Component {
                                 {infoMethod[section].methods[infMethod].description}
                             </MiniInfoCell>
 
-                            <Div>
-                                <Textarea
-                                    name='params'
-                                    value={params}
-                                    onChange={this.onChange}
-                                    placeholder='Введите параметры...'
-                                />
-                            </Div>
+                            {infoMethod[section].methods[infMethod].params.length === 0 ?
+                                <Placeholder className='fixPaddingPlaceholder'>
+                                    У данного события отсутствуют параметры.
+                                </Placeholder> :  // eslint-disable-next-line
+                                infoMethod[section].methods[infMethod].params.map((el, index) => {
+                                    if (el.type === 'string' || el.type === 'string[]') {
+                                        return(
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                                <Textarea
+                                                    name={el.name}
+                                                    onChange={(e) => this.onChange(e, index)}
+                                                />
+                                            </FormItem>
+                                        )
+                                    }  else if (el.type === 'text') {
+                                        return(
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                                <Textarea
+                                                    name={el.name}
+                                                    onChange={(e) => this.onChange(e, index)}
+                                                />
+                                            </FormItem>
+                                        )
+                                    } else if (el.type === 'positive') {
+                                        return(
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                                <Textarea
+                                                    name={el.name}
+                                                    onChange={(e) => this.onChange(e, index)}
+                                                />
+                                            </FormItem>
+                                        )
+                                    } else if (el.type === 'integer') {
+                                        return(
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                                <Input
+                                                    name={el.name}
+                                                    type='number'
+                                                    inputMode='decimal'
+                                                    onChange={(e) => this.onChange(e, index)}
+                                                />
+                                            </FormItem>
+                                        )
+                                    } else if (el.type === 'checkbox') {
+                                        return(
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                                <Checkbox
+                                                    name={el.name}
+                                                    onChange={(e) => this.actionCheckbox(index)}
+                                                >
+                                                    1
+                                                </Checkbox>
+                                            </FormItem>
+                                        )
+                                    }
+                                })
+                            }
 
                             <Div>
                                 <Button 
                                     size="l" 
                                     stretched
                                     mode="secondary" 
-                                    onClick={() => {this.executeMethod(); bridge.send("VKWebAppStorageSet", {"key": "first", "value": "test"})}}
+                                    onClick={() => this.executeMethod()}
                                 >
                                     Выполнить
                                 </Button>

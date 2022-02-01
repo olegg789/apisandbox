@@ -9,7 +9,7 @@ import {
     IOS,
     Card,
     Div,
-    Button, Textarea
+    Button
 } from "@vkontakte/vkui";
 import { 
     Icon24Dismiss, 
