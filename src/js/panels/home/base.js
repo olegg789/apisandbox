@@ -41,16 +41,26 @@ class HomePanelBase extends React.Component {
         const { name, value } = e.currentTarget;
         this.setState({ [name]: value })
 
-        if (name === 'section') {
-            await sleep(1) //setState не обновляется моментально => костыль
+        try {
+            if (name === 'section') {
+                await sleep(1) //setState не обновляется моментально => костыль
 
-            let arrInfoMethods = []
-            // eslint-disable-next-line
-            infoMethod[this.state.section].methods.map((el, index) => {
-                arrInfoMethods.push({ value: index, label: el.title })
-            })
+                let arrInfoMethods = []
+                // eslint-disable-next-line
+                infoMethod[this.state.section].methods.map((el, index) => {
+                    arrInfoMethods.push({ value: index, label: el.title })
+                })
 
-            this.setState({ infoMethods: arrInfoMethods })
+                this.setState({ infoMethods: arrInfoMethods })
+            }
+            else if (name === 'infMethod') {
+                return
+            }
+        }
+        catch(err) {
+            this.setState({section: null})
+            this.setState({infMethod: null})
+            console.log(err)
         }
     }
 
@@ -180,10 +190,10 @@ class HomePanelBase extends React.Component {
                             }
 
                             <Div>
-                                <Button 
-                                    size="l" 
+                                <Button
+                                    size="l"
                                     stretched
-                                    mode="secondary" 
+                                    mode="secondary"
                                     onClick={() => this.executeMethod()}
                                 >
                                     Выполнить

@@ -132,6 +132,7 @@ class HomePanelSettings extends React.Component {
                             </Avatar>
                         }
                         href="https://vk.me/vkapisandbox"
+                        target='_blank'
                     >
                         Поддержка
                     </SimpleCell>

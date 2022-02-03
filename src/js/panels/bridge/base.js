@@ -72,19 +72,26 @@ class HomePanelBridge extends React.Component {
         const { name, value } = e.currentTarget;
         this.setState({ [name]: value })
 
-        if (name === 'section') {
-            await sleep(1) //setState не обновляется моментально => костыль
+        try {
+            if (name === 'section') {
+                await sleep(1) //setState не обновляется моментально => костыль
 
-            let arrInfoMethods = []
-            for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
-                arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+                let arrInfoMethods = []
+                for (let index = method[this.state.section].currentCount; index <= method[this.state.section].totalCount; index++) {
+                    arrInfoMethods.push(<option value={index}>{infoMethod[index].name}</option>)
+                }
+                this.setState({ infoMethods: arrInfoMethods })
             }
-            this.setState({ infoMethods: arrInfoMethods })
-        } else {
-            let arr = this.state.param
-            arr[index] = value
-            this.setState({ param: arr })
+            else {
+                let arr = this.state.param
+                arr[index] = value
+                this.setState({ param: arr })
+            }
         }
+        catch(err) {
+            this.setState({section: null})
+        }
+
     }
 
     actionCheckbox(index) {
