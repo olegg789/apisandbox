@@ -19,9 +19,11 @@ import {
     Placeholder,
     Input,
     Checkbox,
+    Card, Header
 } from '@vkontakte/vkui'
 import { Icon20HelpOutline } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
+import renderjson from "renderjson";
 
 class HomePanelBase extends React.Component {
     constructor(props) {
@@ -32,6 +34,11 @@ class HomePanelBase extends React.Component {
             infoMethods: [],
             infMethod: null,
             responseAPI: '',
+            use_method: false,
+            textButton: true,
+            disabledButton: false,
+            disabledButtonMethod: false,
+            textButtonMethod: true
         };
 
         this.onChange = this.onChange.bind(this);
@@ -40,6 +47,13 @@ class HomePanelBase extends React.Component {
     async onChange(e) {
         const { name, value } = e.currentTarget;
         this.setState({ [name]: value })
+        this.setState({
+            use_method: false,
+            textButtonMethod: true,
+            disabledButtonMethod: false,
+            disabledButton: false,
+            textButton: true
+        })
 
         try {
             if (name === 'section') {
@@ -53,32 +67,43 @@ class HomePanelBase extends React.Component {
 
                 this.setState({ infoMethods: arrInfoMethods })
             }
-            else if (name === 'infMethod') {
-                return
-            }
         }
         catch(err) {
             this.setState({section: null})
             this.setState({infMethod: null})
+            this.setState({use_method: false})
             console.log(err)
         }
     }
 
+    async copy() {
+        await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
+
+        this.setState({
+            textButton: false,
+            disabledButton: true
+        })
+    }
+
     async executeMethod() {
+        this.setState({use_method: true})
+        renderjson.set_show_to_level(30)
         try {
             let response = await bridge.send('VKWebAppCallAPIMethod', {method: infoMethod[this.state.section].methods[this.state.infMethod].title, params: this.state.params})
-            
+
             window.responseAPI = response
-            this.props.openModal('viewResponse')
+            //this.props.openModal('viewResponse')
+            document.getElementById('response').appendChild(renderjson(response))
         } catch(err) {
             window.responseAPI = err
-            this.props.openModal('viewResponse')
+            //this.props.openModal('viewResponse')
+            document.getElementById('response').appendChild(renderjson(err))
         }
     }
 
     render() {
         const {id} = this.props;
-        const {section, infoMethods, infMethod} = this.state;
+        const {section, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -145,7 +170,7 @@ class HomePanelBase extends React.Component {
                                                 />
                                             </FormItem>
                                         )
-                                    }  else if (el.type === 'text') {
+                                    } else if (el.type === 'text') {
                                         return(
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Textarea
@@ -194,9 +219,33 @@ class HomePanelBase extends React.Component {
                                     size="l"
                                     stretched
                                     mode="secondary"
-                                    onClick={() => this.executeMethod()}
+                                    onClick={() => {this.executeMethod(); this.setState({textButtonMethod: false, disabledButtonMethod: true})}}
+                                    disabled={disabledButtonMethod}
                                 >
-                                    Выполнить
+                                    {textButtonMethod ? "Выполнить" : "Выполнено!"}
+                                </Button>
+                            </Div>
+                        </>
+                    }
+                    {use_method &&
+                        <>
+                            <Group header={<Header mode='secondary'>Результат</Header>}>
+                                <Card>
+                                    <Div>
+                                        <div className='scroll' id='response'></div>
+                                    </Div>
+
+                                </Card>
+                            </Group>
+                            <Div>
+                                <Button
+                                    size="l"
+                                    stretched
+                                    mode="secondary"
+                                    disabled={disabledButton}
+                                    onClick={() => this.copy()}
+                                >
+                                    {textButton ? 'Скопировать' : 'Успешно!'}
                                 </Button>
                             </Div>
                         </>

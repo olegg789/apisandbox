@@ -17,16 +17,17 @@ import {
     PanelHeader,
     Textarea,
     MiniInfoCell,
-    Div, 
+    Div,
     Button,
     Placeholder,
     Input,
-    Checkbox
+    Checkbox, Header, Card
 } from "@vkontakte/vkui";
 import {
     Icon20HelpOutline,
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
+import renderjson from "renderjson";
 
 class HomePanelBridge extends React.Component {
     constructor(props) {
@@ -37,7 +38,12 @@ class HomePanelBridge extends React.Component {
             infoMethods: null,
             infoMethodBridge: null,
             infMethod: null,
-            responseBridge: ''
+            responseBridge: '',
+            use_method: false,
+            textButton: true,
+            disabledButton: false,
+            disabledButtonMethod: false,
+            textButtonMethod: true
         };
 
         this.onChange = this.onChange.bind(this);
@@ -71,6 +77,13 @@ class HomePanelBridge extends React.Component {
     async onChange(e, index) {
         const { name, value } = e.currentTarget;
         this.setState({ [name]: value })
+        this.setState({
+            use_method: false,
+            textButtonMethod: true,
+            disabledButtonMethod: false,
+            disabledButton: false,
+            textButton: true
+        })
 
         try {
             if (name === 'section') {
@@ -90,8 +103,18 @@ class HomePanelBridge extends React.Component {
         }
         catch(err) {
             this.setState({section: null})
+            this.setState({use_method: false})
         }
 
+    }
+
+    async copy() {
+        await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
+
+        this.setState({
+            textButton: false,
+            disabledButton: true
+        })
     }
 
     actionCheckbox(index) {
@@ -106,6 +129,8 @@ class HomePanelBridge extends React.Component {
     }
 
     async executeMethod() {
+        this.setState({use_method: true})
+        renderjson.set_show_to_level(30)
         try {
             let params1 = {}
             // eslint-disable-next-line
@@ -118,16 +143,18 @@ class HomePanelBridge extends React.Component {
             let response = await bridge.send(method[this.state.section].name, params1)
 
             window.responseAPI = response
-            this.props.openModal('viewResponse')
+            //this.props.openModal('viewResponse')
+            document.getElementById('response').appendChild(renderjson(response))
         } catch(err) {
             window.responseAPI = err
-            this.props.openModal('viewResponse')
+            //this.props.openModal('viewResponse')
+            document.getElementById('response').appendChild(renderjson(err))
         }
     }
 
     render() {
         const {id} = this.props;
-        const {section, param} = this.state;
+        const {section, param, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -211,12 +238,36 @@ class HomePanelBridge extends React.Component {
                                     size="l"
                                     stretched
                                     mode="secondary"
-                                    onClick={() => {this.executeMethod()}}
+                                    disabled={disabledButtonMethod}
+                                    onClick={() => {this.executeMethod(); this.setState({textButtonMethod: false, disabledButtonMethod: true})}}
                                 >
-                                    Вызвать
+                                    {textButtonMethod ? 'Вызвать' : 'Вызвано!'}
                                 </Button>
                             </Div>
                     </>}
+                    {use_method &&
+                    <>
+                        <Group header={<Header mode='secondary'>Результат</Header>}>
+                            <Card>
+                                <Div>
+                                    <div className='scroll' id='response'></div>
+                                </Div>
+
+                            </Card>
+                        </Group>
+                        <Div>
+                            <Button
+                                size="l"
+                                stretched
+                                mode="secondary"
+                                disabled={disabledButton}
+                                onClick={() => this.copy()}
+                            >
+                                {textButton ? 'Скопировать' : 'Успешно!'}
+                            </Button>
+                        </Div>
+                    </>
+                    }
                 </Group>
             </Panel>
         );

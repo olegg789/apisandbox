@@ -27,10 +27,9 @@ class ViewResponseAPIModal extends React.Component {
 
     componentDidMount() {
         renderjson.set_show_to_level(30)
-        //document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
+        document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
         //this.output(this.syntaxHighlight(window.responseAPI))
         //document.getElementById('responseAPI').appendChild(renderjson(window.responseAPI))
-        this.output(JSON.stringify(window.responseAPI, undefined, 1))
     }
 
     output(inp) {
@@ -67,10 +66,7 @@ class ViewResponseAPIModal extends React.Component {
                 settlingHeight={100}
             >
                 <Card>
-                    <div>
-                        <pre className='scroll' id='responseAPI'></pre>
-                    </div>
-
+                    <div id='responseAPI'></div>
                 </Card>
 
                 <Div>
