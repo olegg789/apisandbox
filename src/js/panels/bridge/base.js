@@ -76,7 +76,8 @@ class HomePanelBridge extends React.Component {
 
     async onChange(e, index) {
         const { name, value } = e.currentTarget;
-        this.setState({ [name]: value })
+        value !== '' ? this.setState({ [name]: value }) : this.setState({ [name]: null })
+
         this.setState({
             use_method: false,
             textButtonMethod: true,
