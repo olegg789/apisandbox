@@ -211,8 +211,16 @@ class HomePanelBase extends React.Component {
                                             </FormItem>
                                         )
                                     }
-                                })
+                                }
+                                )
                             }
+                            <FormItem top='access_token (string)'>
+                                <Input
+                                    type='text'
+                                    name='access_token'
+                                    onChange={(e) => this.onChange(e)}
+                                />
+                            </FormItem>
 
                             <Div>
                                 <Button
