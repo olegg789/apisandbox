@@ -44,6 +44,21 @@ class HomePanelBase extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
+    componentDidMount() {
+        this.setState({
+            param: [
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+            ]
+        })
+    }
+
     async onChange(e) {
         const { name, value } = e.currentTarget;
         value !== '' ? this.setState({ [name]: value }) : (name === 'section' ? this.setState({ [name]: null, infMethod: null }) : this.setState({ [name]: null }))
@@ -52,7 +67,7 @@ class HomePanelBase extends React.Component {
             textButtonMethod: true,
             disabledButtonMethod: false,
             disabledButton: false,
-            textButton: true
+            textButton: true,
         })
 
         try {
@@ -65,7 +80,9 @@ class HomePanelBase extends React.Component {
                     arrInfoMethods.push({ value: index, label: el.title })
                 })
 
-                this.setState({ infoMethods: arrInfoMethods })
+                this.setState({
+                    infoMethods: arrInfoMethods,
+                })
             }
         }
         catch(err) {
@@ -85,11 +102,37 @@ class HomePanelBase extends React.Component {
         })
     }
 
+    actionCheckbox(index) {
+        let arr = this.state.param
+        if (arr[index] === '' || arr[index] === 0) {
+            arr[index] = 1
+        } else {
+            arr[index] = 0
+        }
+
+        this.setState({ param: arr })
+    }
+
     async executeMethod() {
         this.setState({use_method: true})
         renderjson.set_show_to_level(30)
         try {
-            let response = await bridge.send('VKWebAppCallAPIMethod', {method: infoMethod[this.state.section].methods[this.state.infMethod].title, params: this.state.params})
+
+            let params1 = {}
+            // eslint-disable-next-line
+            infoMethod[this.state.section].methods[this.state.infMethod].params.map((el, index) => {
+                // eslint-disable-next-line
+                if (infoMethod[this.state.section].methods[this.state.infMethod].params.length === index || el === '') return
+                params1[`${infoMethod[this.state.section].methods[this.state.infMethod].params[index].name}`] = el
+            })
+
+            let response = await bridge.send(
+                'VKWebAppCallAPIMethod',
+                {
+                    method: infoMethod[this.state.section].methods[this.state.infMethod].title,
+                    params: params1
+                }
+                )
 
             window.responseAPI = response
             //this.props.openModal('viewResponse')
@@ -103,7 +146,7 @@ class HomePanelBase extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
+        const {section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -218,6 +261,14 @@ class HomePanelBase extends React.Component {
                                 <Input
                                     type='text'
                                     name='access_token'
+                                    onChange={(e) => this.onChange(e)}
+                                />
+                            </FormItem>
+                            <FormItem top='v'>
+                                <Input
+                                    type='text'
+                                    name='v'
+                                    placeholder='5.131'
                                     onChange={(e) => this.onChange(e)}
                                 />
                             </FormItem>
