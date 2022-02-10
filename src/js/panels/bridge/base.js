@@ -140,7 +140,6 @@ class HomePanelBridge extends React.Component {
                 if (method[this.state.section].params.length === index || el === '') return
                 params1[`${method[this.state.section].params[index].param}`] = el
             })
-
             let response = await bridge.send(method[this.state.section].name, params1)
 
             window.responseAPI = response

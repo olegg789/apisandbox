@@ -38,7 +38,8 @@ class HomePanelBase extends React.Component {
             textButton: true,
             disabledButton: false,
             disabledButtonMethod: false,
-            textButtonMethod: true
+            textButtonMethod: true,
+            AccessToken: null,
         };
 
         this.onChange = this.onChange.bind(this);
@@ -59,7 +60,7 @@ class HomePanelBase extends React.Component {
         })
     }
 
-    async onChange(e) {
+    async onChange(e, index) {
         const { name, value } = e.currentTarget;
         value !== '' ? this.setState({ [name]: value }) : (name === 'section' ? this.setState({ [name]: null, infMethod: null }) : this.setState({ [name]: null }))
         this.setState({
@@ -83,6 +84,11 @@ class HomePanelBase extends React.Component {
                 this.setState({
                     infoMethods: arrInfoMethods,
                 })
+            }
+            else {
+                let arr = this.state.param
+                arr[index] = value
+                this.setState({ param: arr })
             }
         }
         catch(err) {
@@ -120,11 +126,15 @@ class HomePanelBase extends React.Component {
 
             let params1 = {}
             // eslint-disable-next-line
-            infoMethod[this.state.section].methods[this.state.infMethod].params.map((el, index) => {
+            this.state.param.map((el, index) => {
+
                 // eslint-disable-next-line
                 if (infoMethod[this.state.section].methods[this.state.infMethod].params.length === index || el === '') return
                 params1[`${infoMethod[this.state.section].methods[this.state.infMethod].params[index].name}`] = el
             })
+
+            params1['v'] = 5.131
+            params1['access_token'] = this.state.accessToken
 
             let response = await bridge.send(
                 'VKWebAppCallAPIMethod',
@@ -209,6 +219,7 @@ class HomePanelBase extends React.Component {
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Textarea
                                                     name={el.name}
+                                                    value={param[index]}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
                                             </FormItem>
@@ -227,6 +238,7 @@ class HomePanelBase extends React.Component {
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Textarea
                                                     name={el.name}
+                                                    value={param[index]}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
                                             </FormItem>
@@ -236,6 +248,7 @@ class HomePanelBase extends React.Component {
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Input
                                                     name={el.name}
+                                                    value={param[index]}
                                                     type='number'
                                                     inputMode='decimal'
                                                     onChange={(e) => this.onChange(e, index)}
@@ -247,6 +260,7 @@ class HomePanelBase extends React.Component {
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Checkbox
                                                     name={el.name}
+                                                    value={param[index]}
                                                     onChange={(e) => this.actionCheckbox(index)}
                                                 >
                                                     1
@@ -260,15 +274,7 @@ class HomePanelBase extends React.Component {
                             <FormItem top='access_token (string)'>
                                 <Input
                                     type='text'
-                                    name='access_token'
-                                    onChange={(e) => this.onChange(e)}
-                                />
-                            </FormItem>
-                            <FormItem top='v'>
-                                <Input
-                                    type='text'
-                                    name='v'
-                                    placeholder='5.131'
+                                    name='accessToken'
                                     onChange={(e) => this.onChange(e)}
                                 />
                             </FormItem>
