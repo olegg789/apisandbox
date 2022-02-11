@@ -99,6 +99,10 @@ class HomePanelBase extends React.Component {
         }
     }
 
+    printLength() {
+
+    }
+
     async copy() {
         await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
 
@@ -109,6 +113,15 @@ class HomePanelBase extends React.Component {
     }
 
     actionCheckbox(index) {
+
+        this.setState({
+            use_method: false,
+            textButtonMethod: true,
+            disabledButtonMethod: false,
+            disabledButton: false,
+            textButton: true
+        })
+
         let arr = this.state.param
         if (arr[index] === '' || arr[index] === 0) {
             arr[index] = 1
@@ -220,7 +233,8 @@ class HomePanelBase extends React.Component {
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
-                                                    onChange={(e) => this.onChange(e, index)}
+                                                    onChange={(e) => {this.onChange(e, index)}}
+                                                    maxLength={100}
                                                 />
                                             </FormItem>
                                         )
@@ -229,6 +243,7 @@ class HomePanelBase extends React.Component {
                                             <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
                                                 <Textarea
                                                     name={el.name}
+                                                    maxLength={100}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
                                             </FormItem>
@@ -239,6 +254,7 @@ class HomePanelBase extends React.Component {
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
+                                                    maxLength={100}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
                                             </FormItem>
@@ -250,6 +266,7 @@ class HomePanelBase extends React.Component {
                                                     name={el.name}
                                                     value={param[index]}
                                                     type='number'
+                                                    maxLength={100}
                                                     inputMode='decimal'
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
@@ -275,6 +292,7 @@ class HomePanelBase extends React.Component {
                                 <Input
                                     type='text'
                                     name='accessToken'
+                                    maxLength={100}
                                     onChange={(e) => this.onChange(e)}
                                 />
                             </FormItem>

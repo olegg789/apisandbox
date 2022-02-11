@@ -78,8 +78,8 @@ body {
 .renderjson a              { text-decoration: none; user-select: text; }
 .renderjson .disclosure    { color: crimson; font-size: 150%; user-select: text; }
 .renderjson .syntax        { color: grey; user-select: text; }
-.renderjson .string        { color: #036a07; user-select: text; }
-.renderjson .number        { color: #0000cd; user-select: text; }
+.renderjson .string        { color: green; user-select: text; }
+.renderjson .number        { color: dodgerblue; user-select: text; }
 .renderjson .boolean       { color: plum; user-select: text; }
 .renderjson .key           { color: #318495; user-select: text; }
 .renderjson .keyword       { color: lightgoldenrodyellow; user-select: text; }
@@ -149,4 +149,3 @@ body {
 .vkuiGallery__layer {
     cursor: default;
 }
-

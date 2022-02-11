@@ -119,7 +119,17 @@ class HomePanelBridge extends React.Component {
     }
 
     actionCheckbox(index) {
+
+        this.setState({
+            use_method: false,
+            textButtonMethod: true,
+            disabledButtonMethod: false,
+            disabledButton: false,
+            textButton: true
+        })
+
         let arr = this.state.param
+
         if (arr[index] === '' || arr[index] === false) {
             arr[index] = true
         } else {
@@ -203,6 +213,7 @@ class HomePanelBridge extends React.Component {
                                                     value={param[index]}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
+                                                <div>{this.state.param[index].length} / 100</div>
                                             </FormItem>
                                         )
                                     } else if (el.type === 'integer') {
