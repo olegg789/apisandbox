@@ -213,7 +213,6 @@ class HomePanelBridge extends React.Component {
                                                     value={param[index]}
                                                     onChange={(e) => this.onChange(e, index)}
                                                 />
-                                                <div>{this.state.param[index].length} / 100</div>
                                             </FormItem>
                                         )
                                     } else if (el.type === 'integer') {
