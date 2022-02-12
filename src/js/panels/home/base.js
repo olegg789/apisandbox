@@ -62,7 +62,16 @@ class HomePanelBase extends React.Component {
 
     async onChange(e, index) {
         const { name, value } = e.currentTarget;
-        value !== '' ? this.setState({ [name]: value }) : (name === 'section' ? this.setState({ [name]: null, infMethod: null }) : this.setState({ [name]: null }))
+        value !== '' ? 
+          (name === 'section' ? 
+            this.setState({ [name]: value, infMethod: null }) : 
+            this.setState({ [name]: value })
+          ) : 
+          (name === 'section' ? 
+            this.setState({ [name]: null, infMethod: null }) : 
+            this.setState({ [name]: null })
+        )
+          
         this.setState({
             use_method: false,
             textButtonMethod: true,
