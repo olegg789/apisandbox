@@ -199,7 +199,7 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
                 </Group>
 
-                <Group header={<Header mode="secondary">Получение токена пользователя (access_token)</Header>}>
+                <Group header={<Header mode="secondary">Получение токена пользователя<br/>(access_token)</Header>}>
                     <Div>
                         <Button
                             stretched
@@ -208,7 +208,7 @@ class HomePanelSettings extends React.Component {
                             onClick={() => {this.getToken()}}
                             disabled={disabledButton}
                         >
-                            {textButton ? "Получить токен (со всеми правами)" : "Токен получен!"}
+                            {textButton ? "Получить токен со всеми правами" : "Токен получен!"}
                         </Button>
                         <MiniInfoCell
                             before={<Icon20HelpOutline/>}
