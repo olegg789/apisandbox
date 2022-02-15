@@ -19,11 +19,69 @@ import {
     Placeholder,
     Input,
     Checkbox,
-    Card, Header
+    Card,
+    Header,
+    Chip
 } from '@vkontakte/vkui'
 import { Icon20HelpOutline } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 import renderjson from "renderjson";
+import {ChipsSelect} from "@vkontakte/vkui/unstable";
+
+const groups = [
+    {
+        value: "0",
+        label: "friends",
+    },
+    {
+        value: "1",
+        label: "photos",
+    },
+    {
+        value: "2",
+        label: "video",
+    },
+    {
+        value: "3",
+        label: "stories",
+    },
+    {
+        value: "4",
+        label: "pages",
+    },
+    {
+        value: "5",
+        label: "status",
+    },
+    {
+        value: "6",
+        label: "notes",
+    },
+    {
+        value: "7",
+        label: "wall",
+    },
+    {
+        value: "8",
+        label: "docs",
+    },
+    {
+        value: "9",
+        label: "groups",
+    },
+    {
+        value: "10",
+        label: "stats",
+    },
+    {
+        value: "11",
+        label: "market",
+    },
+    {
+        value: '12',
+        label: 'ads',
+    }
+];
 
 class HomePanelBase extends React.Component {
     constructor(props) {
@@ -40,6 +98,7 @@ class HomePanelBase extends React.Component {
             disabledButtonMethod: false,
             textButtonMethod: true,
             AccessToken: null,
+            selectedGroups: []
         };
 
         this.onChange = this.onChange.bind(this);
@@ -61,7 +120,7 @@ class HomePanelBase extends React.Component {
     }
 
     async onChange(e, index) {
-        const { name, value } = e.currentTarget;
+        const { name, value, } = e.currentTarget;
         value !== '' ? 
           (name === 'section' ? 
             this.setState({ [name]: value, infMethod: null }) : 
@@ -108,10 +167,6 @@ class HomePanelBase extends React.Component {
         }
     }
 
-    printLength() {
-
-    }
-
     async copy() {
         await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
 
@@ -119,6 +174,25 @@ class HomePanelBase extends React.Component {
             textButton: false,
             disabledButton: true
         })
+    }
+
+    async getToken() {
+        try {
+            let response = await bridge.send(
+                "VKWebAppGetAuthToken",
+                {
+                    app_id: 7976662,
+                    scope: 'aboba'
+                }
+                )
+
+            console.log()
+            window.responseToken = response
+            this.props.openModal('viewResponseToken')
+        }
+        catch(err) {
+            console.log(err)
+        }
     }
 
     actionCheckbox(index) {
@@ -178,7 +252,14 @@ class HomePanelBase extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
+        const {selectedGroups, section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
+        const groupsChipsProps = {
+            value: selectedGroups,
+            onChange: () => {this.setState({selectedGroups});},
+            options: groups,
+            placeholder: "Не выбраны",
+            emptyText: "Совсем ничего не найдено",
+        };
 
         return (
             <Panel id={id}>
@@ -297,6 +378,48 @@ class HomePanelBase extends React.Component {
                                 }
                                 )
                             }
+
+                            <Group separator='hide' header={<Header mode='secondary'>Получить токен</Header>}>
+                                <FormItem
+                                    top='Выберите права для токена'
+                                    bottom={
+                                        infoMethod[this.state.section].methods[this.state.infMethod].access_rights.length !== 0 ?
+                                            <>
+                                                Нужные права для вызова метода: {infoMethod[this.state.section].methods[this.state.infMethod].access_rights}.
+                                            </>:
+                                            <>
+                                                Для этого метода не нужны никакие права доступа.
+                                            </>
+                                }>
+                                    <ChipsSelect
+                                        name='accessRights'
+                                        {...groupsChipsProps}
+                                        showSelected
+                                        closeAfterSelect={false}
+                                        renderChip={({ value, label, option: { icon }, ...rest }) => (
+                                            <Chip
+                                                value={value}
+                                                {...rest}
+                                            >
+                                                {label}
+                                            </Chip>
+                                        )}
+                                    />
+                                </FormItem>
+                                <FormItem>
+                                    <Button
+                                        stretched
+                                        size='l'
+                                        mode='secondary'
+                                        onClick={() =>
+                                            this.getToken()
+                                        }
+                                    >
+                                        Получить токен
+                                    </Button>
+                                </FormItem>
+                            </Group>
+
                             <FormItem top='access_token (string)'>
                                 <Input
                                     type='text'
