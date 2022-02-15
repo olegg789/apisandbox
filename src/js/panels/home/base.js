@@ -178,17 +178,30 @@ class HomePanelBase extends React.Component {
 
     async getToken() {
         try {
-            let response = await bridge.send(
-                "VKWebAppGetAuthToken",
-                {
-                    app_id: 7976662,
-                    scope: 'aboba'
-                }
+            try {
+                let response = await bridge.send(
+                    "VKWebAppGetAuthToken",
+                    {
+                        app_id: 7976662,
+                        scope: this.state.selectedGroups[0].label
+                    }
                 )
 
-            console.log()
-            window.responseToken = response
-            this.props.openModal('viewResponseToken')
+                window.responseToken = response
+                this.props.openModal('viewResponseToken')
+            }
+            catch(err) {
+                let response = await bridge.send(
+                    "VKWebAppGetAuthToken",
+                    {
+                        app_id: 7976662,
+                        scope: ''
+                    }
+                )
+
+                window.responseToken = response
+                this.props.openModal('viewResponseToken')
+            }
         }
         catch(err) {
             console.log(err)
@@ -255,7 +268,7 @@ class HomePanelBase extends React.Component {
         const {selectedGroups, section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
         const groupsChipsProps = {
             value: selectedGroups,
-            onChange: () => {this.setState({selectedGroups});},
+            onChange: (e) => {this.setState({selectedGroups: e})},
             options: groups,
             placeholder: "Не выбраны",
             emptyText: "Совсем ничего не найдено",
