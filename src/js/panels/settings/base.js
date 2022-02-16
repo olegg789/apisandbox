@@ -13,13 +13,11 @@ import {
     Footer,
     Link,
     Div,
-    Button,
-    MiniInfoCell
+    Button
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline,
     Icon20BugOutline,
-    Icon20HelpOutline,
     Icon28ArrowUpCircleOutline,
     Icon28BookOutline,
     Icon28FavoriteOutline,
@@ -31,56 +29,9 @@ import {
 import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelSettings extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            textButton: true,
-            disabledButton: false,
-
-        };
-
-    }
-
-    componentDidMount() {
-        this.setState({
-            param: [
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-            ]
-        })
-    }
-
-    async getToken() {
-        try {
-            let response = await bridge.send("VKWebAppGetAuthToken", {app_id: 7976662, scope: 'friends, photos, video, stories, pages, status, notes, wall, docs, groups, stats, market'})
-
-            this.setState({
-                textButton: false,
-                disabledButton: true
-            })
-
-            window.responseToken = response
-            this.props.openModal('viewResponseToken')
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
 
     render() {
         const {id} = this.props;
-        const {textButton, disabledButton} = this.state;
 
         return (
             <Panel id={id}>
@@ -197,27 +148,6 @@ class HomePanelSettings extends React.Component {
                     >
                         Про ключи доступа
                     </SimpleCell>
-                </Group>
-
-                <Group header={<Header mode="secondary">Получение токена пользователя<br/>(access_token)</Header>}>
-                    <Div>
-                        <Button
-                            stretched
-                            mode="secondary"
-                            size="l"
-                            onClick={() => {this.getToken()}}
-                            disabled={disabledButton}
-                        >
-                            {textButton ? "Получить токен со всеми правами" : "Токен получен!"}
-                        </Button>
-                        <MiniInfoCell
-                            before={<Icon20HelpOutline/>}
-                            textWrap="full"
-                        >
-                            Для работы со всеми методами API вам необходимо передавать в запросе access_token — специальный ключ доступа. Он представляет собой строку из латинских букв и цифр и может соответствовать отдельному пользователю, сообществу или вашему приложению.
-                            При нажатии кнопки "Получить токен", Вас попросят дать права доступа для приложения. Это необходимо, чтобы Вам стали доступны все возможные методы.
-                        </MiniInfoCell>
-                    </Div>
                 </Group>
 
                 <Footer>

@@ -179,28 +179,38 @@ class HomePanelBase extends React.Component {
     async getToken() {
         try {
             try {
+                let scopes = []
+                this.state.selectedGroups.map((el) => {
+                    scopes.push(el.label)
+                })
+                scopes.join()
+
                 let response = await bridge.send(
                     "VKWebAppGetAuthToken",
                     {
                         app_id: 7976662,
-                        scope: this.state.selectedGroups[0].label
+                        scope: scopes
                     }
                 )
 
-                window.responseToken = response
-                this.props.openModal('viewResponseToken')
+                this.setState({ accessToken: response.access_token })
             }
             catch(err) {
+                let scopes = []
+                this.state.selectedGroups.map((el) => {
+                    scopes.push(el.label)
+                })
+                scopes.join()
+                
                 let response = await bridge.send(
                     "VKWebAppGetAuthToken",
                     {
                         app_id: 7976662,
-                        scope: ''
+                        scope: scopes
                     }
                 )
 
-                window.responseToken = response
-                this.props.openModal('viewResponseToken')
+                this.setState({ accessToken: response.access_token })
             }
         }
         catch(err) {
@@ -265,7 +275,7 @@ class HomePanelBase extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {selectedGroups, section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
+        const {selectedGroups, section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod, accessToken} = this.state;
         const groupsChipsProps = {
             value: selectedGroups,
             onChange: (e) => {this.setState({selectedGroups: e})},
@@ -437,6 +447,7 @@ class HomePanelBase extends React.Component {
                                 <Input
                                     type='text'
                                     name='accessToken'
+                                    value={accessToken}
                                     maxLength={100}
                                     onChange={(e) => this.onChange(e)}
                                 />
