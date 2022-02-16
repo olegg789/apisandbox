@@ -202,6 +202,9 @@ class HomePanelBase extends React.Component {
                 this.setState({ 
                     disabledButtonMethod: false,
                     use_method: false,
+                    textButton: true,
+                    textButtonMethod: true,
+                    disabledButton: false,
                     accessToken: response.access_token
                 })
             } catch(err) {
