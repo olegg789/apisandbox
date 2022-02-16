@@ -179,41 +179,34 @@ class HomePanelBase extends React.Component {
     async getToken() {
         try {
             try {
+                this.setState({ disabledButtonMethod: false })
+
                 let scopes = []
                 this.state.selectedGroups.map((el) => {
                     scopes.push(el.label)
                 })
-                scopes.join()
 
                 let response = await bridge.send(
                     "VKWebAppGetAuthToken",
                     {
                         app_id: 7976662,
-                        scope: scopes
+                        scope: scopes.join()
                     }
                 )
 
                 this.setState({ accessToken: response.access_token })
-            }
-            catch(err) {
-                let scopes = []
-                this.state.selectedGroups.map((el) => {
-                    scopes.push(el.label)
-                })
-                scopes.join()
-                
+            } catch(err) {
                 let response = await bridge.send(
                     "VKWebAppGetAuthToken",
                     {
                         app_id: 7976662,
-                        scope: scopes
+                        scope: ''
                     }
                 )
 
                 this.setState({ accessToken: response.access_token })
             }
-        }
-        catch(err) {
+        } catch(err) {
             console.log(err)
         }
     }
