@@ -195,6 +195,10 @@ class HomePanelBase extends React.Component {
                     }
                 )
 
+                if (response.scope !== scopes.join()) {
+                    throw 'lets go to catch!'
+                }
+
                 this.setState({ 
                     disabledButtonMethod: false,
                     use_method: false,
@@ -214,7 +218,8 @@ class HomePanelBase extends React.Component {
                         }
                     >
                         Ошибочка... Не удалось получить токен
-                    </Snackbar>
+                    </Snackbar>,
+                    accessToken: ''
                 })
             }
         } catch(err) {
