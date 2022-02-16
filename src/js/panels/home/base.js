@@ -21,12 +21,14 @@ import {
     Checkbox,
     Card,
     Header,
-    Chip
+    Chip,
+    Snackbar, 
+    Avatar
 } from '@vkontakte/vkui'
-import { Icon20HelpOutline } from '@vkontakte/icons';
+import { Icon20HelpOutline, Icon16Cancel } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 import renderjson from "renderjson";
-import {ChipsSelect} from "@vkontakte/vkui/unstable";
+import { ChipsSelect } from "@vkontakte/vkui/unstable";
 
 const groups = [
     {
@@ -98,7 +100,8 @@ class HomePanelBase extends React.Component {
             disabledButtonMethod: false,
             textButtonMethod: true,
             AccessToken: null,
-            selectedGroups: []
+            selectedGroups: [],
+            snackbar: null
         };
 
         this.onChange = this.onChange.bind(this);
@@ -179,11 +182,6 @@ class HomePanelBase extends React.Component {
     async getToken() {
         try {
             try {
-                this.setState({ 
-                    disabledButtonMethod: false,
-                    use_method: false
-                })
-
                 let scopes = []
                 this.state.selectedGroups.map((el) => {
                     scopes.push(el.label)
@@ -197,17 +195,27 @@ class HomePanelBase extends React.Component {
                     }
                 )
 
-                this.setState({ accessToken: response.access_token })
+                this.setState({ 
+                    disabledButtonMethod: false,
+                    use_method: false,
+                    accessToken: response.access_token
+                })
             } catch(err) {
-                let response = await bridge.send(
-                    "VKWebAppGetAuthToken",
-                    {
-                        app_id: 7976662,
-                        scope: ''
-                    }
-                )
-
-                this.setState({ accessToken: response.access_token })
+                this.setState({ snackbar :
+                    <Snackbar
+                        layout='vertical'
+                        onClose={() => this.setState({ snackbar: null })}
+                        action='Попробовать снова'
+                        onActionClick={() => this.getToken()}
+                        before={
+                            <Avatar size={24} style={{ background: 'var(--destructive)' }}> 
+                                <Icon16Cancel fill='#fff' width={14} height={14}/> 
+                            </Avatar>
+                        }
+                    >
+                        Ошибочка... Не удалось получить токен
+                    </Snackbar>
+                })
             }
         } catch(err) {
             console.log(err)
@@ -271,7 +279,20 @@ class HomePanelBase extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {selectedGroups, section, param, infoMethods, infMethod, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod, accessToken} = this.state;
+        const {
+            selectedGroups, 
+            section, param, 
+            infoMethods, 
+            infMethod, 
+            use_method, 
+            disabledButton, 
+            textButton, 
+            disabledButtonMethod, 
+            textButtonMethod, 
+            accessToken,
+            snackbar
+        } = this.state;
+
         const groupsChipsProps = {
             value: selectedGroups,
             onChange: (e) => {this.setState({selectedGroups: e})},
@@ -486,6 +507,7 @@ class HomePanelBase extends React.Component {
                         </>
                     }
                 </Group>
+                {snackbar}
             </Panel>
         );
     }
