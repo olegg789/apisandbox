@@ -179,7 +179,10 @@ class HomePanelBase extends React.Component {
     async getToken() {
         try {
             try {
-                this.setState({ disabledButtonMethod: false })
+                this.setState({ 
+                    disabledButtonMethod: false,
+                    use_method: false
+                })
 
                 let scopes = []
                 this.state.selectedGroups.map((el) => {
