@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {closePopout, goBack, openModal, openPopout} from '../../store/router/actions';
+import {closePopout, openPopout} from '../../store/router/actions';
 import {infoMethod} from '../../../infoMethod';
 import {sleep} from '../../../functions';
 
@@ -23,7 +23,8 @@ import {
     Header,
     Chip,
     Snackbar, 
-    Avatar
+    Avatar,
+    ScreenSpinner
 } from '@vkontakte/vkui'
 import { Icon20HelpOutline, Icon16Cancel } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
@@ -78,10 +79,6 @@ const groups = [
     {
         value: "11",
         label: "market",
-    },
-    {
-        value: '12',
-        label: 'ads',
     }
 ];
 
@@ -180,6 +177,8 @@ class HomePanelBase extends React.Component {
     }
 
     async getToken() {
+        this.props.openPopout(<ScreenSpinner/>)
+
         try {
             try {
                 let scopes = []
@@ -228,6 +227,8 @@ class HomePanelBase extends React.Component {
         } catch(err) {
             console.log(err)
         }
+
+        this.props.closePopout()
     }
 
     actionCheckbox(index) {
@@ -251,6 +252,8 @@ class HomePanelBase extends React.Component {
     }
 
     async executeMethod() {
+        this.props.openPopout(<ScreenSpinner/>)
+
         this.setState({use_method: true})
         renderjson.set_show_to_level(30)
         try {
@@ -283,6 +286,8 @@ class HomePanelBase extends React.Component {
             //this.props.openModal('viewResponse')
             document.getElementById('response').appendChild(renderjson(err))
         }
+
+        this.props.closePopout()
     }
 
     render() {
@@ -367,39 +372,42 @@ class HomePanelBase extends React.Component {
                                 infoMethod[section].methods[infMethod].params.map((el, index) => {
                                     if (el.type === 'string' || el.type === 'string[]') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
                                                     onChange={(e) => {this.onChange(e, index)}}
+                                                    placeholder='Введите параметр...'
                                                     maxLength={100}
                                                 />
                                             </FormItem>
                                         )
                                     } else if (el.type === 'text') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     maxLength={100}
                                                     onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
                                                 />
                                             </FormItem>
                                         )
                                     } else if (el.type === 'positive') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
                                                     maxLength={100}
                                                     onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
                                                 />
                                             </FormItem>
                                         )
                                     } else if (el.type === 'integer') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Input
                                                     name={el.name}
                                                     value={param[index]}
@@ -407,16 +415,18 @@ class HomePanelBase extends React.Component {
                                                     maxLength={100}
                                                     inputMode='decimal'
                                                     onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
                                                 />
                                             </FormItem>
                                         )
                                     } else if (el.type === 'checkbox') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={`${el.description} Обязательный: ${el.is_required}`}>
+                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Checkbox
                                                     name={el.name}
                                                     value={param[index]}
                                                     onChange={(e) => this.actionCheckbox(index)}
+                                                    placeholder='Введите параметр...'
                                                 >
                                                     1
                                                 </Checkbox>
@@ -427,51 +437,51 @@ class HomePanelBase extends React.Component {
                                 )
                             }
 
-                            <Group separator='hide' header={<Header mode='secondary'>Получить токен</Header>}>
-                                <FormItem
-                                    top='Выберите права для токена'
-                                    bottom={
-                                        infoMethod[this.state.section].methods[this.state.infMethod].access_rights.length !== 0 ?
-                                            <>
-                                                Нужные права для вызова метода: {infoMethod[this.state.section].methods[this.state.infMethod].access_rights}.
-                                            </>:
-                                            <>
-                                                Для этого метода не нужны никакие права доступа.
-                                            </>
-                                }>
-                                    <ChipsSelect
-                                        name='accessRights'
-                                        {...groupsChipsProps}
-                                        showSelected
-                                        closeAfterSelect={false}
-                                        renderChip={({ value, label, option: { icon }, ...rest }) => (
-                                            <Chip
-                                                value={value}
-                                                {...rest}
-                                            >
-                                                {label}
-                                            </Chip>
-                                        )}
-                                    />
-                                </FormItem>
-                                <FormItem>
-                                    <Button
-                                        stretched
-                                        size='l'
-                                        mode='secondary'
-                                        onClick={() =>
-                                            this.getToken()
-                                        }
-                                    >
-                                        Получить токен
-                                    </Button>
-                                </FormItem>
-                            </Group>
+                            <Header mode='secondary'>Получить токен</Header>
+                            <FormItem
+                                top='Выберите права для токена'
+                                bottom={
+                                    infoMethod[this.state.section].methods[this.state.infMethod].access_rights.length !== 0 ?
+                                        <>
+                                            Нужные права для вызова метода: {infoMethod[this.state.section].methods[this.state.infMethod].access_rights}.
+                                        </>:
+                                        <>
+                                            Для этого метода не нужны никакие права доступа.
+                                        </>
+                            }>
+                                <ChipsSelect
+                                    name='accessRights'
+                                    {...groupsChipsProps}
+                                    showSelected
+                                    closeAfterSelect={false}
+                                    renderChip={({ value, label, option: { icon }, ...rest }) => (
+                                        <Chip
+                                            value={value}
+                                            {...rest}
+                                        >
+                                            {label}
+                                        </Chip>
+                                    )}
+                                />
+                            </FormItem>
+                            <FormItem>
+                                <Button
+                                    stretched
+                                    size='l'
+                                    mode='secondary'
+                                    onClick={() =>
+                                        this.getToken()
+                                    }
+                                >
+                                    Получить токен
+                                </Button>
+                            </FormItem>
 
                             <FormItem top='access_token (string)'>
                                 <Input
                                     type='text'
                                     name='accessToken'
+                                    placeholder='Введите токен...'
                                     value={accessToken}
                                     maxLength={100}
                                     onChange={(e) => this.onChange(e)}
@@ -491,30 +501,30 @@ class HomePanelBase extends React.Component {
                             </Div>
                         </>
                     }
-                    {use_method &&
-                        <>
-                            <Group header={<Header mode='secondary'>Результат</Header>}>
-                                <Card>
-                                    <Div>
-                                        <div className='scroll' id='response'></div>
-                                    </Div>
-
-                                </Card>
-                            </Group>
-                            <Div>
-                                <Button
-                                    size="l"
-                                    stretched
-                                    mode="secondary"
-                                    disabled={disabledButton}
-                                    onClick={() => this.copy()}
-                                >
-                                    {textButton ? 'Скопировать' : 'Успешно!'}
-                                </Button>
-                            </Div>
-                        </>
-                    }
                 </Group>
+
+                {use_method &&
+                    <Group header={<Header mode='secondary'>Результат</Header>}>
+                        <Card>
+                            <Div>
+                                <div className='scroll' id='response'/>
+                            </Div>
+                        </Card>
+
+                        <Div>
+                            <Button
+                                size="l"
+                                stretched
+                                mode="secondary"
+                                disabled={disabledButton}
+                                onClick={() => this.copy()}
+                            >
+                                {textButton ? 'Скопировать' : 'Успешно!'}
+                            </Button>
+                        </Div>
+                    </Group>
+                }
+
                 {snackbar}
             </Panel>
         );
@@ -523,10 +533,8 @@ class HomePanelBase extends React.Component {
 
 
 const mapDispatchToProps = {
-    goBack,
     openPopout,
     closePopout,
-    openModal
 };
 
 export default connect(null, mapDispatchToProps)(HomePanelBase);

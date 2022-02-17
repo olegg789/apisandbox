@@ -212,6 +212,7 @@ class HomePanelBridge extends React.Component {
                                                     name={el.param}
                                                     value={param[index]}
                                                     onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
                                                 />
                                             </FormItem>
                                         )
@@ -224,6 +225,7 @@ class HomePanelBridge extends React.Component {
                                                     type='number'
                                                     inputMode='decimal'
                                                     onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
                                                 />
                                             </FormItem>
                                         )
@@ -234,6 +236,7 @@ class HomePanelBridge extends React.Component {
                                                         name={el.param}
                                                         value={param[index]}
                                                         onChange={(e) => this.actionCheckbox(index)}
+                                                        placeholder='Введите параметр...'
                                                     >
                                                         true
                                                     </Checkbox>
@@ -260,7 +263,7 @@ class HomePanelBridge extends React.Component {
                         <Group header={<Header mode='secondary'>Результат</Header>}>
                             <Card>
                                 <Div>
-                                    <div className='scroll' id='response'></div>
+                                    <div className='scroll' id='response'/>
                                 </Div>
 
                             </Card>
