@@ -29,9 +29,26 @@ import {
 import bridge from "@vkontakte/vk-bridge";
 
 class HomePanelSettings extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isDesktop: false,
+        };
+    }
+
+    componentDidMount() {
+
+        let parsedUrl = new URL(window.location.href)
+        if (parsedUrl.searchParams.get('vk_platform') === 'desktop_web') {
+            this.setState({
+                isDesktop: true,
+            })
+        }}
 
     render() {
         const {id} = this.props;
+        const {isDesktop} = this.state;
 
         return (
             <Panel id={id}>
@@ -57,20 +74,22 @@ class HomePanelSettings extends React.Component {
                         Добавить в избранное
                     </SimpleCell>
 
-                    <SimpleCell
-                        className='btn_settings'
-                        before={
-                            <Avatar
-                                shadow={false}
-                                size={43}
-                            >
-                                <Icon28SmartphoneOutline fill="#2B8FFE"/>
-                            </Avatar>
-                        }
-                        onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
-                    >
-                        Добавить на главный экран
-                    </SimpleCell>
+                    {!isDesktop &&
+                        <SimpleCell
+                            className='btn_settings'
+                            before={
+                                <Avatar
+                                    shadow={false}
+                                    size={43}
+                                >
+                                    <Icon28SmartphoneOutline fill="#2B8FFE"/>
+                                </Avatar>
+                            }
+                            onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
+                        >
+                            Добавить на главный экран
+                        </SimpleCell>
+                    }
 
                     <SimpleCell
                         className='btn_settings'
@@ -97,7 +116,7 @@ class HomePanelSettings extends React.Component {
                                 <Icon28ShareOutline fill="#2B8FFE"/>
                             </Avatar>
                         }
-                        onClick={() => bridge.send("VKWebAppShare")}
+                        onClick={() => bridge.send("VKWebAppShare", {link: "https://vk.com/app7976662"})}
                     >
                         Поделиться приложением
                     </SimpleCell>
@@ -155,7 +174,7 @@ class HomePanelSettings extends React.Component {
                         От <Link href="https://vk.com/kuz_s" target="_blank">@kuz_s</Link> и <Link href="https://vk.com/olejii" target="_blank">@olejii</Link>
                     </Div>
                     <Div className="podpis">
-                        Сделано с <Icon16LikeOutline/> и <Icon20BugOutline/>
+                        Сделано с <Icon16LikeOutline width={16} height={16}/> и <Icon20BugOutline width={16} height={16}/>
                     </Div>
                 </Footer>
             </Panel>

@@ -216,6 +216,17 @@ class HomePanelBridge extends React.Component {
                                                 />
                                             </FormItem>
                                         )
+                                    } else if (el.type === 'object') {
+                                        return(
+                                            <FormItem top={`${el.param} (${el.type})`} bottom={el.description}>
+                                                <Textarea
+                                                    name={el.param}
+                                                    value={param[index]}
+                                                    onChange={(e) => this.onChange(e, index)}
+                                                    placeholder='Введите параметр...'
+                                                />
+                                            </FormItem>
+                                        )
                                     } else if (el.type === 'integer') {
                                         return(
                                             <FormItem top={`${el.param} (${el.type})`} bottom={el.description}>

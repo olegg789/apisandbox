@@ -207,6 +207,7 @@ class HomePanelBase extends React.Component {
                     accessToken: response.access_token
                 })
             } catch(err) {
+                console.log(err)
                 this.setState({ snackbar :
                     <Snackbar
                         layout='vertical'
