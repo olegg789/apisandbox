@@ -13,7 +13,8 @@ import {
     Footer,
     Link,
     Div,
-    Button
+    Button,
+    ANDROID
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline,
@@ -47,8 +48,7 @@ class HomePanelSettings extends React.Component {
         }}
 
     render() {
-        const {id} = this.props;
-        const {isDesktop} = this.state;
+        const {id, platform} = this.props;
 
         return (
             <Panel id={id}>
@@ -74,7 +74,7 @@ class HomePanelSettings extends React.Component {
                         Добавить в избранное
                     </SimpleCell>
 
-                    {!isDesktop &&
+                    {platform === ANDROID &&
                         <SimpleCell
                             className='btn_settings'
                             before={

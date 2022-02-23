@@ -92,8 +92,6 @@ class HomePanelBase extends React.Component {
             infMethod: null,
             responseAPI: '',
             use_method: false,
-            textButton: true,
-            disabledButton: false,
             disabledButtonMethod: false,
             textButtonMethod: true,
             AccessToken: null,
@@ -135,8 +133,6 @@ class HomePanelBase extends React.Component {
             use_method: false,
             textButtonMethod: true,
             disabledButtonMethod: false,
-            disabledButton: false,
-            textButton: true,
         })
 
         try {
@@ -170,10 +166,6 @@ class HomePanelBase extends React.Component {
     async copy() {
         await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
 
-        this.setState({
-            textButton: false,
-            disabledButton: true
-        })
     }
 
     async getToken() {
@@ -182,6 +174,7 @@ class HomePanelBase extends React.Component {
         try {
             try {
                 let scopes = []
+                // eslint-disable-next-line
                 this.state.selectedGroups.map((el) => {
                     scopes.push(el.label)
                 })
@@ -195,15 +188,14 @@ class HomePanelBase extends React.Component {
                 )
 
                 if (response.scope !== scopes.join()) {
+                    // eslint-disable-next-line
                     throw 'lets go to catch!'
                 }
 
                 this.setState({ 
                     disabledButtonMethod: false,
                     use_method: false,
-                    textButton: true,
                     textButtonMethod: true,
-                    disabledButton: false,
                     accessToken: response.access_token
                 })
             } catch(err) {
@@ -238,8 +230,6 @@ class HomePanelBase extends React.Component {
             use_method: false,
             textButtonMethod: true,
             disabledButtonMethod: false,
-            disabledButton: false,
-            textButton: true
         })
 
         let arr = this.state.param
@@ -298,9 +288,7 @@ class HomePanelBase extends React.Component {
             section, param, 
             infoMethods, 
             infMethod, 
-            use_method, 
-            disabledButton, 
-            textButton, 
+            use_method,
             disabledButtonMethod, 
             textButtonMethod, 
             accessToken,
@@ -438,7 +426,7 @@ class HomePanelBase extends React.Component {
                                 )
                             }
 
-                            <Header mode='secondary'>Получить токен</Header>
+                            <Header mode='primary'>Получить токен</Header>
                             <FormItem
                                 top='Выберите права для токена'
                                 bottom={
@@ -517,10 +505,9 @@ class HomePanelBase extends React.Component {
                                 size="l"
                                 stretched
                                 mode="secondary"
-                                disabled={disabledButton}
                                 onClick={() => this.copy()}
                             >
-                                {textButton ? 'Скопировать' : 'Успешно!'}
+                                Скопировать
                             </Button>
                         </Div>
                     </Group>

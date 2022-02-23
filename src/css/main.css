@@ -122,7 +122,7 @@ body {
 
 .scroll {
     width: available !important;
-    overflow-x: scroll !important;
+    overflow-x: auto !important;
     word-wrap: normal;
 }
 

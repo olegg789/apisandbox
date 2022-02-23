@@ -40,8 +40,6 @@ class HomePanelBridge extends React.Component {
             infMethod: null,
             responseBridge: '',
             use_method: false,
-            textButton: true,
-            disabledButton: false,
             disabledButtonMethod: false,
             textButtonMethod: true
         };
@@ -82,8 +80,6 @@ class HomePanelBridge extends React.Component {
             use_method: false,
             textButtonMethod: true,
             disabledButtonMethod: false,
-            disabledButton: false,
-            textButton: true
         })
 
         try {
@@ -112,10 +108,6 @@ class HomePanelBridge extends React.Component {
     async copy() {
         await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
 
-        this.setState({
-            textButton: false,
-            disabledButton: true
-        })
     }
 
     actionCheckbox(index) {
@@ -124,8 +116,6 @@ class HomePanelBridge extends React.Component {
             use_method: false,
             textButtonMethod: true,
             disabledButtonMethod: false,
-            disabledButton: false,
-            textButton: true
         })
 
         let arr = this.state.param
@@ -164,7 +154,7 @@ class HomePanelBridge extends React.Component {
 
     render() {
         const {id} = this.props;
-        const {section, param, use_method, disabledButton, textButton, disabledButtonMethod, textButtonMethod} = this.state;
+        const {section, param, use_method, disabledButtonMethod, textButtonMethod} = this.state;
 
         return (
             <Panel id={id}>
@@ -284,10 +274,9 @@ class HomePanelBridge extends React.Component {
                                 size="l"
                                 stretched
                                 mode="secondary"
-                                disabled={disabledButton}
                                 onClick={() => this.copy()}
                             >
-                                {textButton ? 'Скопировать' : 'Успешно!'}
+                                Скопировать
                             </Button>
                         </Div>
                     </>
