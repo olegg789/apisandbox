@@ -14,7 +14,6 @@ import {
     Link,
     Div,
     Button,
-    ANDROID
 } from "@vkontakte/vkui";
 import {
     Icon16LikeOutline,
@@ -35,6 +34,7 @@ class HomePanelSettings extends React.Component {
 
         this.state = {
             isDesktop: false,
+            Platform: 'android'
         };
     }
 
@@ -44,11 +44,15 @@ class HomePanelSettings extends React.Component {
         if (parsedUrl.searchParams.get('vk_platform') === 'desktop_web') {
             this.setState({
                 isDesktop: true,
+                Platform: 'vkcom'
             })
-        }}
+        }
+        console.log('Платформа ' + this.state.Platform)
+    }
 
     render() {
-        const {id, platform} = this.props;
+        const {id} = this.props;
+        const {Platform} = this.state;
 
         return (
             <Panel id={id}>
@@ -74,7 +78,7 @@ class HomePanelSettings extends React.Component {
                         Добавить в избранное
                     </SimpleCell>
 
-                    {platform === ANDROID &&
+                    {Platform === 'android' &&
                         <SimpleCell
                             className='btn_settings'
                             before={
@@ -116,7 +120,13 @@ class HomePanelSettings extends React.Component {
                                 <Icon28ShareOutline fill="#2B8FFE"/>
                             </Avatar>
                         }
-                        onClick={() => bridge.send("VKWebAppShare", {link: "https://vk.com/app7976662"})}
+                        onClick={() => bridge.send(
+                            "VKWebAppShowWallPostBox",
+                            {
+                                message: 'Тестирую методы VK API и VK Bidge в этом приложении👇',
+                                attachments: 'https://vk.com/app7976662'
+                            }
+                        )}
                     >
                         Поделиться приложением
                     </SimpleCell>

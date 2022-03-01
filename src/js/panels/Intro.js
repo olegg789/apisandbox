@@ -21,7 +21,8 @@ class Intro extends React.Component {
         super(props);
 
         this.state = {
-            slideIndex: 0
+            slideIndex: 0,
+            isDesktop: false
         };
 
     }
@@ -34,6 +35,15 @@ class Intro extends React.Component {
         store.dispatch(setStory('home', 'base'))
     };
 
+    async componentDidMount() {
+        let parsedUrl = new URL(window.location.href)
+        if (parsedUrl.searchParams.get('vk_platform') === 'desktop_web') {
+            this.setState({
+                isDesktop: true
+            })
+        }
+    }
+
     render() {
         const {id, isDesktop} = this.props;
         const {slideIndex} = this.state;
@@ -44,15 +54,16 @@ class Intro extends React.Component {
                     <Group>
                         <Div>
                             <Gallery
+                                slideIndex={isDesktop && slideIndex}
                                 align="center"
                                 style={{ height: '100%'}}
-                                slideIndex={slideIndex}
                                 bullets={isDesktop ? 'dark' : 'light'}
+                                isDraggable={!isDesktop}
                             >
                                 <Placeholder
                                     icon={<Icon56GestureOutline />}
                                     header="Привет, это сервис VK API/VK Bridge Sandbox"
-                                    action={<Button onClick={() => this.setState({slideIndex: (slideIndex + 1) % 4})} size="m">Дальше</Button>}
+                                    action={isDesktop && <Button onClick={() => this.setState({slideIndex: (slideIndex + 1) % 4})} size="m">Дальше</Button>}
                                 >
                                     Здесь ты можешь легко и быстро протестировать любой метод из <b>VK API</b> или <b>VK Bridge</b>.
                                 </Placeholder>
@@ -60,7 +71,7 @@ class Intro extends React.Component {
                                 <Placeholder
                                     icon={<Icon20HelpOutline width={56} height={56}/>}
                                     header="Что и как"
-                                    action={
+                                    action={isDesktop &&
                                         <>
                                             <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: (slideIndex - 1) % 4})} size="m">Назад</Button>
                                             <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: (slideIndex + 1) % 4})} size="m">Дальше</Button>
@@ -75,7 +86,7 @@ class Intro extends React.Component {
                                 <Placeholder
                                     icon={<Icon20HelpOutline width={56} height={56}/>}
                                     header="А что если у меня нет токена?"
-                                    action={
+                                    action={isDesktop &&
                                         <>
                                             <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: (slideIndex - 1) % 4})} size="m">Назад</Button>
                                             <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: (slideIndex + 1) % 4})} size="m">Дальше</Button>
@@ -83,17 +94,19 @@ class Intro extends React.Component {
                                     }
                                 >
                                     Ты можешь получить его у нас.<br/> 
-                                    Во время вызова метода, выбери нужные права доступа для токена и нажми "Получить токен"
+                                    Во время вызова метода выбери нужные права доступа для токена и нажми "Получить токен"
                                 </Placeholder>
 
                                 <Placeholder
                                     icon={<Icon28CarOutline width={56} height={56}/>}
                                     header='Всё понятно?'
-                                    action={
+                                    action={isDesktop ?
                                         <>
                                             <Button className='btn_onboarding' onClick={() => this.setState({slideIndex: (slideIndex - 1) % 4})} size="l">Назад</Button>
                                             <Button className='btn_onboarding' size='l' onClick={() => this.setUserSeenIntro()}>Поехали!</Button>
-                                        </>
+                                        </> :
+                                        <Button className='btn_onboarding' size='l' onClick={() => this.setUserSeenIntro()}>Поехали!</Button>
+
                                     }
                                 />
                             </Gallery>
