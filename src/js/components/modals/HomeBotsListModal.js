@@ -18,7 +18,7 @@ import bridge from "@vkontakte/vk-bridge";
 class HomeBotsListModal extends React.Component {
 
     render() {
-        const {id, onClose, platform} = this.props;
+        const {id, onClose, platform, changeScheme} = this.props;
 
         return (
             <ModalPage
@@ -37,11 +37,11 @@ class HomeBotsListModal extends React.Component {
                 settlingHeight={100}
             >
                 <List>
-                    <CellButton activeEffectDelay={3} before={<Icon28SettingsOutline/>} onClick={() => this.props.changeScheme('system')}>Системная</CellButton>
+                    <CellButton activeEffectDelay={3} before={<Icon28SettingsOutline/>} onClick={() => changeScheme('system')}>Системная</CellButton>
 
-                    <CellButton activeEffectDelay={3} before={<Icon28MoonOutline/>} onClick={() => {this.props.changeScheme('space_gray'); bridge.unsubscribe()}}>Тёмная</CellButton>
+                    <CellButton activeEffectDelay={3} before={<Icon28MoonOutline/>} onClick={() => changeScheme('client_dark')}>Тёмная</CellButton>
 
-                    <CellButton activeEffectDelay={3} before={<Icon28SunOutline/>} onClick={() => {this.props.changeScheme('bright_light'); bridge.unsubscribe()}}>Светлая</CellButton>
+                    <CellButton activeEffectDelay={3} before={<Icon28SunOutline/>} onClick={() => changeScheme('client_light')}>Светлая</CellButton>
                 </List>
             </ModalPage>
         );

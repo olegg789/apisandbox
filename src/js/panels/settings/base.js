@@ -22,9 +22,9 @@ import {
     Icon28BookOutline,
     Icon28FavoriteOutline,
     Icon28KeyOutline,
-    Icon28MessagesOutline,
+    Icon28MessagesOutline, Icon28MoonOutline,
     Icon28ShareOutline,
-    Icon28SmartphoneOutline,
+    Icon28SmartphoneOutline, Icon28SunOutline,
 } from '@vkontakte/icons';
 import bridge from "@vkontakte/vk-bridge";
 
@@ -51,7 +51,7 @@ class HomePanelSettings extends React.Component {
     }
 
     render() {
-        const {id} = this.props;
+        const {id, scheme} = this.props;
         const {Platform} = this.state;
 
         return (
@@ -112,6 +112,7 @@ class HomePanelSettings extends React.Component {
                     </SimpleCell>
 
                     <SimpleCell
+                        className='btn_settings'
                         before={
                             <Avatar
                                 shadow={false}
@@ -129,6 +130,19 @@ class HomePanelSettings extends React.Component {
                         )}
                     >
                         Поделиться приложением
+                    </SimpleCell>
+                    <SimpleCell
+                        before={
+                            <Avatar
+                                shadow={false}
+                                size={43}
+                            >
+                                {scheme === 'light' || 'vkcom_light' ? <Icon28SunOutline fill="#2B8FFE"/> : <Icon28MoonOutline fill="#2B8FFE"/>}
+                            </Avatar>
+                        }
+                        onClick={() => this.props.openModal('scheme')}
+                    >
+                        Изменить тему
                     </SimpleCell>
                 </Group>
 

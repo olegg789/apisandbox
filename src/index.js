@@ -22,19 +22,6 @@ export const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk),
 ));
 
-bridge.subscribe((e) => {
-    switch (e.detail.type) {
-        case 'VKWebAppUpdateConfig':
-            let schemeAttribute = document.createAttribute('scheme');
-            schemeAttribute.value = e.detail.data.scheme ? e.detail.data.scheme : 'client_light';
-            document.body.attributes.setNamedItem(schemeAttribute);
-            break;
-
-        default:
-            break;
-    }
-})
-
 async function startApp() {
     let userSeenIntroCheck = await bridge.send("VKWebAppStorageGet", {keys: ['userSeenIntro']})
 

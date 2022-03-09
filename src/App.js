@@ -43,6 +43,7 @@ import ViewResponseAPIModal from './js/components/modals/viewResponseAPIModal';
 import ViewResponseGetToken from "./js/components/modals/viewResponseGetToken";
 
 import Intro from "./js/panels/Intro";
+import bridge from "@vkontakte/vk-bridge";
 
 class App extends React.Component {
   constructor(props) {
@@ -52,13 +53,40 @@ class App extends React.Component {
       hasHeader: true,
       isDesktop: false,
       Platform: platform(),
+      scheme: 'light'
     };
 
     this.lastAndroidBackAction = 0;
   }
 
+  async getAppScheme(platform) {
+    if (platform === 'vkcom') {
+      this.setState({scheme: 'vkcom_light'})
+    } else {
+      bridge.subscribe((e) => {
+        if (e.detail.type === 'VKWebAppUpdateConfig') {
+          let data = e.detail.data.scheme
+          this.setState({scheme: data})
+        }
+      })
+      let appScheme = await bridge.send("VKWebAppGetConfig")
+        this.setState({scheme: appScheme.scheme})
+    }
+  }
+
+  async changeScheme(scheme) {
+    if (scheme === 'system') {
+      this.getAppScheme(platform)
+    }
+    else {
+      this.setState({scheme: scheme})
+      bridge.unsubscribe(() => 'VKWebAppUpdateConfig')
+    }
+  }
+
   async componentDidMount() {
     const {goBack} = this.props;
+    this.getAppScheme(platform)
 
     let parsedUrl = new URL(window.location.href)
     if (parsedUrl.searchParams.get('vk_platform') === 'desktop_web') {
@@ -96,10 +124,6 @@ class App extends React.Component {
     }
   }
 
-  changeScheme(scheme) {
-    this.setState({ scheme: scheme })
-  }
-
   render() {
     const {goBack, setStory, closeModal, popouts, activeView, activeStory, activeModals, panelsHistory} = this.props;
     const { isDesktop, hasHeader, Platform } = this.state
@@ -111,7 +135,7 @@ class App extends React.Component {
     const homeModals = (
       <ModalRoot activeModal={activeModal}>
         <HomeBotsListModal
-          id="MODAL_PAGE_BOTS_LIST"
+          id="scheme"
           onClose={() => closeModal()}
           changeScheme={(scheme) => this.changeScheme(scheme)}
         />
@@ -191,7 +215,7 @@ class App extends React.Component {
                       history={history}
                       onSwipeBack={() => goBack()}
                     >
-                      <HomePanelSettings id="base"/>
+                      <HomePanelSettings id="base" scheme={this.state.scheme}/>
                     </View>
                   </Root>
                   <Root id="Intro" activeView={activeView} popout={popout}>

@@ -300,7 +300,7 @@ class HomePanelBase extends React.Component {
             onChange: (e) => {this.setState({selectedGroups: e})},
             options: groups,
             placeholder: "Не выбраны",
-            emptyText: "Совсем ничего не найдено",
+            searchable: true
         };
 
         return (
@@ -350,6 +350,7 @@ class HomePanelBase extends React.Component {
                             <MiniInfoCell
                                 before={<Icon20HelpOutline/>}
                                 textWrap='full'
+                                style={{whiteSpace: "pre-line"}}
                             >
                                 {infoMethod[section].methods[infMethod].description}
                             </MiniInfoCell>
@@ -361,7 +362,7 @@ class HomePanelBase extends React.Component {
                                 infoMethod[section].methods[infMethod].params.map((el, index) => {
                                     if (el.type === 'string' || el.type === 'string[]') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
+                                            <FormItem style={{whiteSpace: "pre-line"}} top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
@@ -373,7 +374,7 @@ class HomePanelBase extends React.Component {
                                         )
                                     } else if (el.type === 'text') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
+                                            <FormItem style={{whiteSpace: "pre-line"}} top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     maxLength={100}
@@ -384,7 +385,7 @@ class HomePanelBase extends React.Component {
                                         )
                                     } else if (el.type === 'positive') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
+                                            <FormItem style={{whiteSpace: "pre-line"}} top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Textarea
                                                     name={el.name}
                                                     value={param[index]}
@@ -396,7 +397,7 @@ class HomePanelBase extends React.Component {
                                         )
                                     } else if (el.type === 'integer') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
+                                            <FormItem style={{whiteSpace: "pre-line"}} top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Input
                                                     name={el.name}
                                                     value={param[index]}
@@ -410,7 +411,7 @@ class HomePanelBase extends React.Component {
                                         )
                                     } else if (el.type === 'checkbox') {
                                         return(
-                                            <FormItem top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
+                                            <FormItem style={{whiteSpace: "pre-line"}} top={`${el.name} (${el.type})`} bottom={<>{el.description} <br/> Параметр {el.is_required ? 'обязательный.' : 'необязательный'}</>}>
                                                 <Checkbox
                                                     name={el.name}
                                                     value={param[index]}
