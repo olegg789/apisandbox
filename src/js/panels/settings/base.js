@@ -58,10 +58,6 @@ class HomePanelSettings extends React.Component {
             <Panel id={id}>
                 <PanelHeader>Настройки</PanelHeader>
 
-                <Button onClick={() => bridge.send("VKWebAppStorageSet", {key: 'userSeenIntro', value: ''})}>
-                    СБРОСИТЬ ОНБОРДИНГ
-                </Button>
-
                 <Group header={<Header mode="secondary">Прочее</Header>}>
                     <SimpleCell
                         className='btn_settings'
@@ -130,19 +126,6 @@ class HomePanelSettings extends React.Component {
                         )}
                     >
                         Поделиться приложением
-                    </SimpleCell>
-                    <SimpleCell
-                        before={
-                            <Avatar
-                                shadow={false}
-                                size={43}
-                            >
-                                {scheme === 'light' || 'vkcom_light' ? <Icon28SunOutline fill="#2B8FFE"/> : <Icon28MoonOutline fill="#2B8FFE"/>}
-                            </Avatar>
-                        }
-                        onClick={() => this.props.openModal('scheme')}
-                    >
-                        Изменить тему
                     </SimpleCell>
                 </Group>
 
