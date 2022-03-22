@@ -469,11 +469,6 @@ export let method = [
         }]
     },
     {
-        "name": 'VKWebAppGetAds',
-        "description":'Cобытие для получения данных рекламного блока.',
-        "params": []
-    },
-    {
         "name": 'VKWebAppConversionHit',
         "description":'Отслеживать конверсионные действия пользователей.',
         "params": [{
@@ -714,20 +709,6 @@ export let method = [
             "param": 'scopes',
             "type": 'string',
             "description":"Список прав через запятую. Например friends,notify." 
-        }]
-    },
-    {
-        "name": 'VKWebAppShowInviteBox',
-        "description":'Пригласить друзей в игру.',
-        "params": []
-    },
-    {
-        "name": 'VKWebAppShowLeaderBoardBox',
-        "description":'Показать таблицу результатов.',
-        "params": [{
-            "param": 'user_result',
-            "type": 'integer',
-            "description":"Результат пользователя." 
         }]
     },
 ]

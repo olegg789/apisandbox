@@ -39,7 +39,6 @@ async function startApp() {
     );
     
     bridge.send('VKWebAppInit', {})
-    import('./eruda.js').then(({ default: eruda }) => {})
 };
 
 
