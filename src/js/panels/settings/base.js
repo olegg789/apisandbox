@@ -120,7 +120,7 @@ class HomePanelSettings extends React.Component {
                         onClick={() => bridge.send(
                             "VKWebAppShowWallPostBox",
                             {
-                                message: 'Тестирую методы VK API и VK Bidge в этом приложении👇',
+                                message: 'Тестирую методы VK API и VK Bridge в этом приложении👇',
                                 attachments: 'https://vk.com/app7976662'
                             }
                         )}
