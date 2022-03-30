@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {closePopout, goBack, openModal, openPopout, setPage} from "../../store/router/actions";
+import {openModal, setPage} from "../../store/router/actions";
 
 import {sleep} from "../../../functions";
 
@@ -62,16 +62,6 @@ class HomePanelBridge extends React.Component {
         })
     }
 
-    async getStorage(key) {
-        try {
-            let response = await bridge.send("VKWebAppStorageGet", {"keys": [key]});
-            console.log(response.keys[0].value);
-            return response.keys[0].value}
-        catch (err) {
-            console.log(err)
-        }
-    };
-
     async onChange(e, index) {
         const { name, value } = e.currentTarget;
         value !== '' ? this.setState({ [name]: value }) : this.setState({ [name]: null })
@@ -102,11 +92,6 @@ class HomePanelBridge extends React.Component {
             this.setState({section: null})
             this.setState({use_method: false})
         }
-
-    }
-
-    async copy() {
-        await bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})
 
     }
 
@@ -259,7 +244,9 @@ class HomePanelBridge extends React.Component {
                                 </Button>
                             </Div>
                     </>}
-                    {use_method &&
+                </Group>
+
+                {use_method &&
                     <>
                         <Group header={<Header mode='secondary'>Результат</Header>}>
                             <Card>
@@ -274,14 +261,13 @@ class HomePanelBridge extends React.Component {
                                 size="l"
                                 stretched
                                 mode="secondary"
-                                onClick={() => this.copy()}
+                                onClick={() => bridge.send('VKWebAppCopyText', {text: JSON.stringify(window.responseAPI)})}
                             >
                                 Скопировать
                             </Button>
                         </Div>
                     </>
-                    }
-                </Group>
+                }
             </Panel>
         );
     }
@@ -290,9 +276,6 @@ class HomePanelBridge extends React.Component {
 
 const mapDispatchToProps = {
     setPage,
-    goBack,
-    openPopout,
-    closePopout,
     openModal
 };
 
